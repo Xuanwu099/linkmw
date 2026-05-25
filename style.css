@@ -63,23 +63,24 @@ body {
 
 /* --- SECCIÓN HERO (LANDING) --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;      /* CAMBIADO: Permite que la sección crezca si falta espacio */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */ /* ELIMINADO o COMENTADO: Así no cortará tu contenido */
+    padding: 120px 20px 60px; /* AÑADIDO: Da un colchón arriba y abajo para que el contenido respire */
 }
 
 #bg-video {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
     z-index: -1;
     transform: translate(-50%, -50%);
-    filter: brightness(35%); 
+    filter: brightness(35%); /* Oscurece el video para resaltar el texto */
     object-fit: cover;
 }
 
@@ -91,8 +92,8 @@ body {
 }
 
 .hero-logo {
-    width: 180px;         /* Ajusta el tamaño a tu gusto */
-    height: 180px;        /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
+    width: 150px;         /* Ajusta el tamaño a tu gusto */
+    height: 150px;        /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
     object-fit: cover;    /* Evita que la imagen se deforme al recortarse */
     border-radius: 50%;   /* Lo hace circular */
     
@@ -100,7 +101,7 @@ body {
     border: 3px solid #00d4ff; 
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); 
     
-    margin-bottom: 40px;  /* Espacio para empujar el título hacia abajo */
+    margin-bottom: 20px;  /* Espacio para empujar el título hacia abajo */
     transition: transform 0.3s ease;
 }
 
@@ -111,7 +112,7 @@ body {
 /* Ajuste extra para el título si quieres más separación */
 .hero-content h1 {
     font-size: 2.3rem;
-    margin-bottom: 80px; /* Espacio solicitado respecto a los botones */
+    margin-bottom: 25px; /* Espacio solicitado respecto a los botones */
     text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
 }
 
@@ -119,7 +120,7 @@ body {
     font-size: 1.0rem;
     font-weight: bold;
     color: #d1dcdf; /* El azul cian de tu tema */
-    margin-bottom: 25px; /* Espacio antes de los botones */
+    margin-bottom: 20px; /* Espacio antes de los botones */
     letter-spacing: 3px; /* Para que los números se lean mejor */
     background: rgba(66, 62, 62, 0.253); /* Un fondo sutil para resaltar */
     display: inline-block;
@@ -127,20 +128,110 @@ body {
     border-radius: 5px;
 }
 
-/* --- BOTONES DE REDES (Minimalistas) --- */
+/* --- COMPONENTES DEL FORMULARIO INTERNO --- */
+.form-container {
+    background: rgba(22, 28, 45, 0.65); /* Fondo oscuro semitransparente */
+    padding: 20px 25px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%; /* Ajuste responsivo para pantallas móviles */
+    border: 1px solid rgba(0, 212, 255, 0.3); /* Contorno cian sutil */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px); /* Efecto cristal esmerilado sobre el video */
+    margin-bottom: 20px;
+}
+
+.form-container h3 {
+    font-size: 1.4rem;
+    color: #00d4ff; /* Título resaltado en cian */
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.form-subtitle {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea etiquetas a la izquierda dentro del contenedor centrado */
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #0b0f19; /* Fondo nativo del sitio para los inputs */
+    border: 1px solid #2d3748;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* Estado de enfoque al escribir en los campos */
+.form-group input:focus {
+    border-color: #00d4ff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+    background: #111827;
+}
+
+/* Botón de envío principal */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: #88ff00; /* Verde brillante característico de tus cajas de información */
+    color: #0b0f19; /* Texto oscuro de alto contraste */
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(136, 255, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Mensaje de confirmación post-envío */
+.success-message {
+    color: #88ff00;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(136, 255, 0, 0.3);
+}
+
+/* --- RE-ESTILIZACIÓN DE BOTONES DE REDES REVELADOS --- */
 .button-container {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     justify-content: center;
 }
 
 .btn {
-    width: 60px;  /* Ancho fijo para que sean circulares */
-    height: 60px; /* Alto fijo */
-    border-radius: 50%; /* Los hace redondos */
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
     text-decoration: none;
     color: white;
-    font-size: 1.5rem; /* Tamaño del icono */
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,7 +240,7 @@ body {
 
 .btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
 }
 
 .whatsapp { background-color: #25d366; }
@@ -206,4 +297,5 @@ body {
     color: #ffffff;
     margin-bottom: 40px;
 }
+
 
