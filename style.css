@@ -109,8 +109,8 @@ body {
 }
 
 .hero-logo {
-    width: 130px;              /* Ajusta el tamaño del logo */
-    height: 130px;             /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
+    width: 160px;              /* Ajusta el tamaño del logo */
+    height: 160px;             /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
     object-fit: cover;         /* Evita que la imagen se deforme al recortarse */
     border-radius: 50%;        /* Lo hace circular */
     border: 3px solid #00d4ff;                 /* El borde y el resplandor azul de tu imagen de referencia */
