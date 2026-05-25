@@ -17,7 +17,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
+    padding: 15px 20px; /* REDUCIDO: De 50px a 20px en móviles para que no se desborde */
     background: rgba(0, 0, 0, 0.85);
     position: fixed;
     width: 100%;
@@ -298,4 +298,125 @@ body {
     margin-bottom: 40px;
 }
 
+/* ==========================================================================
+   OPTIMIZACIONES EXCLUSIVAS PARA DISPOSITIVOS MÓVILES (MÁXIMO 768PX)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Permitir scroll natural y dar colchón superior para la Navbar */
+    .hero {
+        height: auto;            /* Eliminamos el 100vh rígido */
+        min-height: 100vh;       /* Asegura que cubra la pantalla como mínimo */
+        overflow: visible;       /* Evita que se corten los recuadros */
+        padding: 90px 15px 40px; /* Espacio para que la navbar no tape el logo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    /* 2. Reducir márgenes internos para que todo quepa sin obligar a alejar la vista */
+    .hero-content {
+        width: 100%;
+        max-width: 420px;        /* Ancho ideal para la estructura en celulares */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;     /* Fuerza el centrado perfecto de logo, texto e inputs */
+    }
+
+    /* 3. Escalar el Logo de manera proporcional */
+    .hero-logo {
+        width: 120px;            /* Reducido de 180px para balancear la pantalla móvil */
+        height: 120px;
+        margin-bottom: 15px;     /* Compactado */
+    }
+
+    /* 4. Escalar y centrar textos principales */
+    .hero-content h1 {
+        font-size: 1.8rem;       /* Tamaño cómodo para leer en vertical/horizontal */
+        margin-bottom: 15px;     /* Reducido radicalmente de los 80px originales */
+        text-align: center;
+    }
+
+    .clan-id {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        padding: 4px 12px;
+    }
+
+    /* 5. Ajustar la ventana del formulario interno */
+    .form-container {
+        width: 100%;             /* Se adapta al ancho del dispositivo */
+        max-width: 360px;
+        padding: 20px;           /* Reducimos rellenos para ganar espacio visual */
+        border-radius: 10px;
+        box-sizing: border-box;
+        margin: 0 auto 15px auto;/* Centrado horizontal automático */
+    }
+
+    .form-container h3 {
+        font-size: 1.2rem;
+    }
+
+    /* 6. Optimización de campos de texto */
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;        /* Mantiene los títulos alineados estéticamente */
+    }
+
+    .form-group input {
+        padding: 10px 12px;      /* Más estilizado para pantallas táctiles */
+        font-size: 0.9rem;
+    }
+
+    .btn-submit {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* 7. Sección de descripción y Reglamento */
+    .description-section {
+        padding: 60px 15px;      /* Menos espacio muerto a los lados */
+    }
+
+    .info-box {
+        padding: 25px 20px;
+        max-width: 360px;        /* Igualamos el ancho con el formulario anterior */
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .info-box ul {
+        padding-left: 20px;      /* Asegura que las viñetas no queden flotando afuera */
+    }
+}
+
+/* ==========================================================================
+   AJUSTES ESPECÍFICOS PARA MÓVIL EN POSICIÓN HORIZONTAL (LANDSCAPE)
+   ========================================================================== */
+@media (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        padding-top: 80px;       /* Ajuste sutil por la navbar en pantallas chatas */
+    }
+    
+    /* El logo se reduce un poco más para que no empuje todo hacia abajo */
+    .hero-logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+
+    .clan-id {
+        margin-bottom: 15px;
+    }
+
+    .form-container {
+        max-width: 450px;        /* Aprovechamos el ancho extra del modo horizontal */
+    }
+}
