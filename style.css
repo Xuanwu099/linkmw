@@ -1,12 +1,12 @@
 /* ==========================================================================
-   CONFIGURACIÓN GENERAL Y CONTROL DE ZOOM
+   1. CONFIGURACIÓN GENERAL Y RESISTENCIA AL ZOOM
    ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Evita que el navegador altere de forma independiente las fuentes al hacer zoom */
+    /* Evita que los navegadores móviles alteren arbitrariamente el tamaño del texto al hacer zoom */
     -webkit-text-size-adjust: 100%;
 }
 
@@ -15,16 +15,18 @@ body {
     color: white;
     scroll-behavior: smooth;
     width: 100%;
-    overflow-x: hidden; /* Bloquea cualquier intento de desborde horizontal */
+    overflow-x: hidden; /* Bloquea los desplazamientos fantasmas hacia los lados */
 }
 
-/* --- NAVEGACIÓN CORREGIDA PARA MÓVILES --- */
+/* ==========================================================================
+   2. BARRA DE NAVEGACIÓN (NAVBAR) - OPTIMIZADA PARA MÓVILES
+   ========================================================================== */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 25px; /* Reducido de 50px para evitar que en vertical colapse */
-    background: rgba(0, 0, 0, 0.9);
+    padding: 15px 20px; /* Reducido de 50px para garantizar que todo quepa en celulares */
+    background: rgba(0, 0, 0, 0.9); /* Un toque más opaco para legibilidad */
     position: fixed;
     width: 100%;
     z-index: 1000;
@@ -36,7 +38,7 @@ body {
     text-decoration: none;
     color: #7c97d3;
     font-weight: bold;
-    font-size: 1.2rem; /* Ligeramente más compacto en móviles */
+    font-size: 1.1rem; /* Ajustado para que no sature la pantalla del móvil */
     letter-spacing: 1px;
     transition: 0.3s;
 }
@@ -52,7 +54,7 @@ body {
 }
 
 .nav-links li {
-    margin-left: 20px;
+    margin-left: 15px; /* Espaciado compacto ideal para celulares */
 }
 
 .nav-links a {
@@ -60,7 +62,7 @@ body {
     color: white;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.8rem; /* Letra estilizada y legible en barras superiores */
     transition: 0.3s;
 }
 
@@ -69,18 +71,17 @@ body {
 }
 
 /* ==========================================================================
-   ESTRUCTURA PRINCIPAL Y CENTRADO DE BLOQUES
+   3. SECCIÓN HERO (ESTRUCTURA Y COLUMNA CENTRAL DE CONTENCIÓN)
    ========================================================================== */
-
 .hero {
-    min-height: 100vh; /* Permite estirarse de forma infinita si hay mucho contenido */
+    min-height: 100vh; /* Permite scroll natural si el formulario es alto */
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrado horizontal estricto de la columna principal */
+    align-items: center; /* Alineación horizontal estricta */
     justify-content: center;
     position: relative;
-    padding: 100px 15px 30px 15px; /* Colchón superior para no pisar la navbar */
+    padding: 100px 15px 40px 15px; /* Espacio superior para que la navbar no tape el logo */
 }
 
 #bg-video {
@@ -95,26 +96,26 @@ body {
     object-fit: cover;
 }
 
-/* CONTENEDOR ANCLA: Fuerza a todo el contenido del landing a medir lo mismo */
+/* CONTENEDOR MAESTRO: Esta caja unifica el ancho de todo el bloque superior */
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 400px; /* Ancho máximo estándar para evitar dispersión con zoom */
-    margin: 0 auto; /* Centrado geométrico inamovible */
+    max-width: 400px; /* Ancho máximo rígido de contención */
+    margin: 0 auto; /* Centrado absoluto en el eje del navegador */
     text-align: center;
 }
 
 .hero-logo {
-    width: 130px; /* Tamaño ideal y responsivo para móviles */
+    width: 130px; /* Escalado simétrico idéntico a tu captura */
     height: 130px;
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid #00d4ff;
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-    margin-bottom: 20px; /* Reducido para compactar en horizontal */
+    margin-bottom: 20px; /* Reducido para evitar el empuje excesivo */
     transition: transform 0.3s ease;
 }
 
@@ -123,9 +124,11 @@ body {
 }
 
 .hero-content h1 {
-    font-size: 2.0rem; /* Proporcional a la pantalla del móvil */
-    margin-bottom: 20px; /* Espacio optimizado */
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    letter-spacing: 1px;
     width: 100%;
 }
 
@@ -142,26 +145,25 @@ body {
 }
 
 /* ==========================================================================
-   CAJA DE REGISTRO INTERNO (FORMULARIO)
+   4. FORMULARIO DE REGISTRO INTERNO
    ========================================================================== */
 .form-container {
-    background: rgba(22, 28, 45, 0.75); /* Efecto translúcido reforzado */
+    background: rgba(22, 28, 45, 0.75);
     padding: 25px 20px;
     border-radius: 12px;
-    width: 100%; /* Toma el ancho máximo de .hero-content (400px) */
-    max-width: 380px; /* Margen interno estricto */
+    width: 100%; /* Hereda los 400px del contenedor maestro */
+    max-width: 370px; /* Limita su tamaño máximo en celulares */
     border: 1px solid rgba(0, 212, 255, 0.3);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
-    margin: 0 auto 15px auto;
+    margin: 0 auto;
     box-sizing: border-box;
 }
 
 .form-container h3 {
     font-size: 1.3rem;
     color: #00d4ff;
-    margin-bottom: 5px;
-    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .form-subtitle {
@@ -172,7 +174,7 @@ body {
 
 .form-group {
     margin-bottom: 15px;
-    text-align: left; /* Mantiene las etiquetas del formulario bien alineadas */
+    text-align: left;
 }
 
 .form-group label {
@@ -222,7 +224,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* --- BOTONES SECUNDARIOS (REVELADOS POST-REGISTRO) --- */
+/* --- CONTENEDOR DE REDES REVELADO POST-ENVÍO --- */
 .success-message {
     color: #88ff00;
     font-weight: bold;
@@ -259,13 +261,13 @@ body {
 .discord { background-color: #5865f2; }
 
 /* ==========================================================================
-   SECCIÓN REGLAMENTO (CONGELADA EN EL CENTRO)
+   5. SECCIÓN DESCRIPCIÓN Y REGLAMENTO (ESTRICTAMENTE CENTRADO)
    ========================================================================== */
 .description-section {
-    padding: 40px 15px 80px 15px; /* Espaciado balanceado */
+    padding: 40px 15px 80px 15px; /* Reducido de 100px para evitar espacios muertos */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alineación horizontal fija */
+    align-items: center; /* Alineación horizontal forzada al centro geométrico */
     justify-content: center;
     background-color: #0b0f19;
     width: 100%;
@@ -273,14 +275,14 @@ body {
 
 .info-box {
     background: #161c2d;
-    padding: 30px 20px; /* Ajuste responsivo */
+    padding: 30px 20px; /* Relleno compacto responsivo */
     width: 100%;
-    max-width: 380px; /* EXACTAMENTE el mismo ancho de la caja de registro anterior */
+    max-width: 370px; /* EXACTAMENTE el mismo ancho que el formulario de registro superior */
     border-radius: 10px;
     border-bottom: 4px solid #88ff00;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin: 0 auto; /* Anclado al centro por margen automático lateral */
+    margin: 0 auto; /* Obliga al centrado perfecto cuando se aleja la pantalla */
     transition: transform 0.3s;
 }
 
@@ -291,44 +293,44 @@ body {
 .info-box h2 {
     margin-bottom: 20px;
     color: #88ff00;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
-/* Configuración interna del listado de reglas */
+/* Ajuste interno para la lista de las reglas */
 .info-box ul {
-    text-align: left; /* Hace que las reglas sean fáciles de leer */
+    text-align: left; /* Mantiene el listado perfectamente legible */
     padding-left: 20px;
     color: #cbd5e0;
 }
 
 .info-box ul li {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.5;
     margin-bottom: 12px;
 }
 
-/* Elementos obsoletos o de soporte general */
+/* Elementos de limpieza de soporte */
 .section-container { padding: 80px 5%; background: #0b0f19; }
 .section-title { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 40px; }
 
 
 /* ==========================================================================
-   OPTIMIZACIONES MÓVILES EN ORIENTACIÓN HORIZONTAL (LANDSCAPE)
+   6. OPTIMIZACIONES SUTILES PARA MÓVIL EN VISTA HORIZONTAL (LANDSCAPE)
    ========================================================================== */
 @media (max-width: 900px) and (orientation: landscape) {
     .hero {
-        padding-top: 75px;
+        padding-top: 75px; /* Evita colisiones de la navbar al acostar el teléfono */
     }
     
     .hero-logo {
-        width: 85px; /* Reducción agresiva para optimizar el alto escaso de la pantalla girada */
-        height: 85px;
+        width: 80px; /* Se achica el logo para que el formulario no sea empujado hacia abajo */
+        height: 80px;
         margin-bottom: 10px;
     }
 
     .hero-content h1 {
         font-size: 1.5rem;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .clan-id {
@@ -336,7 +338,7 @@ body {
         font-size: 0.8rem;
     }
 
-    /* Ambas cajas crecen de forma unificada en horizontal manteniendo el mismo eje central */
+    /* Ambas cajas se expanden proporcionalmente conservando su mismo centro simétrico */
     .form-container, .info-box {
         max-width: 440px;
         padding: 15px 20px;
