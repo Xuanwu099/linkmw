@@ -1,35 +1,42 @@
-/* Configuración General */
+/* ==========================================================================
+   CONFIGURACIÓN GENERAL Y CONTROL DE ZOOM
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Evita que el navegador altere de forma independiente las fuentes al hacer zoom */
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     background-color: #0b0f19; /* Fondo oscuro tipo naval */
     color: white;
     scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden; /* Bloquea cualquier intento de desborde horizontal */
 }
 
-/* --- NAVEGACIÓN --- */
+/* --- NAVEGACIÓN CORREGIDA PARA MÓVILES --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* REDUCIDO: De 50px a 20px en móviles para que no se desborde */
-    background: rgba(0, 0, 0, 0.85);
+    padding: 15px 25px; /* Reducido de 50px para evitar que en vertical colapse */
+    background: rgba(0, 0, 0, 0.9);
     position: fixed;
     width: 100%;
     z-index: 1000;
+    left: 0;
+    top: 0;
 }
 
-/* Estilo para el Logo/Enlace principal */
 .logo a {
     text-decoration: none;
-    color: #7c97d3; /* Color cian para resaltar */
+    color: #7c97d3;
     font-weight: bold;
-    font-size: 1.0rem;
+    font-size: 1.2rem; /* Ligeramente más compacto en móviles */
     letter-spacing: 1px;
     transition: 0.3s;
 }
@@ -45,7 +52,7 @@ body {
 }
 
 .nav-links li {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .nav-links a {
@@ -53,7 +60,7 @@ body {
     color: white;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: 0.3s;
 }
 
@@ -61,102 +68,111 @@ body {
     color: #00d4ff;
 }
 
-/* --- SECCIÓN HERO (LANDING) --- */
+/* ==========================================================================
+   ESTRUCTURA PRINCIPAL Y CENTRADO DE BLOQUES
+   ========================================================================== */
+
 .hero {
-    min-height: 100vh;      /* CAMBIADO: Permite que la sección crezca si falta espacio */
+    min-height: 100vh; /* Permite estirarse de forma infinita si hay mucho contenido */
+    width: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: center; /* Centrado horizontal estricto de la columna principal */
     justify-content: center;
     position: relative;
-    /* overflow: hidden; */ /* ELIMINADO o COMENTADO: Así no cortará tu contenido */
-    padding: 120px 20px 60px; /* AÑADIDO: Da un colchón arriba y abajo para que el contenido respire */
+    padding: 100px 15px 30px 15px; /* Colchón superior para no pisar la navbar */
 }
 
 #bg-video {
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     transform: translate(-50%, -50%);
-    filter: brightness(35%); /* Oscurece el video para resaltar el texto */
+    filter: brightness(35%);
     object-fit: cover;
 }
 
+/* CONTENEDOR ANCLA: Fuerza a todo el contenido del landing a medir lo mismo */
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 400px; /* Ancho máximo estándar para evitar dispersión con zoom */
+    margin: 0 auto; /* Centrado geométrico inamovible */
+    text-align: center;
 }
 
 .hero-logo {
-    width: 150px;         /* Ajusta el tamaño a tu gusto */
-    height: 150px;        /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
-    object-fit: cover;    /* Evita que la imagen se deforme al recortarse */
-    border-radius: 50%;   /* Lo hace circular */
-    
-    /* El borde y el resplandor azul de tu imagen de referencia */
-    border: 3px solid #00d4ff; 
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); 
-    
-    margin-bottom: 20px;  /* Espacio para empujar el título hacia abajo */
+    width: 130px; /* Tamaño ideal y responsivo para móviles */
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #00d4ff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    margin-bottom: 20px; /* Reducido para compactar en horizontal */
     transition: transform 0.3s ease;
 }
 
 .hero-logo:hover {
-    transform: scale(1.05); /* Efecto sutil al pasar el mouse */
+    transform: scale(1.05);
 }
 
-/* Ajuste extra para el título si quieres más separación */
 .hero-content h1 {
-    font-size: 2.3rem;
-    margin-bottom: 25px; /* Espacio solicitado respecto a los botones */
+    font-size: 2.0rem; /* Proporcional a la pantalla del móvil */
+    margin-bottom: 20px; /* Espacio optimizado */
     text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    width: 100%;
 }
 
 .clan-id {
-    font-size: 1.0rem;
+    font-size: 0.9rem;
     font-weight: bold;
-    color: #d1dcdf; /* El azul cian de tu tema */
-    margin-bottom: 20px; /* Espacio antes de los botones */
-    letter-spacing: 3px; /* Para que los números se lean mejor */
-    background: rgba(66, 62, 62, 0.253); /* Un fondo sutil para resaltar */
+    color: #d1dcdf;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+    background: rgba(66, 62, 62, 0.4);
     display: inline-block;
-    padding: 5px 15px;
+    padding: 6px 16px;
     border-radius: 5px;
 }
 
-/* --- COMPONENTES DEL FORMULARIO INTERNO --- */
+/* ==========================================================================
+   CAJA DE REGISTRO INTERNO (FORMULARIO)
+   ========================================================================== */
 .form-container {
-    background: rgba(22, 28, 45, 0.65); /* Fondo oscuro semitransparente */
-    padding: 20px 25px;
+    background: rgba(22, 28, 45, 0.75); /* Efecto translúcido reforzado */
+    padding: 25px 20px;
     border-radius: 12px;
-    max-width: 400px;
-    width: 90%; /* Ajuste responsivo para pantallas móviles */
-    border: 1px solid rgba(0, 212, 255, 0.3); /* Contorno cian sutil */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px); /* Efecto cristal esmerilado sobre el video */
-    margin-bottom: 20px;
+    width: 100%; /* Toma el ancho máximo de .hero-content (400px) */
+    max-width: 380px; /* Margen interno estricto */
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    margin: 0 auto 15px auto;
+    box-sizing: border-box;
 }
 
 .form-container h3 {
-    font-size: 1.4rem;
-    color: #00d4ff; /* Título resaltado en cian */
+    font-size: 1.3rem;
+    color: #00d4ff;
     margin-bottom: 5px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .form-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #a0aec0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
-    text-align: left; /* Alinea etiquetas a la izquierda dentro del contenedor centrado */
+    margin-bottom: 15px;
+    text-align: left; /* Mantiene las etiquetas del formulario bien alineadas */
 }
 
 .form-group label {
@@ -164,38 +180,35 @@ body {
     font-size: 0.75rem;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     letter-spacing: 1px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px 15px;
-    background: #0b0f19; /* Fondo nativo del sitio para los inputs */
+    padding: 12px;
+    background: #0b0f19;
     border: 1px solid #2d3748;
     border-radius: 6px;
     color: white;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
-/* Estado de enfoque al escribir en los campos */
 .form-group input:focus {
     border-color: #00d4ff;
     outline: none;
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-    background: #111827;
 }
 
-/* Botón de envío principal */
 .btn-submit {
     width: 100%;
-    padding: 14px;
-    background: #88ff00; /* Verde brillante característico de tus cajas de información */
-    color: #0b0f19; /* Texto oscuro de alto contraste */
+    padding: 12px;
+    background: #88ff00;
+    color: #0b0f19;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
@@ -209,29 +222,28 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mensaje de confirmación post-envío */
+/* --- BOTONES SECUNDARIOS (REVELADOS POST-REGISTRO) --- */
 .success-message {
     color: #88ff00;
     font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    text-shadow: 0 0 10px rgba(136, 255, 0, 0.3);
+    font-size: 1.0rem;
+    margin-bottom: 20px;
 }
 
-/* --- RE-ESTILIZACIÓN DE BOTONES DE REDES REVELADOS --- */
 .button-container {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     justify-content: center;
+    width: 100%;
 }
 
 .btn {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     text-decoration: none;
     color: white;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,183 +252,93 @@ body {
 
 .btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
 }
 
 .whatsapp { background-color: #25d366; }
 .discord { background-color: #5865f2; }
 
-/* --- SECCIÓN DESCRIPCIÓN --- */
-/* Contenedor principal de los recuadros */
+/* ==========================================================================
+   SECCIÓN REGLAMENTO (CONGELADA EN EL CENTRO)
+   ========================================================================== */
 .description-section {
-    padding: 100px 20px;
-    display: flex; 
-    flex-direction: column; /* Alinea los recuadros uno debajo del otro */
-    align-items: center;    /* Los centra horizontalmente */
-    gap: 40px;              /* <--- Espacio de separación entre el primer y segundo recuadro */
+    padding: 40px 15px 80px 15px; /* Espaciado balanceado */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alineación horizontal fija */
+    justify-content: center;
     background-color: #0b0f19;
+    width: 100%;
 }
 
-/* El diseño del recuadro se mantiene igual, pero ahora se aplica a ambos */
 .info-box {
     background: #161c2d;
-    padding: 40px;
-    max-width: 800px;
-    width: 100%;            /* Asegura que ocupen el mismo ancho */
+    padding: 30px 20px; /* Ajuste responsivo */
+    width: 100%;
+    max-width: 380px; /* EXACTAMENTE el mismo ancho de la caja de registro anterior */
     border-radius: 10px;
-    border-bottom: 4px solid #88ff00; 
+    border-bottom: 4px solid #88ff00;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 0 auto; /* Anclado al centro por margen automático lateral */
     transition: transform 0.3s;
 }
 
-/* Efecto opcional: resalta el recuadro cuando pasas el mouse */
 .info-box:hover {
     transform: scale(1.02);
 }
 
 .info-box h2 {
     margin-bottom: 20px;
-    color: #88ff00
+    color: #88ff00;
+    font-size: 1.5rem;
 }
 
-.info-box p {
-    line-height: 1.6;
+/* Configuración interna del listado de reglas */
+.info-box ul {
+    text-align: left; /* Hace que las reglas sean fáciles de leer */
+    padding-left: 20px;
     color: #cbd5e0;
 }
 
-/* Contenedor General de Secciones */
-.section-container {
-    padding: 80px 5%;
-    background: #0b0f19;
+.info-box ul li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 40px;
-}
+/* Elementos obsoletos o de soporte general */
+.section-container { padding: 80px 5%; background: #0b0f19; }
+.section-title { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 40px; }
+
 
 /* ==========================================================================
-   OPTIMIZACIONES EXCLUSIVAS PARA DISPOSITIVOS MÓVILES (MÁXIMO 768PX)
-   ========================================================================== */
-@media (max-width: 768px) {
-    
-    /* 1. Permitir scroll natural y dar colchón superior para la Navbar */
-    .hero {
-        height: auto;            /* Eliminamos el 100vh rígido */
-        min-height: 100vh;       /* Asegura que cubra la pantalla como mínimo */
-        overflow: visible;       /* Evita que se corten los recuadros */
-        padding: 90px 15px 40px; /* Espacio para que la navbar no tape el logo */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* 2. Reducir márgenes internos para que todo quepa sin obligar a alejar la vista */
-    .hero-content {
-        width: 100%;
-        max-width: 420px;        /* Ancho ideal para la estructura en celulares */
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;     /* Fuerza el centrado perfecto de logo, texto e inputs */
-    }
-
-    /* 3. Escalar el Logo de manera proporcional */
-    .hero-logo {
-        width: 120px;            /* Reducido de 180px para balancear la pantalla móvil */
-        height: 120px;
-        margin-bottom: 15px;     /* Compactado */
-    }
-
-    /* 4. Escalar y centrar textos principales */
-    .hero-content h1 {
-        font-size: 1.8rem;       /* Tamaño cómodo para leer en vertical/horizontal */
-        margin-bottom: 15px;     /* Reducido radicalmente de los 80px originales */
-        text-align: center;
-    }
-
-    .clan-id {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-        padding: 4px 12px;
-    }
-
-    /* 5. Ajustar la ventana del formulario interno */
-    .form-container {
-        width: 100%;             /* Se adapta al ancho del dispositivo */
-        max-width: 360px;
-        padding: 20px;           /* Reducimos rellenos para ganar espacio visual */
-        border-radius: 10px;
-        box-sizing: border-box;
-        margin: 0 auto 15px auto;/* Centrado horizontal automático */
-    }
-
-    .form-container h3 {
-        font-size: 1.2rem;
-    }
-
-    /* 6. Optimización de campos de texto */
-    .form-group {
-        margin-bottom: 15px;
-        text-align: left;        /* Mantiene los títulos alineados estéticamente */
-    }
-
-    .form-group input {
-        padding: 10px 12px;      /* Más estilizado para pantallas táctiles */
-        font-size: 0.9rem;
-    }
-
-    .btn-submit {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-
-    /* 7. Sección de descripción y Reglamento */
-    .description-section {
-        padding: 60px 15px;      /* Menos espacio muerto a los lados */
-    }
-
-    .info-box {
-        padding: 25px 20px;
-        max-width: 360px;        /* Igualamos el ancho con el formulario anterior */
-        width: 100%;
-        margin: 0 auto;
-    }
-    
-    .info-box ul {
-        padding-left: 20px;      /* Asegura que las viñetas no queden flotando afuera */
-    }
-}
-
-/* ==========================================================================
-   AJUSTES ESPECÍFICOS PARA MÓVIL EN POSICIÓN HORIZONTAL (LANDSCAPE)
+   OPTIMIZACIONES MÓVILES EN ORIENTACIÓN HORIZONTAL (LANDSCAPE)
    ========================================================================== */
 @media (max-width: 900px) and (orientation: landscape) {
     .hero {
-        padding-top: 80px;       /* Ajuste sutil por la navbar en pantallas chatas */
+        padding-top: 75px;
     }
     
-    /* El logo se reduce un poco más para que no empuje todo hacia abajo */
     .hero-logo {
-        width: 90px;
-        height: 90px;
+        width: 85px; /* Reducción agresiva para optimizar el alto escaso de la pantalla girada */
+        height: 85px;
         margin-bottom: 10px;
     }
 
     .hero-content h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         margin-bottom: 10px;
     }
 
     .clan-id {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+        font-size: 0.8rem;
     }
 
-    .form-container {
-        max-width: 450px;        /* Aprovechamos el ancho extra del modo horizontal */
+    /* Ambas cajas crecen de forma unificada en horizontal manteniendo el mismo eje central */
+    .form-container, .info-box {
+        max-width: 440px;
+        padding: 15px 20px;
     }
 }
