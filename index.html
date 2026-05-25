@@ -9,11 +9,12 @@
     <link rel="icon" href="favicon.png" type="image/x-icon">
 </head>
 <body>
+
     <header>
         <nav class="navbar">
             <div class="logo">
-				<a href="https://modernwarships.com/"target="_blank">MODERN WARSHIPS</a> 
-			</div>
+							<a href="https://modernwarships.com/"target="_blank">MODERN WARSHIPS</a> 
+						</div>
             <ul class="nav-links">
                 <li><a href="#Reglamento">Reglamento</a></li>
             </ul>
@@ -26,104 +27,32 @@
         </video>
         
         <div class="hero-content">
-            <img src="logo_ndl.jpeg" alt="Logo Clan" class="hero-logo">
-            <h1>BIENVENIDOS</h1>
-            <p class="clan-id">CLAN ID: RHLTFL</p>
-            
-            <div class="form-container" id="form-bloque">
-                <h3>Registro de Aspirante</h3>
-                <p class="form-subtitle">Ingresa tus datos para desbloquear los accesos a whatsapp y discord</p>
-                
-                <form id="reclutamiento-form">
-                    <div class="form-group">
-                        <label for="nickname">NICKNAME:</label>
-                        <input type="text" id="nickname" required placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="game-id">ID DE JUGADOR:</label>
-                        <input type="text" id="game-id" required placeholder="">
-                    </div>
-                    <button type="submit" class="btn-submit">Enviar Registro</button>
-                </form>
+					<img src="logo_ndl.jpeg" alt="Logo Clan" class="hero-logo">
+            <h1>BIENVENIDOS </h1>
+						<p class="clan-id">CLAN ID: RHLTFL</p>
+            <div class="button-container">
+                <a href="https://chat.whatsapp.com/FEr4FRv49gX0MVimpBfr25?mode=hqrc" class="btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> 
+                </a>
+                <a href="https://discord.com/invite/66b6TEkG4" class="btn discord">
+                    <i class="fab fa-discord"></i> 
+                </a>
             </div>
-
-            <div id="enlaces-ocultos" style="display: none; margin-top: 20px;">
-                    <p class="success-message">¡Registro Enviado! Elige tu plataforma:</p>
-                    <div class="button-container">
-                        <a href="https://chat.whatsapp.com/FEr4FRv49gX0MVimpBfr25?mode=hqrc" class="btn whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://discord.com/invite/66b6TEkG4" class="btn discord" target="_blank">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                    </div>
-                </div>
-         </div>
-
-        <script>
-        document.getElementById('reclutamiento-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Detiene el refresco automático de la página
-            
-            // Extracción de los valores ingresados por el usuario
-            const nick = document.getElementById('nickname').value;
-            const idJugador = document.getElementById('game-id').value;
-            
-            // REEMPLAZA ESTA URL por la que generes en los ajustes de integración de tu canal de Discord
-            const webhookURL = "https://discord.com/api/webhooks/1508552426058289265/_h-s1hZpsN5F3AQXpc-QyKBqdISwn1FyQg8nLkvMyjALXHTMClER8xJyxTvyXQu0yCm5"; 
-            
-            // Formateo del mensaje en formato Embed para Discord
-            const ordenMensaje = {
-                username: "Miembros Nieve de Limón",
-                avatar_url: "https://limonmw.github.io/linkmw/logo_ndl.jpeg", // Usa tu logo real en producción
-                embeds: [{
-                    title: "⚓ Nuevo integrante 🍋",
-                    color: 51740, // Código de color decimal correspondiente al Cian
-                    fields: [
-                        { name: "👤 Nickname", value: nick, inline: true },
-                        { name: "🆔 ID de Jugador", value: idJugador, inline: true }
-                    ],
-                    footer: { text: "Filtro automatizado del Sitio Web" },
-                    timestamp: new Date()
-                }]
-            };
-
-            // Envío asíncrono de los datos estructurados a Discord
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(ordenMensaje)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Transición visual si la red responde positivamente
-                    document.getElementById('form-bloque').style.display = 'none';
-                    document.getElementById('enlaces-ocultos').style.display = 'block';
-                } else {
-                    throw new Error('Fallo en el servidor de destino');
-                }
-            })
-            .catch(err => {
-                alert("Ocurrió un error al enviar el registro. Inténtalo de nuevo.");
-                console.error("Error de transferencia:", err);
-            });
-        });
-        </script>
-
+        </div>
     </section>
 
     <section class="description-section">
       <div class="info-box" id="Reglamento">
         <h2>Reglamento</h2>
         <p> 
+           
                 <li>Respeto entre miembros del clan.</li>
                 <li>Ser jugador activo (No se exigen puntos minínimos).</li>
                 <li>Prohibido el contenido explicito y/o pornografía.</li>
-                <li>Prohibida la venta de cuentas, hacks y/o aplicaciones de terceros.</li>     
+                <li>Prohibida la venta de cuentas, hacks y/o aplicaciones de terceros.</li>            
         </p>
       </div>
-
     </section>
-    
 
 </body>
 </html>
