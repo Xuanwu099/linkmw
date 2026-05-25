@@ -1,44 +1,35 @@
-/* ==========================================================================
-   1. CONFIGURACIÓN GENERAL Y RESISTENCIA AL ZOOM
-   ========================================================================== */
+/* Configuración General */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Evita que los navegadores móviles alteren arbitrariamente el tamaño del texto al hacer zoom */
-    -webkit-text-size-adjust: 100%;
 }
 
 body {
     background-color: #0b0f19; /* Fondo oscuro tipo naval */
     color: white;
     scroll-behavior: smooth;
-    width: 100%;
-    overflow-x: hidden; /* Bloquea los desplazamientos fantasmas hacia los lados */
 }
 
-/* ==========================================================================
-   2. BARRA DE NAVEGACIÓN (NAVBAR) - OPTIMIZADA PARA MÓVILES
-   ========================================================================== */
+/* --- NAVEGACIÓN --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* Reducido de 50px para garantizar que todo quepa en celulares */
-    background: rgba(0, 0, 0, 0.9); /* Un toque más opaco para legibilidad */
+    padding: 15px 50px;
+    background: rgba(0, 0, 0, 0.85);
     position: fixed;
     width: 100%;
     z-index: 1000;
-    left: 0;
-    top: 0;
 }
 
+/* Estilo para el Logo/Enlace principal */
 .logo a {
     text-decoration: none;
-    color: #7c97d3;
+    color: #7c97d3; /* Color cian para resaltar */
     font-weight: bold;
-    font-size: 1.1rem; /* Ajustado para que no sature la pantalla del móvil */
+    font-size: 1.4rem;
     letter-spacing: 1px;
     transition: 0.3s;
 }
@@ -54,7 +45,7 @@ body {
 }
 
 .nav-links li {
-    margin-left: 15px; /* Espaciado compacto ideal para celulares */
+    margin-left: 30px;
 }
 
 .nav-links a {
@@ -62,7 +53,7 @@ body {
     color: white;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.8rem; /* Letra estilizada y legible en barras superiores */
+    font-size: 0.9rem;
     transition: 0.3s;
 }
 
@@ -70,182 +61,86 @@ body {
     color: #00d4ff;
 }
 
-/* ==========================================================================
-   3. SECCIÓN HERO (ESTRUCTURA Y COLUMNA CENTRAL DE CONTENCIÓN)
-   ========================================================================== */
+/* --- SECCIÓN HERO (LANDING) --- */
 .hero {
-    min-height: 100vh; /* Permite scroll natural si el formulario es alto */
-    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Alineación horizontal estricta */
+    align-items: center;
     justify-content: center;
     position: relative;
-    padding: 100px 15px 40px 15px; /* Espacio superior para que la navbar no tape el logo */
+    overflow: hidden;
 }
 
 #bg-video {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
     z-index: -1;
     transform: translate(-50%, -50%);
-    filter: brightness(35%);
+    filter: brightness(35%); /* Oscurece el video para resaltar el texto */
     object-fit: cover;
 }
 
-/* CONTENEDOR MAESTRO: Esta caja unifica el ancho de todo el bloque superior */
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 400px; /* Ancho máximo rígido de contención */
-    margin: 0 auto; /* Centrado absoluto en el eje del navegador */
-    text-align: center;
 }
 
 .hero-logo {
-    width: 160px;              /* Ajusta el tamaño del logo */
-    height: 160px;             /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
-    object-fit: cover;         /* Evita que la imagen se deforme al recortarse */
-    border-radius: 50%;        /* Lo hace circular */
-    border: 3px solid #00d4ff;                 /* El borde y el resplandor azul de tu imagen de referencia */
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-    margin-bottom: 20px;                     /* Reducido para evitar el empuje excesivo */
+    width: 180px;         /* Ajusta el tamaño a tu gusto */
+    height: 180px;        /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
+    object-fit: cover;    /* Evita que la imagen se deforme al recortarse */
+    border-radius: 50%;   /* Lo hace circular */
+    
+    /* El borde y el resplandor azul de tu imagen de referencia */
+    border: 3px solid #00d4ff; 
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); 
+    
+    margin-bottom: 40px;  /* Espacio para empujar el título hacia abajo */
     transition: transform 0.3s ease;
 }
 
 .hero-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Efecto sutil al pasar el mouse */
 }
 
+/* Ajuste extra para el título si quieres más separación */
 .hero-content h1 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    margin-bottom: 15px;
+    font-size: 2.3rem;
+    margin-bottom: 80px; /* Espacio solicitado respecto a los botones */
     text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
-    letter-spacing: 1px;
-    width: 100%;
 }
 
 .clan-id {
-    font-size: 0.9rem;
+    font-size: 1.0rem;
     font-weight: bold;
-    color: #d1dcdf;
-    margin-bottom: 25px;
-    letter-spacing: 3px;
-    background: rgba(66, 62, 62, 0.4);
+    color: #d1dcdf; /* El azul cian de tu tema */
+    margin-bottom: 25px; /* Espacio antes de los botones */
+    letter-spacing: 3px; /* Para que los números se lean mejor */
+    background: rgba(66, 62, 62, 0.253); /* Un fondo sutil para resaltar */
     display: inline-block;
-    padding: 6px 16px;
+    padding: 5px 15px;
     border-radius: 5px;
 }
 
-/* ==========================================================================
-   4. FORMULARIO DE REGISTRO INTERNO
-   ========================================================================== */
-.form-container {
-    background: rgba(22, 28, 45, 0.75);
-    padding: 25px 20px;
-    border-radius: 12px;
-    width: 100%; /* Hereda los 400px del contenedor maestro */
-    max-width: 370px; /* Limita su tamaño máximo en celulares */
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.form-container h3 {
-    font-size: 1.3rem;
-    color: #00d4ff;
-    margin-bottom: 6px;
-}
-
-.form-subtitle {
-    font-size: 0.8rem;
-    color: #a0aec0;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 6px;
-    letter-spacing: 1px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    background: #0b0f19;
-    border: 1px solid #2d3748;
-    border-radius: 6px;
-    color: white;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.form-group input:focus {
-    border-color: #00d4ff;
-    outline: none;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-}
-
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    background: #88ff00;
-    color: #0b0f19;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-.btn-submit:hover {
-    background: #ffffff;
-    box-shadow: 0 0 20px rgba(136, 255, 0, 0.7);
-    transform: translateY(-2px);
-}
-
-/* --- CONTENEDOR DE REDES REVELADO POST-ENVÍO --- */
-.success-message {
-    color: #88ff00;
-    font-weight: bold;
-    font-size: 1.0rem;
-    margin-bottom: 20px;
-}
-
+/* --- BOTONES DE REDES (Minimalistas) --- */
 .button-container {
     display: flex;
     gap: 20px;
     justify-content: center;
-    width: 100%;
 }
 
 .btn {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+    width: 60px;  /* Ancho fijo para que sean circulares */
+    height: 60px; /* Alto fijo */
+    border-radius: 50%; /* Los hace redondos */
     text-decoration: none;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.5rem; /* Tamaño del icono */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,58 +155,58 @@ body {
 .whatsapp { background-color: #25d366; }
 .discord { background-color: #5865f2; }
 
-/* ==========================================================================
-   5. SECCIÓN DESCRIPCIÓN Y REGLAMENTO (ESTRICTAMENTE CENTRADO)
-   ========================================================================== */
+/* --- SECCIÓN DESCRIPCIÓN --- */
+/* Contenedor principal de los recuadros */
 .description-section {
-    padding: 40px 15px 80px 15px; /* Reducido de 100px para evitar espacios muertos */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Alineación horizontal forzada al centro geométrico */
-    justify-content: center;
+    padding: 100px 20px;
+    display: flex; 
+    flex-direction: column; /* Alinea los recuadros uno debajo del otro */
+    align-items: center;    /* Los centra horizontalmente */
+    gap: 40px;              /* <--- Espacio de separación entre el primer y segundo recuadro */
     background-color: #0b0f19;
-    width: 100%;
 }
 
+/* El diseño del recuadro se mantiene igual, pero ahora se aplica a ambos */
 .info-box {
     background: #161c2d;
-    padding: 30px 20px; /* Relleno compacto responsivo */
-    width: 100%;
-    max-width: 370px; /* EXACTAMENTE el mismo ancho que el formulario de registro superior */
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;            /* Asegura que ocupen el mismo ancho */
     border-radius: 10px;
-    border-bottom: 4px solid #88ff00;
+    border-bottom: 4px solid #88ff00; 
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin: 0 auto; /* Obliga al centrado perfecto cuando se aleja la pantalla */
     transition: transform 0.3s;
 }
 
+/* Efecto opcional: resalta el recuadro cuando pasas el mouse */
 .info-box:hover {
     transform: scale(1.02);
 }
 
 .info-box h2 {
     margin-bottom: 20px;
-    color: #88ff00;
-    font-size: 1.4rem;
+    color: #88ff00
 }
 
-/* Ajuste interno para la lista de las reglas */
-.info-box ul {
-    text-align: left; /* Mantiene el listado perfectamente legible */
-    padding-left: 20px;
+.info-box p {
+    line-height: 1.6;
     color: #cbd5e0;
 }
 
-.info-box ul li {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 12px;
+/* Contenedor General de Secciones */
+.section-container {
+    padding: 80px 5%;
+    background: #0b0f19;
 }
 
-/* Elementos de limpieza de soporte */
-.section-container { padding: 80px 5%; background: #0b0f19; }
-.section-title { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 40px; }
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
 
 
 /* ==========================================================================
