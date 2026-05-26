@@ -162,11 +162,11 @@ body {
     display: flex; 
     flex-direction: column; /* Alinea los recuadros uno debajo del otro */
     align-items: center;    /* Los centra horizontalmente */
-    gap: 40px;              /* <--- Espacio de separación entre el primer y segundo recuadro */
+    gap: 40px;              /* Espacio de separación entre recuadros */
     background-color: #0b0f19;
 }
 
-/* El diseño del recuadro se mantiene igual, pero ahora se aplica a ambos */
+/* El diseño del recuadro se mantiene igual */
 .info-box {
     background: #161c2d;
     padding: 40px;
@@ -186,12 +186,21 @@ body {
 
 .info-box h2 {
     margin-bottom: 20px;
-    color: #88ff00
+    color: #88ff00;
 }
 
-.info-box p {
-    line-height: 1.6;
+/* Estilos específicos para la lista del reglamento */
+.reglas-list {
+    list-style-position: inside;
+    text-align: left;
+    display: inline-block;
+    max-width: 90%;
+}
+
+.reglas-list li {
+    line-height: 1.8;
     color: #cbd5e0;
+    margin-bottom: 8px;
 }
 
 /* Contenedor General de Secciones */
@@ -207,8 +216,6 @@ body {
     margin-bottom: 40px;
 }
 
-
-
 /* ==========================================================================
    6. OPTIMIZACIONES SUTILES PARA MÓVIL EN VISTA HORIZONTAL (LANDSCAPE)
    ========================================================================== */
@@ -218,7 +225,7 @@ body {
     }
     
     .hero-logo {
-        width: 80px; /* Se achica el logo para que el formulario no sea empujado hacia abajo */
+        width: 80px; 
         height: 80px;
         margin-bottom: 10px;
     }
@@ -233,8 +240,8 @@ body {
         font-size: 0.8rem;
     }
 
-    /* Ambas cajas se expanden proporcionalmente conservando su mismo centro simétrico */
-    .form-container, .info-box {
+    /* Removido .form-container y ajustado el layout */
+    .info-box {
         max-width: 440px;
         padding: 15px 20px;
     }
