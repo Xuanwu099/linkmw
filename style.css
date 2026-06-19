@@ -1,248 +1,468 @@
-/* Configuración General */
+/* --- CONFIGURACIÓN GENERAL --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+:root {
+    --amarillo-limon: #d1eb13da;
+    --oscuro-principal: #0d0f02;
+    --oscuro-tarjeta: #151904;
+    --texto-gris: #c3cda1;
+    --discord-color: #5865f2;
+    --whatsapp-color: #25d366;
 }
 
 body {
-    background-color: #0b0f19; /* Fondo oscuro tipo naval */
-    color: white;
+    background-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
-/* --- NAVEGACIÓN --- */
+/* --- MENÚ DE NAVEGACIÓN SUPERIOR --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    background: rgba(0, 0, 0, 0.85);
+    padding: 15px 6%;
+    background: rgba(13, 15, 2, 0.95);
     position: fixed;
     width: 100%;
+    top: 0;
     z-index: 1000;
+    border-bottom: 2px solid rgba(4, 224, 23, 0.788);
 }
 
-/* Estilo para el Logo/Enlace principal */
 .logo a {
     text-decoration: none;
-    color: #7c97d3; /* Color cian para resaltar */
-    font-weight: bold;
-    font-size: 1.0rem;
-    letter-spacing: 1px;
-    transition: 0.3s;
-}
-
-.logo a:hover {
-    color: white;
-    text-shadow: 0 0 10px #00d4ff;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .nav-links li {
-    margin-left: 30px;
+    margin-left: 25px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9rem;
-    transition: 0.3s;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: #00d4ff;
+.nav-links a:hover, .nav-links a.active {
+    color: var(--amarillo-limon);
 }
 
-/* --- SECCIÓN HERO (LANDING) --- */
+.menu-btn {
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+#click {
+    display: none;
+}
+
+/* --- SECCIÓN INICIO (HERO SPLIT-DESIGN) --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 70px;
+}
+
+.hero-left {
+    flex: 1 1 55%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    padding: 60px 6%;
+    background-color: var(--amarillo-limon);
 }
 
-#bg-video {
+.hero-right {
+    flex: 1 1 45%;
+    position: relative;
+    min-height: 400px;
+}
+
+.ship-bg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-    filter: brightness(35%); /* Oscurece el video para resaltar el texto */
-    object-fit: cover;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    
+    /* 👇 CAMBIA ESTO PARA VIDEOS 👇 */
+    object-fit: cover; 
+    filter: brightness(75%); /* Opcional: oscurece un poco el video si distrae mucho */
+    
+    /* Conserva el corte diagonal intacto */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 650px;
 }
 
 .hero-logo {
-    width: 180px;         /* Ajusta el tamaño a tu gusto */
-    height: 180px;        /* Obligatorio: debe ser igual al ancho para que sea un círculo perfecto */
-    object-fit: cover;    /* Evita que la imagen se deforme al recortarse */
-    border-radius: 50%;   /* Lo hace circular */
-    
-    /* El borde y el resplandor azul de tu imagen de referencia */
-    border: 3px solid #00d4ff; 
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); 
-    
-    margin-bottom: 40px;  /* Espacio para empujar el título hacia abajo */
-    transition: transform 0.3s ease;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--oscuro-principal);
+    box-shadow: 0 0 25px rgba(13, 15, 2, 0.3);
+    margin-bottom: 25px;
 }
 
-.hero-logo:hover {
-    transform: scale(1.05); /* Efecto sutil al pasar el mouse */
-}
-
-/* Ajuste extra para el título si quieres más separación */
 .hero-content h1 {
-    font-size: 2.3rem;
-    margin-bottom: 80px; /* Espacio solicitado respecto a los botones */
-    text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--oscuro-principal);
+    line-height: 1.1;
+    margin-bottom: 5px;
 }
 
-.clan-id {
-    font-size: 1.0rem;
-    font-weight: bold;
-    color: #d1dcdf; /* El azul cian de tu tema */
-    margin-bottom: 25px; /* Espacio antes de los botones */
-    letter-spacing: 3px; /* Para que los números se lean mejor */
-    background: rgba(66, 62, 62, 0.253); /* Un fondo sutil para resaltar */
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 5px;
+.subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgba(13, 15, 2, 0.8);
+    margin-bottom: 35px;
 }
 
-/* --- BOTONES DE REDES (Minimalistas) --- */
-.button-container {
+/* --- CONTENEDORES DE BOTONES --- */
+.cta-container {
     display: flex;
-    gap: 20px;
-    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 480px;
 }
 
-.btn {
-    width: 60px;  /* Ancho fijo para que sean circulares */
-    height: 60px; /* Alto fijo */
-    border-radius: 50%; /* Los hace redondos */
+.btn-id {
+    background-color: var(--oscuro-principal);
+    color: var(--amarillo-limon);
+    border: none;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(13, 15, 2, 0.2);
+}
+
+.btn-id:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-link {
+    flex: 1;
     text-decoration: none;
-    color: white;
-    font-size: 1.5rem; /* Tamaño del icono */
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    gap: 8px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-.btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+.discord { background-color: var(--discord-color); }
+.whatsapp { background-color: var(--whatsapp-color); }
+
+.btn-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
 }
 
-.whatsapp { background-color: #25d366; }
-.discord { background-color: #5865f2; }
-
-/* --- SECCIÓN DESCRIPCIÓN --- */
-/* Contenedor principal de los recuadros */
-.description-section {
-    padding: 100px 20px;
-    display: flex; 
-    flex-direction: column; /* Alinea los recuadros uno debajo del otro */
-    align-items: center;    /* Los centra horizontalmente */
-    gap: 40px;              /* Espacio de separación entre recuadros */
-    background-color: #0b0f19;
+/* --- SECCIÓN ESTADÍSTICAS --- */
+.stats-section {
+    padding: 30px 6%;
+    background-color: var(--amarillo-limon);
 }
 
-/* El diseño del recuadro se mantiene igual */
-.info-box {
-    background: #161c2d;
-    padding: 40px;
-    max-width: 800px;
-    width: 100%;            /* Asegura que ocupen el mismo ancho */
-    border-radius: 10px;
-    border-bottom: 4px solid #88ff00; 
+.stats-grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    max-width: 650px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: rgba(13, 15, 2, 0.05);
+    border: 2px solid var(--oscuro-principal);
+    padding: 10px 20px;
+    border-radius: 6px;
+    min-width: 140px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transition: transform 0.3s;
 }
 
-/* Efecto opcional: resalta el recuadro cuando pasas el mouse */
-.info-box:hover {
-    transform: scale(1.02);
+.stat-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: rgba(13, 15, 2, 0.6);
 }
 
-.info-box h2 {
-    margin-bottom: 20px;
-    color: #88ff00;
+.stat-value {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--oscuro-principal);
 }
 
-/* Estilos específicos para la lista del reglamento */
-.reglas-list {
-    list-style-position: inside;
-    text-align: left;
-    display: inline-block;
-    max-width: 90%;
-}
+.text-green { color: #1e7e34 !important; }
 
-.reglas-list li {
-    line-height: 1.8;
-    color: #cbd5e0;
-    margin-bottom: 8px;
-}
-
-/* Contenedor General de Secciones */
-.section-container {
-    padding: 80px 5%;
-    background: #0b0f19;
+/* --- SECCIÓN REGLAMENTO --- */
+.reglamento-section {
+    background-color: var(--amarillo-limon);
+    padding: 60px 6%;
 }
 
 .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 40px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--oscuro-principal);
+    margin-bottom: 30px;
+    letter-spacing: 1px;
 }
 
-/* ==========================================================================
-   6. OPTIMIZACIONES SUTILES PARA MÓVIL EN VISTA HORIZONTAL (LANDSCAPE)
-   ========================================================================== */
-@media (max-width: 900px) and (orientation: landscape) {
-    .hero {
-        padding-top: 75px; /* Evita colisiones de la navbar al acostar el teléfono */
+.reglas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.regla-card {
+    background-color: rgba(13, 15, 2, 0.05);
+    border: 2px solid var(--oscuro-principal);
+    padding: 25px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.regla-card:hover {
+    background-color: rgba(13, 15, 2, 0.08);
+}
+
+.card-icon {
+    font-size: 1.6rem;
+    color: var(--oscuro-principal);
+    margin-bottom: 12px;
+}
+
+.regla-card h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.regla-card p {
+    font-size: 0.85rem;
+    color: rgba(13, 15, 2, 0.7);
+    font-weight: 600;
+}
+
+.warning-text {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #b71c1c;
+}
+
+/* --- SECCIÓN GALERÍA --- */
+.galeria-section {
+    background-color: var(--amarillo-limon);
+    padding: 40px 6% 60px 6%;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.slider-track {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Oculta scroll en Firefox */
+}
+
+.slider-track::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome */
+
+.gallery-card {
+    flex: 0 0 calc(33.333% - 10px);
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--oscuro-principal);
+    aspect-ratio: 16/9;
+}
+
+.gallery-card img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+.gallery-info {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background: rgba(13, 15, 2, 0.85);
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.gallery-info span { color: var(--amarillo-limon); }
+
+.slider-arrow {
+    background: var(--oscuro-principal);
+    color: var(--amarillo-limon);
+    border: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+/* --- SECCIÓN NOTICIAS --- */
+.noticias-section {
+    background-color: var(--amarillo-limon);
+    padding: 20px 6% 60px 6%;
+}
+
+.news-panel {
+    background-color: var(--oscuro-principal);
+    color: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(13, 15, 2, 0.25);
+}
+
+.news-panel h3 {
+    color: var(--amarillo-limon);
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.news-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.news-block h4 {
+    color: var(--amarillo-limon);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.news-block ul { list-style: none; }
+.news-block li {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+}
+
+.news-item {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: #e2e8f0;
+}
+
+.activity-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    color: var(--texto-gris);
+    margin-bottom: 8px;
+}
+
+/* --- PIE DE PÁGINA --- */
+footer {
+    background-color: var(--oscuro-principal);
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================
+   ⚡ RESPONSIVE DESIGN (VISTA MOVIL) 
+   ========================================== */
+@media (max-width: 992px) {
+    .gallery-card { flex: 0 0 calc(50% - 8px); }
+}
+
+@media (max-width: 768px) {
+    /* Navbar Colapsable */
+    .menu-btn { display: block; }
+    .nav-links {
+        position: fixed;
+        top: 60px; left: -100%;
+        background: rgba(13, 15, 2, 0.98);
+        height: calc(100vh - 60px);
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 0.4s ease;
     }
+    #click:checked ~ .nav-links { left: 0; }
+    .nav-links li { margin: 20px 0; }
+    .nav-links a { font-size: 1.1rem; }
+
+    /* Layout Hero Apilado */
+    .hero-left { flex: 1 1 100%; padding: 40px 6%; text-align: center; justify-content: center; }
+    .hero-right { display: none; } /* Oculta el split lateral en móviles */
+    .hero-content { display: flex; flex-direction: column; align-items: center; }
     
-    .hero-logo {
-        width: 80px; 
-        height: 80px;
-        margin-bottom: 10px;
-    }
-
-    .hero-content h1 {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-
-    .clan-id {
-        margin-bottom: 12px;
-        font-size: 0.8rem;
-    }
-
-    /* Removido .form-container y ajustado el layout */
-    .info-box {
-        max-width: 440px;
-        padding: 15px 20px;
-    }
+    .hero-content h1 { font-size: 2.2rem; }
+    .cta-container { width: 100%; }
+    .social-buttons { flex-direction: column; }
+    
+    /* Elementos de Galería a 1 columna */
+    .gallery-card { flex: 0 0 100%; }
+    .slider-arrow { display: none; } /* Navegación por deslizamiento nativo */
 }
