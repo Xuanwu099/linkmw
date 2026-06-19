@@ -10,51 +10,176 @@
 </head>
 <body>
 
+    <!-- MENÚ DE NAVEGACIÓN SUPERIOR -->
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="https://modernwarships.com/" target="_blank">MODERN WARSHIPS</a> 
+                <a href="#">MW | NIEVE DE LIMÓN</a> 
             </div>
+            <!-- Botón hamburguesa para móviles -->
+            <input type="checkbox" id="click">
+            <label for="click" class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </label>
             <ul class="nav-links">
-                <li><a href="#Reglamento">Reglamento</a></li>
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#reglamento">Reglamento</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#noticias">Noticias</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <video autoplay muted loop id="bg-video">
+    <!-- SECCIÓN INICIO (HERO) -->
+    <section class="hero" id="inicio">
+        <div class="hero-left">
+            <div class="hero-content">
+                <img src="logo_ndl.jpeg" alt="Logo Clan Nieve de Limón" class="hero-logo">
+                <h1>MW | NIEVE DE LIMÓN</h1>
+                <p class="subtitle"> MODERN WARSHIPS</p>
+                
+                <div class="cta-container">
+                    <!-- Botón interactivo de Copiar ID -->
+                    <button class="btn-id" onclick="copiarID()">
+                         CLAN ID: <span id="clan-id-text">RHLTFL</span> <i class="far fa-copy"></i>
+                    </button>
+                    
+                    <div class="social-buttons">
+                        <a href="https://tally.so/r/Bz059Y" class="btn-link discord" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-discord"></i>  DISCORD
+                        </a>
+                        <a href="https://tally.so/r/44zdok" class="btn-link whatsapp" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> WHATSAPP 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right">
+        <video autoplay muted loop playsinline class="ship-bg">
             <source src="videomw.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
         </video>
-        
-        <div class="hero-content">
-            <img src="logo_ndl.jpeg" alt="Logo Clan" class="hero-logo">
-            <h1>BIENVENIDOS</h1>
-            <p class="clan-id">CLAN ID: RHLTFL</p>
-            <div class="button-container">
-                <a href="https://tally.so/r/44zdok" class="btn whatsapp" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-whatsapp"></i> 
-                </a>
-                <a href="https://discord.gg/v3VZ2CFhv" class="btn discord" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-discord"></i> 
-                </a>
+    </div>
+    </section>
+
+    <!-- SECCIÓN ESTADÍSTICAS RÁPIDAS -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-title">RECLUTAMIENTO:</p>
+                <p class="stat-value text-green">ABIERTO</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-title">REQUISITOS:</p>
+                <p class="stat-value">[JUGADOR ACTIVO]</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-title">NIVEL MÍNIMO:</p>
+                <p class="stat-value">[35]</p>
             </div>
         </div>
     </section>
 
-    <section class="description-section">
-        <div class="info-box" id="Reglamento">
-            <h2>Reglamento</h2>
-            <ul class="reglas-list">
-                <li>Respeto entre miembros del clan (Respetar el limite de cada persona).</li>
-                <li>Prohibido el acoso a cualquier miembro del clan.</li>
-                <li>Ser jugador activo (No se exigen puntos mínimos).</li>
-                <li>Prohibido el contenido explícito y/o pornografía.</li>
-                <li>Prohibida la venta de cuentas, hacks y/o aplicaciones de terceros.</li>
-                <li>Prohido el spam masivo en los chats.</li>
-                <h3>⚠️ El incumplimiento de cualquiera de estas normas será motivo de sanción o expulsión inmediata</h3>                  
-            </ul>
+    <!-- SECCIÓN REGLAMENTO (TARJETAS INDIVIDUALES) -->
+    <section class="reglamento-section" id="reglamento">
+        <h2 class="section-title">REGLAMENTO GENERAL</h2>
+        <div class="reglas-grid">
+            <div class="regla-card">
+                <i class="fas fa-handshake card-icon"></i>
+                <h3>1. RESPETO MUTUO</h3>
+                <p>(Prohibido el acoso.Respetar el límite de cada persona)</p>
+            </div>
+            <div class="regla-card">
+                <i class="fas fa-stopwatch card-icon"></i>
+                <h3>2. JUGADOR ACTIVO</h3>
+                <p>(No se exigen puntos mínimos)</p>
+            </div>
+            <div class="regla-card">
+                <i class="fas fa-ban card-icon"></i>
+                <h3>3. HACKS Y VENTAS</h3>
+                <p>(Prohibida venta de hacks, cuentas o apps de terceros)</p>
+            </div>
+            <div class="regla-card">
+                <i class="fas fa-microphone card-icon"></i>
+                <h3>4. COMUNICACIÓN </h3>
+                <p>(Prohibido el spam masivo en chats)</p>
+            </div>
+            <div class="regla-card">
+                <i class="fas fa-exclamation-triangle card-icon"></i>
+                <h3>5. NO CONTENIDO EXPLÍCITO</h3>
+                <p>(Prohibida pornografía o material explicito)</p>
+            </div>
+        </div>
+        <p class="warning-text">⚠️ El incumplimiento de cualquiera de estas normas será motivo de sanción o expulsión inmediata</p>
+    </section>
+
+    <!-- SECCIÓN GALERÍA DE CAPTURAS -->
+    <section class="galeria-section" id="galeria">
+        <h2 class="section-title">GALERÍA </h2>
+        <div class="slider-container">
+            <button class="slider-arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-track">
+                <!-- Reemplaza "capturaX.jpg" por las rutas de tus imágenes -->
+                <div class="gallery-card">
+                    <img src="captura1.jpg" alt="Captura de pantalla Modern Warships">
+                    <div class="gallery-info"><p>User_X <span>[Barco]</span></p></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="captura2.jpg" alt="Batalla Naval Modern Warships">
+                    <div class="gallery-info"><p>User_y <span>[Destructor]</span></p></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="captura3.jpg" alt="Flota Nieve de Limón">
+                    <div class="gallery-info"><p>User_z <span>[Portaviones]</span></p></div>
+                </div>
+            </div>
+            <button class="slider-arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
+    <!-- SECCIÓN NOTICIAS Y PANEL DE LIDERAZGO -->
+    <section class="noticias-section" id="noticias">
+        <div class="noticias-container">
+            <div class="news-panel">
+                <h3>INFORMACIÓN GENERAL Y NOTICIAS</h3>
+                <div class="news-content">
+                    <div class="news-block">
+                        <h4>OFICIALES DESTACADOS</h4>
+                        <ul>
+                            <li><i class="fas fa-medal text-green"></i> Madison Nicole (Líder)</li>
+                            <li><i class="fas fa-chevron-up text-green"></i> Zero Two (Oficial)</li>
+                            <li><i class="fas fa-chevron-up text-green"></i> Rolitas (Oficial)</li>
+                        </ul>
+                    </div>
+                    <div class="news-block">
+                        <h4>NOTICIAS RECIENTES</h4>
+                        <p class="news-item"><strong>Actualizaciones:</strong></p>
+                        <p class="news-item"> The Old Sovereigns: FS NORMANDIE ; RF SHKVAL </p>
+                    </div>
+                    <div class="news-block">
+                        <h4>HORARIO CLAN WARS</h4>
+                        <p class="activity-text">> Jueves-Sábado: 19:00 (CDMX).</p>
+                        <p class="activity-text">> Sábado-Domingo: 13:00 (CDMX).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>© 2026 CLAN NIEVE DE LIMÓN  - COMUNIDAD MODERN WARSHIPS </p>
+    </footer>
+
+    <!-- Script básico para la funcionalidad de copiar ID -->
+    <script>
+        function copiarID() {
+            const idTexto = document.getElementById("clan-id-text").innerText;
+            navigator.clipboard.writeText(idTexto).then(() => {
+                alert("¡ID de Clan Copiado: " + idTexto + "!");
+            });
+        }
+    </script>
 </body>
 </html>
