@@ -108,9 +108,9 @@ body {
     width: 100%; 
     height: 100%;
     
-    /* 👇 CAMBIA ESTO PARA VIDEOS 👇 */
+    /*  Modificar para videos */
     object-fit: cover; 
-    filter: brightness(75%); /* Opcional: oscurece un poco el video si distrae mucho */
+    filter: brightness(75%); /* Opcional: oscureceel video  */
     
     /* Conserva el corte diagonal intacto */
     clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -464,5 +464,5 @@ footer {
     
     /* Elementos de Galería a 1 columna */
     .gallery-card { flex: 0 0 100%; }
-    .slider-arrow { display: none; } /* Navegación por deslizamiento nativo */
+    .slider-arrow { display: none; } /* Navegación por deslizamiento  */
 }
