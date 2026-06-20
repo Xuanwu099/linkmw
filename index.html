@@ -181,5 +181,26 @@
             });
         }
     </script>
+    <!-- ... resto de tus secciones ... -->
+
+    <script>
+        // Función existente para copiar el ID
+        function copiarID() {
+            const idTexto = document.getElementById("clan-id-text").innerText;
+            navigator.clipboard.writeText(idTexto).then(() => {
+                alert("¡ID de Clan Copiado: " + idTexto + "!");
+            });
+        }
+
+        // 👇 NUEVO CÓDIGO: Cierra el menú al hacer clic en cualquier enlace 👇
+        const menuCheckbox = document.getElementById('click');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuCheckbox.checked = false; // Desmarca el checkbox, cerrando el menú
+            });
+        });
+    </script>
 </body>
 </html>
