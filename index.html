@@ -4,48 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MW | Nieve de Limón</title>
+    
+    <meta name="description" content="Sitio oficial del Clan Nieve de Limón en Modern Warships. Conoce nuestro reglamento, horarios de Clan Wars y únete a nuestra flota.">
+    <meta name="keywords" content="Modern Warships, Clan, Nieve de Limon, Videojuegos, Flota, Clan Wars">
+    <meta property="og:title" content="MW | Clan Nieve de Limón">
+    <meta property="og:description" content="¿Buscas clan activo? Reclutamiento abierto nivel 35+. Consulta nuestras normas y despliega tu flota con nosotros.">
+    <meta property="og:image" content="logo_ndl.jpeg">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="favicon.png" type="image/x-icon">
 </head>
 <body>
-
-    <!-- MENÚ DE NAVEGACIÓN SUPERIOR -->
+<!--Preloader-->
+    <div id="preloader">
+        <div class="preloader-content">
+            <i class="fas fa-anchor preloader-spinner"></i>
+            <p>CARGANDO...</p>
+        </div>
+    </div>
+<!--Header-->
     <header>
         <nav class="navbar">
             <div class="logo">
                 <a href="#">MW | NIEVE DE LIMÓN</a> 
             </div>
-            <!-- Botón hamburguesa para móviles -->
             <input type="checkbox" id="click">
             <label for="click" class="menu-btn">
                 <i class="fas fa-bars"></i>
             </label>
             <ul class="nav-links">
-                <li><a href="#inicio" class="active">Inicio</a></li>
-                <li><a href="#reglamento">Reglamento</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#noticias">Noticias</a></li>
+                <li><a href="#inicio" class="nav-item active">Inicio</a></li>
+                <li><a href="#reglamento" class="nav-item">Reglamento</a></li>
+                <li><a href="#galeria" class="nav-item">Galería</a></li>
+                <li><a href="#noticias" class="nav-item">Anuncios</a></li>
             </ul>
         </nav>
     </header>
-
-    <!-- SECCIÓN INICIO (HERO) -->
+<!--LOGo-->
     <section class="hero" id="inicio">
         <div class="hero-left">
             <div class="hero-content">
                 <img src="logo_ndl.jpeg" alt="Logo Clan Nieve de Limón" class="hero-logo">
                 <h1>MW | NIEVE DE LIMÓN</h1>
-                <p class="subtitle"> CLAN DE HABLA HISPANA</p>
-                
+                <p class="subtitle"> MODERN WARSHIPS</p>
+<!--BOtones-->                
                 <div class="cta-container">
-                    <!-- Botón interactivo de Copiar ID -->
                     <button class="btn-id" onclick="copiarID()">
                          CLAN ID: <span id="clan-id-text">RHLTFL</span> <i class="far fa-copy"></i>
                     </button>
                     
                     <div class="social-buttons">
-                        <a href="https://discord.gg/TScQA4PuW" class="btn-link discord" target="_blank" rel="noopener noreferrer">
+                        <a href="https://tally.so/r/Bz059Y" class="btn-link discord" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-discord"></i>  DISCORD
                         </a>
                         <a href="https://tally.so/r/44zdok" class="btn-link whatsapp" target="_blank" rel="noopener noreferrer">
@@ -56,14 +67,13 @@
             </div>
         </div>
         <div class="hero-right">
-        <video autoplay muted loop playsinline class="ship-bg">
-            <source src="videomw.mp4" type="video/mp4">
-            NO FOUND.
-        </video>
-    </div>
+            <video autoplay muted loop playsinline class="ship-bg">
+                <source src="videomw.mp4" type="video/mp4">
+                No found.
+            </video>
+        </div>
     </section>
-
-    <!-- SECCIÓN ESTADÍSTICAS RÁPIDAS -->
+<!--Tarjetas requisitos-->
     <section class="stats-section">
         <div class="stats-grid">
             <div class="stat-card">
@@ -80,15 +90,14 @@
             </div>
         </div>
     </section>
-
-    <!-- SECCIÓN REGLAMENTO (TARJETAS INDIVIDUALES) -->
+<!--REglamento-->
     <section class="reglamento-section" id="reglamento">
         <h2 class="section-title">REGLAMENTO GENERAL</h2>
         <div class="reglas-grid">
             <div class="regla-card">
                 <i class="fas fa-handshake card-icon"></i>
                 <h3>1. RESPETO MUTUO</h3>
-                <p>(Prohibido el acoso.Respetar el límite de cada persona)</p>
+                <p>(Prohibido el acoso. Respetar el límite de cada persona)</p>
             </div>
             <div class="regla-card">
                 <i class="fas fa-stopwatch card-icon"></i>
@@ -113,100 +122,235 @@
         </div>
         <p class="warning-text">⚠️ El incumplimiento de cualquiera de estas normas será motivo de sanción o expulsión inmediata</p>
     </section>
-
-    <!-- SECCIÓN GALERÍA DE CAPTURAS -->
+<!--Galeria-->
     <section class="galeria-section" id="galeria">
         <h2 class="section-title">GALERÍA </h2>
         <div class="slider-container">
             <button class="slider-arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
             <div class="slider-track">
-                <!-- acapturas imágenes -->
                 <div class="gallery-card">
                     <img src="001.jpeg" alt="Captura de pantalla Modern Warships">
-                    <div class="gallery-info"><p>Zero´s <span>[Acorazado]</span></p></div>
+                    <div class="gallery-info"><p>User_X <span>[Barco]</span></p></div>
                 </div>
                 <div class="gallery-card">
                     <img src="002.jpeg" alt="Batalla Naval Modern Warships">
-                    <div class="gallery-info"><p>Zero´s <span>[Destructor]</span></p></div>
+                    <div class="gallery-info"><p>User_y <span>[Destructor]</span></p></div>
                 </div>
                 <div class="gallery-card">
                     <img src="003.jpeg" alt="Flota Nieve de Limón">
-                    <div class="gallery-info"><p>Zero´s <span>[Yamato]</span></p></div>
+                    <div class="gallery-info"><p>User_z <span>[Portaviones]</span></p></div>
                 </div>
                 <div class="gallery-card">
                     <img src="004.jpeg" alt="Flota Nieve de Limón">
-                    <div class="gallery-info"><p>Zero´s <span>[Roodney]</span></p></div>
-                </div>
-                 <div class="gallery-card">
-                    <img src="005.jpeg" alt="Flota Nieve de Limón">
-                    <div class="gallery-info"><p>Limón <span>[Clan wars]</span></p></div>
+                    <div class="gallery-info"><p>User_z <span>[Portaviones]</span></p></div>
                 </div>
             </div>
             <button class="slider-arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
-
-    <!-- SECCIÓN NOTICIAS Y PANEL DE LIDERAZGO -->
+<!--Anuncios-->
     <section class="noticias-section" id="noticias">
         <div class="noticias-container">
             <div class="news-panel">
-                <h3>INFORMACIÓN GENERAL Y NOTICIAS</h3>
+                <h3>ANUNCIOS </h3>
                 <div class="news-content">
                     <div class="news-block">
                         <h4>OFICIALES DESTACADOS</h4>
                         <ul>
                             <li><i class="fas fa-medal text-green"></i> Madison Nicole (Líder)</li>
-                            <li><i class="fas fa-chevron-up text-green"></i> Zero Two (Sublíder)</li>
+                            <li><i class="fas fa-chevron-up text-green"></i> Zero Two (Oficial)</li>
                             <li><i class="fas fa-chevron-up text-green"></i> Rolitas (Oficial)</li>
                         </ul>
                     </div>
+<!--Actualizaciones-->                    
                     <div class="news-block">
-                        <h4>NOTICIAS RECIENTES</h4>
-                        <p class="news-item"><strong>Actualizaciones:</strong></p>
-                        <p class="news-item"> The Old Sovereigns: FS NORMANDIE ; RF SHKVAL </p>
+                        <h4>ACTUALIZACIONES Y FILTRACIONES</h4> 
+                        <div class="news-links-container">
+                            <a href="https://modernwarships.com/news" class="news-btn-card official-site" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="btn-card-text">
+                                    <span class="btn-card-title">Actualizaciones Oficiales</span>
+                                    <span class="btn-card-sub">Sitio Web MW</span>
+                                </div>
+                            </a>
+
+                            <a href="https://whatsapp.com/channel/0029VbAzAWm47Xe9yZCGHz2b" class="news-btn-card whatsapp-channel" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp"></i>
+                                <div class="btn-card-text">
+                                    <span class="btn-card-title">Filtraciones (Jossephine)</span>
+                                    <span class="btn-card-sub">Canal de WhatsApp</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
+<!--Horarios-->
                     <div class="news-block">
                         <h4>HORARIO CLAN WARS</h4>
-                        <p class="activity-text">> Jueves-Sábado: 19:00 (CDMX).</p>
-                        <p class="activity-text">> Sábado-Domingo: 13:00 (CDMX).</p>
+                        <div class="schedule-item">
+                            <p class="activity-text">> Jueves-Sábado: 19:00 (CDMX)</p>
+                            <p class="local-time-text" data-cdmx-hour="19">> Hora local: <span class="converted-time">Cargando...</span></p>
+                        </div>
+                        <div class="schedule-item" style="margin-top: 10px;">
+                            <p class="activity-text">> Sábado-Domingo: 13:00 (CDMX)</p>
+                            <p class="local-time-text" data-cdmx-hour="13">> Hora local: <span class="converted-time">Cargando...</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- PIE DE PÁGINA -->
+ <!--Pie de pagina-->   
     <footer>
-        <p>© 2026 CLAN NIEVE DE LIMÓN  - COMUNIDAD MODERN WARSHIPS </p>
+        <p>© 2026 CLAN NIEVE DE LIMÓN - COMUNIDAD MODERN WARSHIPS</p>
     </footer>
+<!--Carrusel-->
+    <div id="image-modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <button class="modal-arrow modal-left-arrow" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <div class="modal-wrapper">
+            <img class="modal-content" id="modal-img" alt="Captura ampliada">
+            <div id="modal-caption"></div>
+        </div>
+        <button class="modal-arrow modal-right-arrow" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+    </div>
 
-    <!-- Script básico para la funcionalidad de copiar ID -->
     <script>
+        // CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+        });
+
+        // Funcion copiar ID
         function copiarID() {
             const idTexto = document.getElementById("clan-id-text").innerText;
             navigator.clipboard.writeText(idTexto).then(() => {
                 alert("¡ID de Clan Copiado: " + idTexto + "!");
             });
         }
-    </script>
-    <!-- ... resto de tus secciones ... -->
 
-    <script>
-        // Función existente para copiar el ID
-        function copiarID() {
-            const idTexto = document.getElementById("clan-id-text").innerText;
-            navigator.clipboard.writeText(idTexto).then(() => {
-                alert("¡ID de Clan Copiado: " + idTexto + "!");
-            });
-        }
-
-        //   Cierra el menú al hacer clic en cualquier enlace 
+        // Cerrar menú hamburguesa
         const menuCheckbox = document.getElementById('click');
         const navLinks = document.querySelectorAll('.nav-links a');
-
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuCheckbox.checked = false; // Desmarca el checkbox, cerrando el menú
+            link.addEventListener('click', () => { menuCheckbox.checked = false; });
+        });
+
+        // FUNCIONALIDAD DE LAS FLECHAS DEL CARRUSEL DE LA PÁGINA (PC)
+        const track = document.querySelector('.slider-track');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+
+        if (track && leftArrow && rightArrow) {
+            rightArrow.addEventListener('click', () => {
+                const cardWidth = document.querySelector('.gallery-card').offsetWidth + 15;
+                track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            });
+            leftArrow.addEventListener('click', () => {
+                const cardWidth = document.querySelector('.gallery-card').offsetWidth + 15;
+                track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            });
+        }
+
+        // Modal para agrandar imagenes
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const captionText = document.getElementById('modal-caption');
+        const closeBtn = document.querySelector('.modal-close');
+        const galleryImages = document.querySelectorAll('.gallery-card img');
+        const modalLeftArrow = document.querySelector('.modal-left-arrow');
+        const modalRightArrow = document.querySelector('.modal-right-arrow');
+        let currentImgIndex = 0;
+
+        function updateModalImage(index) {
+            if (index >= 0 && index < galleryImages.length) {
+                currentImgIndex = index;
+                const targetImg = galleryImages[currentImgIndex];
+                modalImg.style.opacity = "0";
+                setTimeout(() => {
+                    modalImg.src = targetImg.src;
+                    const infoText = targetImg.nextElementSibling ? targetImg.nextElementSibling.innerText : "";
+                    captionText.innerHTML = infoText;
+                    modalImg.style.opacity = "1";
+                }, 150);
+            }
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', function() {
+                modal.style.display = "flex";
+                updateModalImage(index);
+            });
+        });
+
+        modalRightArrow.addEventListener('click', (e) => { e.stopPropagation(); navigateModal(1); });
+        modalLeftArrow.addEventListener('click', (e) => { e.stopPropagation(); navigateModal(-1); });
+
+        function navigateModal(direction) {
+            let nextIndex = currentImgIndex + direction;
+            if (nextIndex >= galleryImages.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = galleryImages.length - 1;
+            updateModalImage(nextIndex);
+        }
+
+        //  SWipe para moviles
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+        modal.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Sensibilidad del deslizamiento
+            if (touchStartX - touchEndX > swipeThreshold) navigateModal(1);  // Swipe Izquierda -> Siguiente
+            if (touchEndX - touchStartX > swipeThreshold) navigateModal(-1); // Swipe Derecha -> Anterior
+        }
+
+        // Teclado físico PC
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === "flex") {
+                if (e.key === "ArrowRight") navigateModal(1);
+                if (e.key === "ArrowLeft") navigateModal(-1);
+                if (e.key === "Escape") modal.style.display = "none";
+            }
+        });
+
+        closeBtn.addEventListener('click', () => { modal.style.display = "none"; });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === closeBtn) modal.style.display = "none";
+        });
+
+        //  CONVERTIDOR AUTOMÁTICO DE ZONA HORARIA
+        document.querySelectorAll('.local-time-text').forEach(item => {
+            const cdmxHour = parseInt(item.getAttribute('data-cdmx-hour'));
+            const cdmxDate = new Date();
+            cdmxDate.setUTCHours(cdmxHour + 6, 0, 0, 0); 
+            const localTimeStr = cdmxDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+            item.querySelector('.converted-time').innerText = localTimeStr;
+        });
+
+        //  INDICADOR VISUAL DE SECCIÓN ACTIVA (SCROLL SPY)
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let currentSectionId = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Margen de holgura por la barra superior
+                if (window.scrollY >= sectionTop) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentSectionId}`) {
+                    item.classList.add('active');
+                }
             });
         });
     </script>
