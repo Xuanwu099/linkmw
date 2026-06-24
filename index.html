@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MW | Nieve de Limón</title>
-    
+<!--METATAGS-->
     <meta name="description" content="Sitio oficial del Clan Nieve de Limón en Modern Warships. Conoce nuestro reglamento, horarios de Clan Wars y únete a nuestra flota.">
-    <meta name="keywords" content="Modern Warships, Clan, Nieve de Limon, Videojuegos, Clan Wars">
+    <meta name="keywords" content="Modern Warships, Clan, Nieve de Limon, Videojuegos, Flota, Clan Wars">
+    
+<!-- OPEN GRAPH (Facebook, Discord, WhatsApp)-->
     <meta property="og:title" content="MW | Clan Nieve de Limón">
-    <meta property="og:description" content="¿Buscas clan activo? Sin puntos mínimos. Reclutamiento abierto nivel 35+. Consulta nuestras normas y únete a la flota.">
-    <meta property="og:image" content="logo_ndl02.jpeg">
+    <meta property="og:description" content="¿Buscas clan activo en Modern Warships? Sin puntos mínimos. Reclutamiento abierto nivel 35+. Consulta nuestro reglamento, horarios de Clan Wars y únete a la flota.">
+    <meta property="og:image" content="https://limonmw.online/logo_ndl.jpeg">
+    <meta property="og:image:secure_url" content="https://limonmw.online/logo_ndl.jpeg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://limonmw.online">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Clan Nieve de Limón">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -23,6 +32,11 @@
             <i class="fas fa-anchor preloader-spinner"></i>
             <p>CARGANDO...</p>
         </div>
+    </div>
+<!-- Toast notification-->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>¡ID Copiado!</span>
     </div>
 <!--Header-->
     <header>
@@ -39,6 +53,7 @@
                 <li><a href="#reglamento" class="nav-item">Reglamento</a></li>
                 <li><a href="#galeria" class="nav-item">Galería</a></li>
                 <li><a href="#noticias" class="nav-item">Anuncios</a></li>
+                <li><a href="#faq" class="nav-item">FAQ</a></li>
             </ul>
         </nav>
     </header>
@@ -46,9 +61,9 @@
     <section class="hero" id="inicio">
         <div class="hero-left">
             <div class="hero-content">
-                <img src="logo_ndl.jpeg" alt="Logo Clan Nieve de Limón" class="hero-logo">
+                <img src="logo_ndl.jpeg" alt="Logo Clan Nieve de Limón" class="hero-logo"  fetchpriority="high">
                 <h1>MW | NIEVE DE LIMÓN</h1>
-                <p class="subtitle"> Clan de habla Hispana</p>
+                <p class="subtitle"> Clan de habla hispana</p>
 <!--BOtones-->                
                 <div class="cta-container">
                     <button class="btn-id" onclick="copiarID()">
@@ -57,19 +72,21 @@
                     
                     <div class="social-buttons">
                         <a href="https://tally.so/r/Bz059Y" class="btn-link discord" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-discord"></i>  DISCORD
+                            <i class="fab fa-discord" aria-hidden="true"></i> DISCORD
                         </a>
                         <a href="https://tally.so/r/44zdok" class="btn-link whatsapp" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp"></i> WHATSAPP 
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i> WHATSAPP 
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+<!--Video-->
         <div class="hero-right">
-            <video autoplay muted loop playsinline class="ship-bg">
+            <video autoplay muted loop playsinline class="ship-bg" poster="fallback-image.jpg">
                 <source src="videomw.mp4" type="video/mp4">
-                No found.
+                <!-- Mensaje alternativo video no disponible -->
+                    Tu navegador no soporta videos HMTL5.
             </video>
         </div>
     </section>
@@ -97,7 +114,7 @@
             <div class="regla-card">
                 <i class="fas fa-handshake card-icon"></i>
                 <h3>1. RESPETO MUTUO</h3>
-                <p>(Prohibido el acoso. Respetar el límite de cada persona)</p>
+                <p>(Respetar el límite de cada persona. Prohibido el acoso)</p>
             </div>
             <div class="regla-card">
                 <i class="fas fa-stopwatch card-icon"></i>
@@ -129,25 +146,35 @@
             <button class="slider-arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
             <div class="slider-track">
                 <div class="gallery-card">
-                    <img src="001.jpeg" alt="Captura de pantalla Modern Warships">
+                    <img src="001.jpeg" alt="Captura de pantalla Modern Warships" loading="lazy">
                     <div class="gallery-info"><p>Acorazado <span>[HMS Rodney]</span></p></div>
                 </div>
                 <div class="gallery-card">
-                    <img src="002.jpeg" alt="Batalla Naval Modern Warships">
+                    <img src="002.jpeg" alt="Batalla Naval Modern Warships" loading="lazy">
                     <div class="gallery-info"><p>ROKS Jeongjo <span>[Jelly]</span></p></div>
                 </div>
                 <div class="gallery-card">
-                    <img src="003.jpeg" alt="Flota Nieve de Limón">
+                    <img src="003.jpeg" alt="Flota Nieve de Limón" loading="lazy">
                     <div class="gallery-info"><p>Acorazado <span>[IJN Yamayo]</span></p></div>
                 </div>
                 <div class="gallery-card">
-                    <img src="004.jpeg" alt="Flota Nieve de Limón">
-                    <div class="gallery-info"><p>Acorazado <span>[HMS Rodney]</span></p></div>
+                    <img src="004.jpeg" alt="Flota Nieve de Limón" loading="lazy">
+                    <div class="gallery-info"><p>Battleship <span>[HMS Rodney]</span></p></div>
                 </div>
             </div>
             <button class="slider-arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
+<!--Carrusel-->
+    <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+        <span class="modal-close">&times;</span>
+        <button class="modal-arrow modal-left-arrow" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <div class="modal-wrapper">
+            <img class="modal-content" id="modal-img" alt="Captura ampliada">
+            <div id="modal-caption"></div>
+        </div>
+        <button class="modal-arrow modal-right-arrow" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+    </div>
 <!--Anuncios-->
     <section class="noticias-section" id="noticias">
         <div class="noticias-container">
@@ -158,7 +185,7 @@
                         <h4>OFICIALES DESTACADOS</h4>
                         <ul>
                             <li><i class="fas fa-medal text-green"></i> Madison Nicole (Líder)</li>
-                            <li><i class="fas fa-chevron-up text-green"></i> Zero Two (Oficial)</li>
+                            <li><i class="fas fa-chevron-up text-green"></i> Zero Two (Sublider)</li>
                             <li><i class="fas fa-chevron-up text-green"></i> Rolitas (Oficial)</li>
                         </ul>
                     </div>
@@ -173,10 +200,11 @@
                                     <span class="btn-card-sub">Sitio Web MW</span>
                                 </div>
                             </a>
+
                             <a href="https://artstorm.com/en-US/news" class="news-btn-card whatsapp-channel" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-newspaper"></i>
                                 <div class="btn-card-text">
-                                    <span class="btn-card-title">ARTSTORM </span>
+                                    <span class="btn-card-title">ARTSTROM </span>
                                     <span class="btn-card-sub">Sitio Web </span>
                                 </div>
                             </a>
@@ -198,21 +226,80 @@
             </div>
         </div>
     </section>
+<!--FAQ-->
+    <section class="faq-section" id="faq">
+        <h2 class="section-title">PREGUNTAS FRECUENTES</h2>
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Necesito tener un nivel específico para unirme?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Solo necesitas tener <strong>nivel 35 o superior</strong>. No exigimos puntos mínimos ni estadísticas específicas, solo que seas un jugador activo y respetuoso.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Cuál es el límite máximo de días de inactividad permitidos?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>El límite es de 15 días. Sin embargo, entendemos perfectamente que la vida real es lo primero. Si tu periodo de inactividad se va a prolongar más de lo permitido, solo debes avisar a un oficial/administrador. </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Realizan torneos o dinámicas en los que regalen premios (pases, buques o llaves)?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p> Sí. Se aclara que la entrega de premios no es periódica; estos se llevarán a cabo exclusivamente cuando se disponga de un patrocinador.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Juegan Clan wars?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, los horarios de Clan Wars vienen marcados en la sección Anunicios. </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Piden requisitos para jugar Clan Wars?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p> De preferencia contar con un número significativo de buques y mejorados al máximo. Es importante llegar a tiempo, pues se le da prioridad a los jugadores que están conectados.  </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Qué hago si tengo un problema con otro miembro?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Reporta la situación a un oficial por mensaje privado o etiquetalo en los chats del grupo. Investigaremos el caso y tomaremos las medidas necesarias. La tolerancia cero es para acoso y toxicidad.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
  <!--Pie de pagina-->   
     <footer>
         <p>© 2026 CLAN NIEVE DE LIMÓN - COMUNIDAD MODERN WARSHIPS</p>
     </footer>
-<!--Carrusel-->
-    <div id="image-modal" class="modal">
-        <span class="modal-close">&times;</span>
-        <button class="modal-arrow modal-left-arrow" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-        <div class="modal-wrapper">
-            <img class="modal-content" id="modal-img" alt="Captura ampliada">
-            <div id="modal-caption"></div>
-        </div>
-        <button class="modal-arrow modal-right-arrow" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
-    </div>
 
+
+<!---javascript-->
     <script>
         // CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
         window.addEventListener('load', () => {
@@ -225,7 +312,9 @@
         function copiarID() {
             const idTexto = document.getElementById("clan-id-text").innerText;
             navigator.clipboard.writeText(idTexto).then(() => {
-                alert("¡ID de Clan Copiado: " + idTexto + "!");
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
             });
         }
 
@@ -276,11 +365,38 @@
             }
         }
 
+        // Declarar variables para scroll spy
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+        let scrollTimeout;
+
+        //Event listeners
+        // Cuando abres el modal (en el click de las imágenes)
         galleryImages.forEach((img, index) => {
             img.addEventListener('click', function() {
                 modal.style.display = "flex";
+                document.body.style.overflow = "hidden"; // ← Agregar aquí
                 updateModalImage(index);
             });
+        });
+
+        // Cuando cierras el modal (en todos los eventos de cierre)
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = ""; // ← Agregar aquí
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === closeBtn) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === "flex") {
+                if (e.key === "ArrowRight") navigateModal(1);
+                if (e.key === "ArrowLeft") navigateModal(-1);
+                if (e.key === "Escape") closeModal(); // ← Usar función
+            }
         });
 
         modalRightArrow.addEventListener('click', (e) => { e.stopPropagation(); navigateModal(1); });
@@ -308,50 +424,89 @@
             if (touchStartX - touchEndX > swipeThreshold) navigateModal(1);  // Swipe Izquierda -> Siguiente
             if (touchEndX - touchStartX > swipeThreshold) navigateModal(-1); // Swipe Derecha -> Anterior
         }
-
-        // Teclado físico PC
-        document.addEventListener('keydown', (e) => {
-            if (modal.style.display === "flex") {
-                if (e.key === "ArrowRight") navigateModal(1);
-                if (e.key === "ArrowLeft") navigateModal(-1);
-                if (e.key === "Escape") modal.style.display = "none";
-            }
-        });
-
-        closeBtn.addEventListener('click', () => { modal.style.display = "none"; });
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target === closeBtn) modal.style.display = "none";
-        });
-
+    
         //  CONVERTIDOR AUTOMÁTICO DE ZONA HORARIA
         document.querySelectorAll('.local-time-text').forEach(item => {
             const cdmxHour = parseInt(item.getAttribute('data-cdmx-hour'));
-            const cdmxDate = new Date();
-            cdmxDate.setUTCHours(cdmxHour + 6, 0, 0, 0); 
-            const localTimeStr = cdmxDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+            
+            // Obtener la diferencia horaria entre CDMX y la zona local
+            const now = new Date();
+            const cdmxString = now.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
+            const localString = now.toLocaleString('en-US');
+            
+            const cdmxDate = new Date(cdmxString);
+            const localDate = new Date(localString);
+            
+            const diffHours = Math.round((cdmxDate - localDate) / (1000 * 60 * 60));
+            
+            // Calcular la hora local equivalente
+            const localHour = cdmxHour + diffHours;
+            const localTime = new Date();
+            localTime.setHours(localHour, 0, 0, 0);
+            
+            const localTimeStr = localTime.toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false 
+            });
+            
             item.querySelector('.converted-time').innerText = localTimeStr;
         });
 
-        //  INDICADOR VISUAL DE SECCIÓN ACTIVA (SCROLL SPY)
-        const sections = document.querySelectorAll('section[id]');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        window.addEventListener('scroll', () => {
-            let currentSectionId = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100; // Margen de holgura por la barra superior
-                if (window.scrollY >= sectionTop) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href') === `#${currentSectionId}`) {
-                    item.classList.add('active');
+        // FAQ ACORDEÓN
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Cerrar todos los demás
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Abrir el actual (si no estaba abierto)
+                if (!isActive) {
+                    faqItem.classList.add('active');
                 }
             });
         });
+
+        //  INDICADOR VISUAL DE SECCIÓN ACTIVA (SCROLL SPY)...throttling para mejorar el rendimiento
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                let currentSectionId = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (window.scrollY >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${currentSectionId}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }, 100); // Ejecuta cada 100ms máximo
+        });
+    </script>
+<!--JSON-LD para que Google entienda que es un clan de videojuegos-->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Clan Nieve de Limón",
+            "description": "Clan hispano de Modern Warships. Reclutamiento abierto nivel 35+.",
+            "url": "https://limonmw.online",
+            "logo": "https://limonmw.online/logo_ndl.jpeg",
+            "foundingDate": "2026",
+            "sameAs": [
+                "https://tally.so/r/Bz059Y",
+                "https://tally.so/r/44zdok"
+            ]
+        }
     </script>
 </body>
 </html>
