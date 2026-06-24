@@ -57,6 +57,35 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+/*--Toast notificacion--*/
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast i {
+    font-size: 1.2rem;
+}
 
 /* --- MENÚ DE NAVEGACIÓN SUPERIOR --- */
 .navbar {
@@ -220,6 +249,34 @@ body {
     filter: brightness(1.1);
 }
 
+/* Mejora de accesibilidad - Focus visible */
+button:focus, 
+a:focus, 
+input:focus {
+    outline: 2px solid var(--amarillo-limon);
+    outline-offset: 2px;
+}
+
+/* Para el menú hamburguesa */
+.menu-btn:focus {
+    outline: 2px solid var(--amarillo-limon);
+    outline-offset: 2px;
+}
+
+/*--Seccion video -- */
+.video-fallback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--texto-gris);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 20px;
+    background: rgba(6, 11, 19, 0.8);
+    border-radius: 8px;
+}
+
 /* --- SECCIÓN REQUISITOS --- */
 .stats-section { padding: 30px 6%; background-color: var(--oscuro-principal); }
 .stats-grid { display: flex; justify-content: flex-start; gap: 15px; max-width: 650px; flex-wrap: wrap; }
@@ -288,6 +345,99 @@ body {
 .news-btn-card.whatsapp-channel:hover i { color: #25d366; }
 .news-btn-card.official-site:hover i { color: #00d4ff; }
 .activity-text { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--amarillo-limon); margin-bottom: 8px; }
+
+/*horarios*/
+.schedule-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+}
+
+.local-time-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: var(--texto-gris);
+    margin-top: 5px;
+}
+
+.converted-time {
+    color: var(--amarillo-limon);
+    font-weight: 700;
+}
+/* --- FAQ ACORDEÓN --- */
+.faq-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--oscuro-tarjeta);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(225, 255, 0, 0.3);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--texto-blanco);
+    padding: 18px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.faq-question:hover {
+    color: var(--amarillo-limon);
+}
+
+.faq-question i {
+    color: var(--amarillo-limon);
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 20px;
+    color: var(--texto-gris);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+    padding: 0 20px 20px 20px;
+}
+
+.faq-answer strong {
+    color: var(--amarillo-limon);
+}
 
 /* --- VENTANA MODAL (LIGHTBOX INTERACTIVO) --- */
 .modal {
