@@ -25,7 +25,7 @@
     <meta property="og:site_name" content="Clan Nieve de Limón">
     <!--Bing-->
     <meta name="msvalidate.01" content="C7FD8BA9D1B3E62FB11D9F3FC1513DCB" />
-    <!---->     
+<!--CSS y FAvicon-->   
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="favicon_01.png" type="image/x-icon">
@@ -35,8 +35,18 @@
 <!-- ====================PRELOADER ========================== -->
     <div id="preloader">
         <div class="preloader-content">
-            <i class="fas fa-anchor preloader-spinner"></i>
-            <p>CARGANDO...</p>
+            <div class="lighthouse-wrapper">
+                <!-- Haz de luz principal -->
+                <div class="light-beam"></div>
+                <!-- Segundo haz (opuesto) -->
+                <div class="light-beam-2"></div>
+                <!-- Imagen del faro -->
+                <img src="faro.png" alt="Cargando" class="preloader-image">
+            </div>
+            <p class="loading-text">CARGANDO</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
         </div>
     </div>
 
@@ -486,11 +496,11 @@
 
 <!-- ============JAVASCRIPT ==================== -->
     <script>
-         // CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
+         // 1.CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
         window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 2200);
         });
 
         // 2. COPIAR ID
