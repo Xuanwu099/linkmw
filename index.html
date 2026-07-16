@@ -33,20 +33,10 @@
 <body>
 
 <!-- ====================PRELOADER ========================== -->
-    <div id="preloader">
+        <div id="preloader">
         <div class="preloader-content">
-            <div class="lighthouse-wrapper">
-                <!-- Haz de luz principal -->
-                <div class="light-beam"></div>
-                <!-- Segundo haz (opuesto) -->
-                <div class="light-beam-2"></div>
-                <!-- Imagen del faro -->
-                <img src="faro.png" alt="Cargando" class="preloader-image">
-            </div>
-            <p class="loading-text">CARGANDO</p>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
+            <i class="fas fa-anchor preloader-spinner"></i>
+            <p>CARGANDO...</p>
         </div>
     </div>
 
@@ -498,9 +488,9 @@
     <script>
          // 1.CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 2200);
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
         });
 
         // 2. COPIAR ID
