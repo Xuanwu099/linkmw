@@ -35,14 +35,8 @@
 <!-- ====================PRELOADER ========================== -->
     <div id="preloader">
         <div class="preloader-content">
-            <div class="ship-wrapper">
-                <div class="light-beam"></div>
-                <img src="faro.png" alt="Cargando" class="preloader-image">
-            </div>
-            <p class="loading-text">CARGANDO</p>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
+            <i class="fas fa-anchor preloader-spinner"></i>
+            <p>CARGANDO...</p>
         </div>
     </div>
 
@@ -494,9 +488,9 @@
     <script>
          // CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 2200); // Se oculta después de 2.2 segundos
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
         });
 
         // 2. COPIAR ID
