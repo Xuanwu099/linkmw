@@ -25,7 +25,7 @@
     <meta property="og:site_name" content="Clan Nieve de Limón">
     <!--Bing-->
     <meta name="msvalidate.01" content="C7FD8BA9D1B3E62FB11D9F3FC1513DCB" />
-<!--CSS y FAvicon-->   
+<!---->   
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="favicon_01.png" type="image/x-icon">
@@ -33,10 +33,20 @@
 <body>
 
 <!-- ====================PRELOADER ========================== -->
-        <div id="preloader">
+    <div id="preloader">
         <div class="preloader-content">
-            <i class="fas fa-anchor preloader-spinner"></i>
-            <p>CARGANDO...</p>
+            <div class="lighthouse-wrapper">
+                <!-- Haz de luz principal -->
+                <div class="light-beam"></div>
+                <!-- Segundo haz (opuesto) -->
+                <div class="light-beam-2"></div>
+                <!-- Imagen del faro -->
+                <img src="faro.png" alt="Cargando" class="preloader-image">
+            </div>
+            <p class="loading-text">CARGANDO</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
         </div>
     </div>
 
@@ -93,7 +103,7 @@
         </div>
 <!--Video-->        
         <div class="hero-right">
-            <video autoplay muted loop playsinline class="ship-bg" poster="fallback-image.jpg">
+            <video autoplay muted loop playsinline class="ship-bg" poster="fallback-image.jpg" preload="metadata">
                 <source src="videomw.mp4" type="video/mp4">
                 Tu navegador no soporta videos HTML5.
             </video>
@@ -486,12 +496,32 @@
 
 <!-- ============JAVASCRIPT ==================== -->
     <script>
-         // 1.CONTROL DEL PRELOADER (DESAPARECE CUANDO LA WEB CARGA AL 100%)
-        window.addEventListener('load', () => {
+        // 1. CONTROL DEL PRELOADER (CON SISTEMA DE SEGURIDAD O FALLBACK)
+        let preloaderHidden = false;
+
+        function hidePreloader() {
+            if (preloaderHidden) return; // Evita que se ejecute dos veces
+            preloaderHidden = true;
+            
             const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            if (preloader) {
+                preloader.classList.add('hidden');
+                
+                // Opcional pero recomendado: eliminarlo del DOM después de la animación para liberar memoria
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 800); // Debe coincidir con los 0.8s de tu transición en CSS
+            }
+        }
+
+        // Opción A: Cuando todo haya cargado correctamente (tu lógica original)
+        window.addEventListener('load', () => {
+            setTimeout(hidePreloader, 2200);
         });
+
+        // Opción B: SEGURIDAD (Fallback). Fuerza la ocultación a los 5 segundos máximo.
+        // Esto garantiza que, si algo falla en la red de GitHub, el usuario podrá ver la web sí o sí.
+        setTimeout(hidePreloader, 5000);
 
         // 2. COPIAR ID
         function copiarID() {
