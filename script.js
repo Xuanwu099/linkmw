@@ -1016,9 +1016,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- OTROS ---
         const oth_SS = ['type071'];
         const oth_S = ['sanantonio', 'vladimirandreev'];
-        const oth_A = [];
+        const oth_A = ['07x'];
         const oth_B = ['chang', 'dx125'];
-        const oth_C = ['07x', 'project1239', 'zeus'];
+        const oth_C = ['project1239', 'zeus'];
         const oth_D = ['fearless', 'katori', 'bahia'];
         // CORREGIDO: Ahora filtra D también para no enviarlo a N/A por error
         const oth_rest = others.filter(id => !oth_SS.includes(id) && !oth_S.includes(id) && !oth_A.includes(id) && !oth_B.includes(id) && !oth_C.includes(id) && !oth_D.includes(id));
