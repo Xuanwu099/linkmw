@@ -89,7 +89,7 @@
         { "id": "aquitaine", "name": "FS Aquitaine", "clase": "fragata", "img": "db/frigate/Aquitaine.jpg" },
         { "id": "127", "name": "FGS F127", "clase": "fragata", "img": "db/frigate/F127.jpg" },
         { "id": "mogami", "name": "JS Mogami", "clase": "fragata", "img": "db/frigate/Mogami.jpg" },
-        { "id": "126", "name": "FGS F126", "clase": "fragata", "img": "db/frigate/F126.jpg","build": { "misiles": "MICA-M, HQ-26, Shtil-1" , "lanzagranadas": "RBU-2500, WS-3, RHAN" } },
+        { "id": "126", "name": "FGS F126", "clase": "fragata", "img": "db/frigate/F126.jpg","build": { "misiles": "MICA-M, HQ-26, Shtil-1" , "lanzagrandas": "RBU-2500, WS-3, RHAN" } },
         { "id": "gorshkov", "name": "RF Admiral Gorshkov", "clase": "fragata", "img": "db/frigate/Gorshkov.jpg" },
 
         { "id": "arkansas", "name": "USS Arkansas", "clase": "crucero", "img": "db/cruiser/Arkansas.jpg", "build": { "misiles": "MICA-M, HQ-26, S-500 Prometheus", "canones": "A-200 Navigator, XM2001 Crusader, Primetron, Archer", "torpedos": "DM2A5, TAL Shyena, YU-12, Spearfish Mod1", "aa": "KSAM Block 2, ALKA, HPLS" } },
