@@ -171,7 +171,7 @@
 
         { "id": "type071", "name": "CN Type 071", "clase": "otros", "img": "db/others/Type071.jpg", "build": { "misiles": "Mako, YJ-17", "canones": "Crusader, L/52A1", "lanzagrandas": "RBU-2500, R-HAN 122B, WS-3, Deterrence 300", "automaticos": "Paket-NK, AFGS", "helicopteros": " RAH-66B Sea Comanche, Mi-171,Z-18,Z-20", "usv": "CH-T1", "aa": "KSAM Block 2, ALKA, HPLS" } },
         { "id": "07x", "name": "CN 07X", "clase": "otros", "img": "db/others/07X.jpg" },
-        { "id": "bahia", "name": "BR Bahia", "clase": "otros", "img": "db/others/Bahia.jpg" },
+        { "id": "bahia", "name": "BR Bahia", "clase": "otros", "img": "db/others/BahiaG40.jpg" },
         { "id": "chang", "name": "MTMS Chang", "clase": "otros", "img": "db/others/Chang.jpg" },
         { "id": "dx125", "name": "CN DX125", "clase": "otros", "img": "db/others/DX125.jpg" },
         { "id": "fearless", "name": "HMS Fearless", "clase": "otros", "img": "db/others/Fearless.jpg" },
