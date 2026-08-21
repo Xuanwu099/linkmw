@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e1ff00">
+    <title>MW | Nieve de Limón</title>
+    
+    <!-- ============ METATAGS SEO ============ -->
+    <meta name="description" content="Sitio oficial del Clan Nieve de Limón en Modern Warships. Conoce nuestro reglamento, horarios de Clan Wars y únete a nuestra flota.">
+    <meta name="keywords" content="Modern Warships, Clan, Nieve de Limon, Videojuegos, Flota, Clan Wars">
+    
+    <!-- ============ OPEN GRAPH (Facebook, Discord, WhatsApp) ============ -->
+    <meta property="og:title" content="MW | Clan Nieve de Limón - Reclutamiento Abierto">
+    <meta property="og:description" content="¿Buscas clan activo en Modern Warships? Sin puntos mínimos. Nivel +35. Consulta nuestras normas y únete a la flota.">
+    <meta property="og:image" content="https://limonmw.online/og-share.png">
+    <meta property="og:image:secure_url" content="https://limonmw.online/og-share.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Clan Nieve de Limón - Modern Warships">
+    <meta property="og:url" content="https://limonmw.online">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Clan Nieve de Limón">
+    
+    <!-- ============ Verificación de Bing ============ -->
+    <meta name="msvalidate.01" content="C7FD8BA9D1B3E62FB11D9F3FC1513DCB" />
+    
+    <!-- ============ CSS y Favicon ============ -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="favicon_01.png" type="image/x-icon">
+</head>
+<body>
+
+<!-- ==================== PRELOADER ========================== -->
+<div id="preloader">
+    <div class="preloader-content">
+        <div class="lighthouse-wrapper">
+            <div class="light-beam"></div>
+            <div class="light-beam-2"></div>
+            <img src="faro.png" alt="Cargando" class="preloader-image">
+        </div>
+        <p class="loading-text">CARGANDO</p>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Notificación toast al copiar ID -->
+<div id="toast" class="toast" role="alert" aria-live="polite">
+    <i class="fas fa-check-circle"></i>
+    <span>¡ID Copiado!</span>
+</div>
+
+<!-- ==================== NAVEGACIÓN PRINCIPAL ==================== -->
+<header>
+    <nav class="navbar" aria-label="Navegación principal">
+        <div class="logo">
+            <a href="#inicio" aria-label="Ir al inicio">
+                <img src="wordd.png" alt="MW | Nieve de Limón Wordmark" class="logo-img">
+            </a> 
+        </div>
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn" aria-label="Abrir menú de navegación" aria-controls="nav-links" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#inicio" class="nav-item active">Inicio</a></li>
+            <li><a href="#noticias" class="nav-item">Anuncios</a></li>
+            <li><a href="#reglamento" class="nav-item">Reglamento</a></li>
+            <li><a href="#galeria" class="nav-item">Galería</a></li>
+            <li><a href="#database" class="nav-item">Tier list</a></li>
+            <li><a href="#faq" class="nav-item">FAQ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ==================== SECCIÓN HERO (PORTADA) ==================== -->
+<section class="hero" id="inicio">
+    <div class="hero-left">
+        <div class="hero-content">
+            <img src="faro.png" alt="Logo Clan Nieve de Limón" class="hero-logo" fetchpriority="high" decoding="async">
+            <h1>MW | NIEVE DE LIMÓN</h1>
+            <p class="subtitle"><i>"Dulcis nomine, letalis in aqua"</i></p>
+            
+            <div class="cta-container">
+                <!-- Botón para copiar el ID del clan -->
+                <button class="btn-id" id="btn-copiar-id" aria-label="Copiar ID del clan al portapapeles">
+                    CLAN ID: <span id="clan-id-text">RHLTFL</span> <i class="far fa-copy"></i>
+                </button>
+                <!-- Botones de redes sociales -->
+                <div class="social-buttons">
+                    <a href="https://tally.so/r/Bz059Y" class="btn-link discord" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-discord" aria-hidden="true"></i> DISCORD
+                    </a>
+                    <a href="https://tally.so/r/44zdok" class="btn-link whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WHATSAPP 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Video de fondo -->
+    <div class="hero-right">
+        <video autoplay muted loop playsinline class="ship-bg" poster="fallback-image.jpg">
+            <source src="videomw.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+    </div>
+</section>
+
+<!-- ==================== ESTADÍSTICAS RÁPIDAS ==================== -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p class="stat-title">RECLUTAMIENTO:</p>
+            <p class="stat-value text-green">ABIERTO</p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">REQUISITOS:</p>
+            <p class="stat-value">[JUGADOR ACTIVO]</p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">NIVEL MÍNIMO:</p>
+            <p class="stat-value">[35]</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ANUNCIOS Y HORARIOS ==================== -->
+<section class="noticias-section" id="noticias">
+    <div class="noticias-container">
+        <div class="news-panel">
+            <h3>ANUNCIOS</h3>
+            <div class="news-content">
+                <!-- Recursos tácticos externos -->
+                <div class="news-block">
+                    <h4>RECURSOS TÁCTICOS</h4>
+                    <div class="news-links-container">
+                        <a href="https://mwstats.info/ships" class="news-btn-card official-site" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-ship"></i>
+                            <div class="btn-card-text">
+                                <span class="btn-card-title">MW STATS</span>
+                                <span class="btn-card-sub">Compara buques y armamento</span>
+                            </div>
+                        </a>
+                        <a href="https://wiki.modernwarships.com/es" class="news-btn-card official-site" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-book"></i>
+                            <div class="btn-card-text">
+                                <span class="btn-card-title">MW WIKI</span>
+                                <span class="btn-card-sub">Game Knowledge Base</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Actualizaciones -->
+                <div class="news-block">
+                    <h4>ACTUALIZACIONES Y FILTRACIONES</h4>
+                    <div class="news-links-container">
+                        <a href="https://modernwarships.com/news" class="news-btn-card official-site" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-newspaper"></i>
+                            <div class="btn-card-text">
+                                <span class="btn-card-title">MODERN WARSHIPS</span>
+                                <span class="btn-card-sub">Sitio Web MW</span>
+                            </div>
+                        </a>
+                        <a href="https://artstorm.com/en-US/news" class="news-btn-card whatsapp-channel" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-globe"></i>
+                            <div class="btn-card-text">
+                                <span class="btn-card-title">ARTSTORM</span>
+                                <span class="btn-card-sub">Sitio Web</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Horarios de Clan Wars -->
+                <div class="news-block">
+                    <h4>HORARIO CLAN WARS</h4>
+                    <div class="news-links-container">
+                        <div class="schedule-item">
+                            <p class="activity-text">> AMÉRICA: Jueves a Sábado  19:00 (UTC-6) </p>
+                            <p class="activity-text">> EUROPA: Viernes a Domingo </p>
+                            <p class="local-time-text" data-cdmx-hour="19">> Hora local: <span class="converted-time">Cargando...</span></p>
+                        </div>
+                        <div class="schedule-item">
+                            <p class="activity-text">> Sábado-Domingo: 13:00 (UTC-6)</p>
+                            <p class="local-time-text" data-cdmx-hour="13">> Hora local: <span class="converted-time">Cargando...</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                   
+<!-- ==================== REGLAMENTO DEL CLAN ==================== -->
+<section class="reglamento-section" id="reglamento">
+    <h2 class="section-title">REGLAMENTO GENERAL</h2>
+    <div class="reglas-grid">
+        <div class="regla-card">
+            <i class="fas fa-handshake card-icon"></i>
+            <h3>1. RESPETO MUTUO</h3>
+            <p>1.1 Respetar el límite de cada persona.</p>
+            <p>1.2 Cero tolerancia al acoso, intimidación o amenazas.</p>
+        </div>
+        <div class="regla-card">
+            <i class="fas fa-stopwatch card-icon"></i>
+            <h3>2. JUGADOR ACTIVO</h3>
+            <p>2.1 Máximo 15 días de inactividad.</p>
+            <p>2.2 No se exigen puntos mínimos.</p>
+        </div>
+        <div class="regla-card">
+            <i class="fas fa-ban card-icon"></i>
+            <h3>3. HACKS Y VENTAS</h3>
+            <p>3.1 Prohibida la venta y distribución de hacks, cuentas o software malicioso.</p>
+            <p>3.2 El clan no se hace responsable de robos, pérdidas de ítems, baneos o cualquier daño que pueda ocurrir en caso de transferencia o préstamo de cuentas.</p>
+        </div>
+        <div class="regla-card">
+            <i class="fas fa-microphone card-icon"></i>
+            <h3>4. USO DEL CHAT Y SEGURIDAD</h3>
+            <p>4.1 Prohibido hacer un uso indebido de nuestros canales de comunicación (Ej. spam masivo, ventas, etc.).</p>
+            <p>4.2 Prohibido solicitar, recopilar o distribuir información privada de cualquier miembro del clan.</p>
+        </div>
+        <div class="regla-card">
+            <i class="fas fa-exclamation-triangle card-icon"></i>
+            <h3>5. NO CONTENIDO EXPLÍCITO</h3>
+            <p>5.1 Prohibido el contenido explícito o de carácter sexual.</p>
+        </div>
+    </div>
+    <p class="warning-text">⚠️ El incumplimiento de cualquiera de estas normas será motivo de sanción o expulsión inmediata.</p>
+</section>
+
+<!-- ==================== GALERÍA DE IMÁGENES ==================== -->
+<section class="galeria-section" id="galeria">
+    <h2 class="section-title">GALERÍA</h2>
+    
+    <!-- Filtros de galería -->
+    <div class="galeria-filtros">
+        <button class="filtro-btn" data-filter="lideres">
+            <i class="fas fa-user-shield"></i> LÍDERES
+        </button>
+        <button class="filtro-btn" data-filter="wallpapers">
+            <i class="fas fa-image"></i> OTROS
+        </button>
+        <button class="filtro-btn active" data-filter="todos">
+            <i class="fas fa-th"></i> TODOS
+        </button>
+    </div>
+
+    <!-- Slider con flechas -->
+    <div class="slider-container">
+        <button class="slider-arrow left-arrow" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="slider-track" id="galleryTrack">
+            <!-- Tarjetas de líderes -->
+            <div class="gallery-card leader-card" data-category="lideres">
+                <div class="card-frame">
+                    <div class="corner top-left"></div><div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                </div>
+                <div class="leader-badge"><i class="fas fa-crown"></i> LÍDER</div>
+                <img src="madi.jpeg" alt="Madison Nicole - Líder del clan" loading="lazy" decoding="async">
+                <div class="card-overlay"></div>
+                <div class="leader-info">
+                    <h3>Madison Nicole</h3>
+                    <p class="leader-role">Fundadora y Líder</p>
+                    <p class="leader-stats"><i class="fas fa-ship"></i> Nivel: 57</p>
+                </div>
+            </div>
+            
+            <div class="gallery-card leader-card" data-category="lideres">
+                <div class="card-frame">
+                    <div class="corner top-left"></div><div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                </div>
+                <div class="leader-badge official-badge"><i class="fas fa-angles-up"></i> SUBLÍDER</div>
+                <img src="zero_two.png" alt="Zero Two - Sublíder" loading="lazy" decoding="async">
+                <div class="card-overlay"></div>
+                <div class="leader-info">
+                    <h3>Zero Two</h3>
+                    <p class="leader-role">Sublíder</p>
+                    <p class="leader-stats"><i class="fas fa-ship"></i> Nivel: 54</p>
+                </div>
+            </div>
+            
+            <div class="gallery-card leader-card" data-category="lideres">
+                <div class="card-frame">
+                    <div class="corner top-left"></div><div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                </div>
+                <div class="leader-badge official-badge"><i class="fas fa-chevron-up"></i> OFICIAL</div>
+                <img src="rolitas.png" alt="Rolitas - Oficial del clan" loading="lazy" decoding="async">
+                <div class="card-overlay"></div>
+                <div class="leader-info">
+                    <h3>Rolitas</h3>
+                    <p class="leader-role">Oficial</p>
+                    <p class="leader-stats"><i class="fas fa-ship"></i> Nivel: 56</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta de wallpaper -->
+            <div class="gallery-card wallpaper-card" data-category="wallpapers">
+                <div class="card-frame">
+                    <div class="corner top-left"></div><div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                </div>
+                <img src="banner01.jpeg" alt="Wallpaper Nieve de Limón" loading="lazy" decoding="async">
+                <div class="card-overlay"></div>
+                <div class="wallpaper-badge"><i class="fas fa-download"></i> DESCARGAR</div>
+                <div class="gallery-info">
+                    <p class="ship-name">¡Únete!</p>
+                    <p class="wallpaper-res">1920x1080</p>
+                </div>
+                <a href="banner01.jpeg" download="banner01.jpeg" class="download-btn" aria-label="Descargar wallpaper">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+        
+        <button class="slider-arrow right-arrow" aria-label="Siguiente">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Botón para cargar más imágenes -->
+    <div class="gallery-load-more">
+        <button class="load-more-btn" id="loadMoreBtn">
+            <i class="fas fa-plus"></i> VER MÁS IMÁGENES
+        </button>
+    </div>
+</section>    
+
+<!-- Modal para ver imágenes ampliadas -->
+<div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+    <span class="modal-close" aria-label="Cerrar modal">&times;</span>
+    <button class="modal-arrow modal-left-arrow" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
+    <div class="modal-wrapper">
+        <img class="modal-content" id="modal-img" alt="Captura ampliada">
+        <div id="modal-caption"></div>
+    </div>
+    <button class="modal-arrow modal-right-arrow" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<!-- ==================== BASE DE DATOS DE BUILDS ==================== -->
+<section class="database-section" id="database">
+    <h2 class="section-title">TIER LIST Y RECOMENDACIONES</h2>
+    <p class="db-description">Tier list, buques y configuraciones recomendadas por miembros del clan.</p>
+
+    <!-- Tabs para alternar entre Recomendaciones y Tier List -->
+    <div class="db-tabs">
+        <button class="db-tab active" data-dbtab="recomendaciones">
+            <i class="fas fa-wrench"></i> RECOMENDACIONES DEL CLAN
+        </button>
+        <button class="db-tab" data-dbtab="tierlist">
+            <i class="fas fa-layer-group"></i> TIER LIST
+        </button>
+    </div>
+
+    <!-- Panel de Recomendaciones -->
+    <div class="db-panel" id="panel-recomendaciones">
+        <div class="db-controls">
+            <div class="db-filters">
+                <button class="filtro-btn active" data-shipclass="fragata">FRAGATA</button>
+                <button class="filtro-btn" data-shipclass="destructor">DESTRUCTOR</button>
+                <button class="filtro-btn" data-shipclass="crucero">CRUCERO</button>
+                <button class="filtro-btn" data-shipclass="acorazado">ACORAZADO</button>
+                <button class="filtro-btn" data-shipclass="portaaviones">PORTAAVIONES</button>
+                <button class="filtro-btn" data-shipclass="submarino">SUBMARINO</button>
+                <button class="filtro-btn" data-shipclass="otros">OTROS</button>
+                <button class="filtro-btn" data-shipclass="helicoptero">HELICÓPTEROS</button>
+            </div>
+        </div>
+        
+        <!-- Sección de helicópteros (oculta por defecto) 
+        <div class="helicopters-section hidden-panel" id="helicoptersSection">
+            <h3 class="section-subtitle"><i class="fas fa-helicopter"></i> HELICÓPTEROS</h3>
+            <p class="helicopter-legend">Consulte la leyenda en cada tarjeta para conocer sus especialidades.</p>
+        </div> -->
+        
+        <div class="ships-grid" id="shipsGrid">
+            <p class="db-loading"><i class="fas fa-spinner fa-spin"></i> Cargando base de datos...</p>
+        </div>
+    </div>
+
+    <!-- Panel de Tier List -->
+    <!-- Panel de Tier List -->
+<div class="db-panel hidden-panel" id="panel-tierlist">
+    
+    <!-- Barra principal de 3 vistas -->
+    <div class="tier-main-tabs">
+        <button class="tier-main-tab active" data-maintab="fijadas">
+            <i class="fas fa-thumbtack"></i> TIERLIST FIJADAS
+        </button>
+        <button class="tier-main-tab" data-maintab="mislistas">
+            <i class="fas fa-folder-open"></i> MIS LISTAS
+        </button>
+        <button class="tier-main-tab" data-maintab="crear">
+            <i class="fas fa-plus-circle"></i> CREA TU TIERLIST
+        </button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- LEYENDA DE CATEGORÍAS — Visible en toda la sección Tier List -->
+    <!-- ============================================================ -->
+    <div class="tier-legend" id="tierLegend">
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-SS">SS</span>
+            <span class="tier-legend-text">Nivel superior, Meta actual</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-S">S</span>
+            <span class="tier-legend-text">Bastante versátil, muy potente.</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-A">A</span>
+            <span class="tier-legend-text">Muy bueno con el equipamiento adecuado y/o requiere cierta habilidad</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-B">B</span>
+            <span class="tier-legend-text">Decente,usable/Requiere un ligero buff</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-C">C</span>
+            <span class="tier-legend-text">Usable en ciertos modos/Requiere buff en su armamento bloqueado</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-D">D</span>
+            <span class="tier-legend-text">Obsoleto, requiere un buff urgente</span>
+        </div>
+        <div class="tier-legend-item">
+            <span class="tier-legend-badge tier-NA">NA</span>
+            <span class="tier-legend-text">Sin clasificar</span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VISTA 1: TIERLIST FIJADAS -->
+    <!-- ============================================================ -->
+    <div class="tier-view active-view" id="view-fijadas">
+        
+        <!-- Sub-pestañas de categorías -->
+        <div class="tier-sub-tabs" id="fijadasSubTabs">
+            <button class="tier-sub-tab active" data-subcat="fragata">FRAGATAS</button>
+            <button class="tier-sub-tab" data-subcat="destructor">DESTRUCTORES</button>
+            <button class="tier-sub-tab" data-subcat="crucero">CRUCEROS</button>
+            <button class="tier-sub-tab" data-subcat="acorazado">ACORAZADOS</button>
+            <button class="tier-sub-tab" data-subcat="portaaviones">PORTAAVIONES</button>
+            <button class="tier-sub-tab" data-subcat="submarino">SUBMARINOS</button>
+            <button class="tier-sub-tab" data-subcat="otros">OTROS</button>
+            
+        </div>
+
+        <!-- Contenedor de listas fijadas en formato acordeón -->
+        <div class="fijadas-container" id="fijadasContainer">
+            <!-- Se renderiza dinámicamente via JS -->
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VISTA 2: MIS LISTAS (guardadas por el usuario) -->
+    <!-- ============================================================ -->
+    <div class="tier-view hidden-view" id="view-mislistas">
+        <div class="mislistas-header">
+            <h4><i class="fas fa-save"></i> Listas guardadas en este dispositivo</h4>
+            <p class="tier-hint">Tus listas se almacenan localmente en tu navegador.</p>
+        </div>
+        <div class="mislistas-container" id="mislistasContainer">
+            <!-- Se renderiza dinámicamente via JS -->
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VISTA 3: CREA TU TIERLIST (plantilla en blanco con drag & drop) -->
+    <!-- ============================================================ -->
+    <div class="tier-view hidden-view" id="view-crear">
+        
+        <!-- Selector de categoría para crear -->
+        <div class="tier-sub-tabs" id="crearSubTabs">
+            <!-- Se renderiza dinámicamente según las categorías disponibles -->
+        </div>
+
+        <p class="tier-hint">> Arrastra cada elemento a su tier.</p>
+        
+        <!-- Tablero de tiers -->
+        <div class="tier-board" id="tierBoard"></div>
+
+        <!-- Pool de elementos sin clasificar -->
+        <div class="tier-pool-wrap">
+            <h4><i class="fas fa-box-open"></i> POOL (SIN CLASIFICAR)</h4>
+            <div class="tier-pool-items" id="tierPool"></div>
+        </div>
+
+        <!-- Acciones: guardar y reiniciar -->
+        <div class="tier-actions">
+            <input type="text" id="tierListName" placeholder="Nombre de mi lista (ej. Meta BBs mayo)..." aria-label="Nombre de la lista">
+            <button class="load-more-btn" id="saveTierBtn"><i class="fas fa-floppy-disk"></i> GUARDAR</button>
+            <button class="load-more-btn" id="resetTierBtn"><i class="fas fa-rotate-right"></i> REINICIAR</button>
+        </div>
+    </div>
+
+</div>
+<!-- ==================== PREGUNTAS FRECUENTES ==================== -->
+<section class="faq-section" id="faq">
+    <h2 class="section-title">PREGUNTAS FRECUENTES</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Necesito tener un nivel específico para unirme?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Solo necesitas tener <strong>nivel 35 o superior</strong>. No exigimos puntos mínimos ni estadísticas específicas, solo que seas un jugador activo y respetuoso.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Cuál es el límite máximo de días de inactividad permitidos?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>El límite es de 15 días. Sin embargo, entendemos perfectamente que la vida real es lo primero. Si tu período de inactividad se va a prolongar más de lo permitido, solo debes avisar a un oficial o administrador.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Realizan torneos o dinámicas en los que regalen premios (pases, buques o llaves)?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Sí. Se aclara que la entrega de premios no es periódica; estos se llevarán a cabo exclusivamente cuando se disponga de un patrocinador.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Juegan Clan Wars?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Sí, los horarios de Clan Wars están marcados en la sección de Anuncios.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Piden requisitos para jugar Clan Wars?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>De preferencia, contar con un número significativo de buques mejorados al máximo. Es importante llegar a tiempo, pues se le da prioridad a los jugadores que están conectados.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>¿Qué hago si tengo un problema con otro miembro?</span>
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Reporta la situación a un oficial por mensaje privado o etiquétalo en los chats del grupo. Investigaremos el caso y tomaremos las medidas necesarias. La tolerancia es cero frente al acoso, intimidación o amenazas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <p>&copy; 2026 CLAN NIEVE DE LIMÓN - COMUNIDAD MODERN WARSHIPS</p>
+    
+    <div class="footer-socials">
+        <a href="https://tally.so/r/Bz059Y" target="_blank" class="footer-icon discord-icon" title="Unirse al Discord Oficial" rel="noopener noreferrer" aria-label="Discord oficial del clan">
+            <i class="fab fa-discord" aria-hidden="true"></i>
+        </a>
+        <a href="https://tally.so/r/44zdok" target="_blank" class="footer-icon whatsapp-icon" title="Unirse al grupo de WhatsApp" rel="noopener noreferrer" aria-label="Grupo de WhatsApp del clan">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+    </div>
+    
+    <!-- Enlaces legales -->
+    <p style="margin-top: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <a href="#" id="open-terms" style="color: var(--texto-gris); text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">
+            Términos y Privacidad de la Comunidad
+        </a>
+        
+        <span style="color: rgba(255, 255, 255, 0.15); font-size: 0.8rem;">|</span>
+
+        <a href="#" id="open-legal" style="color: var(--texto-gris); text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">
+            Legal y fuentes
+        </a>
+        
+        <span style="color: rgba(255, 255, 255, 0.15); font-size: 0.8rem;">|</span>
+        
+        <a href="https://tally.so/help/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: var(--texto-gris); text-decoration: none; font-size: 0.8rem; transition: color 0.2s;">
+            Términos y Privacidad de Tally.so <i class="fas fa-external-link-alt" style="font-size: 0.7rem; margin-left: 3px;"></i>
+        </a>
+    </p>
+</footer>
+
+<!-- Modal de Términos y Privacidad -->
+<div id="terms-modal" class="terms-modal-overlay-footer" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+    <div class="terms-modal-card-footer">
+        <div class="terms-modal-header-footer">
+            <i class="fas fa-gavel"></i>
+            <h2 id="terms-modal-title">ACUERDO DE TÉRMINOS Y PRIVACIDAD</h2>
+        </div>
+        
+        <div class="terms-modal-body-footer">
+            <p style="margin-bottom: 15px;">La Comunidad <strong>Nieve de Limón</strong> es una organización sin fines de lucro constituida exclusivamente dentro del entorno del videojuego <em>Modern Warships</em>.</p>
+            
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">1. ACUERDO SOBRE LOS TÉRMINOS</h3>
+            <p>Al acceder al Sitio, usted acepta que ha leído, comprendido y acuerda estar sujeto a estos Términos de Servicio. Si no está de acuerdo con ellos, se le prohíbe expresamente utilizar el Sitio y demás canales oficiales (Discord, WhatsApp, redes sociales, etc.) de la comunidad (Nieve de Limón) y debe interrumpir su uso inmediatamente.</p>
+            <p style="margin-top: 8px;">Nos reservamos el derecho de realizar cambios o modificaciones a estos Términos en cualquier momento. Es su responsabilidad revisar periódicamente esta sección para mantenerse informado.</p>
+
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">2. POLÍTICA DE MENORES DE EDAD</h3>
+            <p>Todos los usuarios que sean menores de edad en su jurisdicción de residencia deben contar con el permiso y supervisión directa de sus padres o tutores para utilizar el Sitio y demás canales de la comunidad. Sus tutores deben leer y aceptar estos Términos antes de su incorporación a los canales de la comunidad.</p>
+
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">3. REPRESENTACIONES DE USUARIO Y REGISTRO</h3>
+            <p>Al utilizar el Sitio y registrarse, usted declara y garantiza que:</p>
+            <ul style="list-style: none; padding-left: 10px; margin-top: 5px;">
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-check" style="color: var(--amarillo-limon); margin-right: 6px;"></i> Toda la información de registro que envíe será verdadera, precisa, actual y completa.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-check" style="color: var(--amarillo-limon); margin-right: 6px;"></i> No utilizará el Sitio o canales de la comunidad para ningún propósito ilegal o no autorizado.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-check" style="color: var(--amarillo-limon); margin-right: 6px;"></i> Su uso del Sitio no violará ninguna ley o regulación aplicable.</li>
+            </ul>
+            <p style="margin-top: 8px;">Si proporciona información falsa, inexacta o incompleta, tenemos el derecho de suspender o cancelar su cuenta y rechazar todo uso actual o futuro del Sitio.</p>
+            <p style="margin-top: 8px;">Nos reservamos el derecho de eliminar, recuperar o cambiar un nombre de usuario si determinamos, a nuestro exclusivo criterio, que es inapropiado, obsceno o de otro modo objetable.</p>
+
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">4. USO, RETENCIÓN Y BORRADO DE DATOS</h3>
+            <p>El usuario autoriza expresamente a la administración de la comunidad Nieve de Limón a almacenar y procesar los datos recabados únicamente para:</p>
+            <ul style="list-style: none; padding-left: 10px; margin-top: 5px; margin-bottom: 8px;">
+                <li style="margin-bottom: 4px; color: var(--texto-gris);"><i class="fas fa-user-shield" style="color: var(--amarillo-limon); margin-right: 6px;"></i> Tramitar y gestionar las solicitudes de ingreso, permanencia o expulsión del clan.</li>
+                <li style="margin-bottom: 4px; color: var(--texto-gris);"><i class="fas fa-comment-alt" style="color: var(--amarillo-limon); margin-right: 6px;"></i> Enviar notificaciones importantes sobre la organización interna y/o sobre temas relacionados al videojuego Modern Warships.</li>
+                <li style="margin-bottom: 4px; color: var(--texto-gris);"><i class="fas fa-users" style="color: var(--amarillo-limon); margin-right: 6px;"></i> Mostrar información de miembros en la web y canales oficiales de la comunidad.</li>
+            </ul>
+            <p><strong>Retención:</strong> Almacenaremos sus datos personales solo durante el tiempo de permanencia en el Clan con el propósito específico para el cual fueron recopilados.</p>
+            <p style="margin-top: 6px;"><strong>Derecho de Borrado:</strong> Usted tiene derecho a solicitar que la comunidad borre sus datos personales, <em>si y solo si</em> es dado de baja de los canales oficiales de la comunidad o si su cuenta es eliminada dentro del juego.</p>
+
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">5. ACTIVIDADES PROHIBIDAS</h3>
+            <p>Como usuario del Sitio y canales oficiales de la comunidad, usted acepta no:</p>
+            <ul style="list-style: none; padding-left: 10px; margin-top: 5px;">
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Recuperar sistemáticamente datos u otro contenido del Sitio para crear bases de datos o directorios sin permiso escrito.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Recopilar nombres de usuario o correos electrónicos para enviar spam, o crear cuentas bajo falsas pretensiones.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Engañar, defraudar o estafar a la administración o a otros usuarios, especialmente para obtener contraseñas o información confidencial.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Intentar hacerse pasar por otra persona o utilizar el nombre de usuario de otro miembro.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Vender su perfil del clan.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Utilizar información obtenida del Sitio y canales oficiales para acosar o dañar a otra persona.</li>
+                <li style="margin-bottom: 5px; color: var(--texto-gris);"><i class="fas fa-ban" style="color: #ff3333; margin-right: 6px;"></i> Menospreciar, empañar o dañar la reputación de la administración, la comunidad o el Sitio.</li>
+            </ul>
+
+            <h3 style="color: var(--amarillo-limon); font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">6. INFRACCIONES DE DERECHOS DE AUTOR</h3>
+            <p>Este sitio fue creado por jugadores de Modern Warships y no está afiliado ni respaldado por ARTSTORM. Los nombres, recursos y propiedad intelectual relacionados con Modern Warships pertenecen a ARTSTORM. Respetamos los derechos de propiedad intelectual de los demás. Si cree que algún material disponible en o a través de este Sitio infringe algún derecho de autor que usted posee o controla, notifíquenoslo inmediatamente utilizando nuestros canales oficiales de <strong>WhatsApp</strong> o <strong>Discord</strong>.</p>
+        </div>
+        
+        <div class="terms-modal-footer-footer">
+            <a href="#" id="close-terms-btn" class="terms-btn-accept-footer">ACEPTAR Y CERRAR</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Legal y Fuentes -->
+<div id="legal-modal" class="terms-modal-overlay-footer" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+    <div class="terms-modal-card-footer">
+        <div class="terms-modal-header-footer">
+            <i class="fas fa-balance-scale"></i>
+            <h2 id="legal-modal-title">LEGAL Y FUENTES</h2>
+        </div>
+        
+        <div class="terms-modal-body-footer">
+            <p>Este sitio fue creado por jugadores de Modern Warships y no está afiliado ni respaldado por ARTSTORM.</p>
+            <p style="margin-top: 15px;">Los nombres, imágenes, recursos y propiedad intelectual relacionados con Modern Warships pertenecen a ARTSTORM.</p>
+        </div>
+        
+        <div class="terms-modal-footer-footer">
+            <a href="#" id="close-legal-btn" class="terms-btn-accept-footer">ENTENDIDO</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCRIPT EXTERNO ============ -->
+<script src="script.js" defer></script>
+
+</body>
+</html>

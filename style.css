@@ -1,0 +1,2201 @@
+/* ============================================================================
+   NIEVE DE LIMÓN — HOJA DE ESTILOS PRINCIPAL
+   ============================================================================
+   Paleta principal:
+   - Fondo oscuro:       #060b13 (casi negro con tinte azul)
+   - Tarjetas/oscuridad: #0f172a (slate-900 de Tailwind)
+   - Acento amarillo:    #e1ff00 (limón neón, identidad de marca)
+   - Grises de texto:    #94a3b8 (gris) y #f8fafc (blanco roto)
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. RESET Y CONFIGURACIÓN GLOBAL
+   ============================================================================ */
+
+/* Reset básico: elimina márgenes/paddings por defecto y normaliza el box model
+   para que border y padding se incluyan dentro del width/height del elemento */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Variables CSS (Custom Properties) — facilitan cambios globales de color */
+:root {
+    --amarillo-limon:    #e1ff00;   /* Color de acento principal (marca) */
+    --oscuro-principal:  #060b13;   /* Fondo base del sitio */
+    --oscuro-tarjeta:    #0f172a;   /* Fondo de tarjetas y paneles */
+    --texto-gris:        #94a3b8;   /* Texto secundario / descripciones */
+    --texto-blanco:      #f8fafc;   /* Texto principal */
+    --discord-color:     #5865f2;   /* Color oficial de Discord */
+    --whatsapp-color:    #25d366;   /* Color oficial de WhatsApp */
+}
+
+body {
+    background-color: var(--oscuro-principal);
+    color: var(--texto-blanco);
+    scroll-behavior: smooth;    /* Scroll suave entre secciones (al hacer click en nav) */
+    overflow-x: hidden;         /* Evita scroll horizontal por elementos que sobresalen */
+}
+
+
+/* ============================================================================
+   2. PRELOADER (Pantalla de carga inicial)
+   ============================================================================
+   Efecto de faro con haz de luz giratorio y barra de progreso animada. */
+
+#preloader {
+    position: fixed;
+    inset: 0;                   /* Equivalente a top/right/bottom/left: 0 */
+    background-color: var(--oscuro-principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;              /* Por encima de todo el contenido */
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none;       /* Permite hacer click "a través" del preloader */
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+
+.lighthouse-wrapper {
+    position: relative;
+    width: 150px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.preloader-image {
+    width: 150px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    animation: lighthouse-pulse 2s ease-in-out infinite;
+}
+
+.light-beam,
+.light-beam-2 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 250px;
+    height: 4px;
+    background: linear-gradient(90deg,
+        #e1ff00f2 0%,   /* Luz intensa cerca del faro */
+        #e1ff0066 40%,  /* Se desvanece gradualmente */
+        #e1ff0000 100%);
+    transform-origin: 0% 50%;
+    border-radius: 2px;
+    animation: beam-rotate 4s linear infinite;
+    z-index: 1;
+    filter: blur(2px);                    /* Suaviza los bordes para simular luz difusa */
+    box-shadow: 0 0 25px #e1ff00b3;
+}
+
+.light-beam-2 {
+    animation-delay: -2s;
+}
+
+@keyframes beam-rotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes lighthouse-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px #e1ff0066);
+    }
+    50% {
+        filter: drop-shadow(0 0 30px #e1ff00e6)
+               drop-shadow(0 0 50px #e1ff0080);
+    }
+}
+
+.loading-text {
+    color: #e0f7fa;
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+    margin: 0 0 1rem;
+    padding-left: 0.5rem;   /* Compensa el letter-spacing para centrado óptico */
+    text-shadow: 0 0 10px #4fc3f799;
+}
+
+.progress-bar {
+    width: 240px;
+    height: 4px;
+    background: #ffffff1a;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, #34cc16, #e1ff00, #34cc16);
+    background-size: 200% 100%;         /* Gradiente 2x más ancho para el efecto shimmer */
+    border-radius: 2px;
+    animation: load 2s ease-in-out infinite, shimmer 1.5s linear infinite;
+}
+
+@keyframes load {
+    0%   { width: 0%; }
+    50%  { width: 80%; }
+    100% { width: 100%; }
+}
+
+@keyframes shimmer {
+    to { background-position: -200% 0; }
+}
+
+
+/* ============================================================================
+   3. TOAST (Notificación flotante al copiar ID)
+   ============================================================================ */
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px #0000004d;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;      /* No bloquea clicks cuando está oculto */
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast i {
+    font-size: 1.2rem;
+}
+
+
+/* ============================================================================
+   4. NAVBAR (Navegación superior fija)
+   ============================================================================ */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 6%;
+    background: #0f172af2;  /* Fondo semi-transparente */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--amarillo-limon);  /* Línea inferior de marca */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--texto-blanco);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px #e1ff0080);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li { margin-left: 25px; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--texto-blanco);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--amarillo-limon);
+    text-shadow: 0 0 8px #e1ff0099;
+}
+
+.menu-btn {
+    color: var(--texto-blanco);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+#click { display: none; }
+
+
+/* ============================================================================
+   5. SECCIÓN HERO (Portada con video de fondo)
+   ============================================================================ */
+
+.hero {
+    min-height: 100vh;          /* Ocupa toda la altura de la ventana */
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 70px;          /* Compensa la altura del navbar fijo */
+}
+
+.hero-left {
+    flex: 1 1 55%;
+    display: flex;
+    align-items: center;
+    padding: 60px 6%;
+    background-color: var(--oscuro-principal);
+}
+
+.hero-right {
+    flex: 1 1 45%;
+    position: relative;
+    min-height: 400px;
+}
+
+.ship-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(60%) contrast(110%);     /* Oscurece y aumenta contraste */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.hero-content { max-width: 650px; }
+
+.hero-logo {
+    width: 280px;
+    height: auto;
+    object-fit: contain;
+    border: none;
+    filter: drop-shadow(0 0 20px #e1ff0040);
+    margin-bottom: 20px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hero-logo:hover {
+    transform: scale(1.05) translateY(-5px);
+    filter: drop-shadow(0 0 35px #e1ff0073);
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--texto-blanco);
+    line-height: 1.1;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--amarillo-limon);
+    margin-bottom: 35px;
+}
+
+
+/* ============================================================================
+   6. BOTONES (ID del clan y redes sociales)
+   ============================================================================ */
+
+.cta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 480px;
+}
+
+.btn-id {
+    background-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    border: none;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px #e1ff0033;
+}
+
+.btn-id:hover {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #e1ff004d;
+}
+
+.social-buttons { display: flex; gap: 12px; }
+
+.btn-link {
+    flex: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px #0000004d;
+}
+
+.discord  { background-color: var(--discord-color); }
+.whatsapp { background-color: var(--whatsapp-color); }
+
+.btn-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+
+/* ============================================================================
+   7. ACCESIBILIDAD — Focus visible
+   ============================================================================ */
+button:focus,
+a:focus,
+input:focus,
+.menu-btn:focus {
+    outline: 2px solid var(--amarillo-limon);
+    outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   8. SECCIÓN DE ESTADÍSTICAS RÁPIDAS
+   ============================================================================ */
+
+.stats-section {
+    padding: 30px 6%;
+    background-color: var(--oscuro-principal);
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    max-width: 650px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: var(--oscuro-tarjeta);
+    border: 2px solid #ffffff0d;
+    padding: 10px 20px;
+    border-radius: 6px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.stat-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--texto-gris);
+}
+
+.stat-value {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--texto-blanco);
+}
+
+.text-green { color: var(--amarillo-limon); }
+
+
+/* ============================================================================
+   9. SECCIÓN DE NOTICIAS Y ANUNCIOS
+   ============================================================================ */
+
+.noticias-section {
+    background-color: var(--oscuro-principal);
+    padding: 20px 6% 60px 6%;
+}
+
+.news-panel {
+    background-color: var(--oscuro-tarjeta);
+    color: var(--texto-blanco);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px #00000080;
+    border: 1px solid #ffffff05;
+}
+
+.news-panel h3 {
+    color: var(--texto-blanco);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.news-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.news-block h4 {
+    color: var(--amarillo-limon);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.news-links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.news-btn-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 16px;
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.news-btn-card i {
+    font-size: 1.4rem;
+    color: var(--amarillo-limon);
+}
+
+.btn-card-text { display: flex; flex-direction: column; }
+
+.btn-card-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--texto-blanco);
+}
+
+.btn-card-sub {
+    font-size: 0.75rem;
+    color: var(--texto-gris);
+}
+
+.news-btn-card:hover {
+    transform: translateX(5px);
+    background: #e1ff000a;
+    border-color: var(--amarillo-limon);
+}
+
+.news-btn-card.whatsapp-channel:hover i { color: #25d366; }
+.news-btn-card.official-site:hover i    { color: #00d4ff; }
+
+.activity-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    color: var(--amarillo-limon);
+    margin-bottom: 8px;
+}
+
+.schedule-item {
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+}
+
+.local-time-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: var(--texto-gris);
+    margin-top: 5px;
+}
+
+.converted-time {
+    color: var(--amarillo-limon);
+    font-weight: 700;
+}
+
+.news-links-container .schedule-item { margin-bottom: 0; }
+
+
+/* ============================================================================
+   10. REGLAMENTO DEL CLAN
+   ============================================================================ */
+
+.reglamento-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--texto-blanco);
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.reglas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.regla-card {
+    background-color: var(--oscuro-tarjeta);
+    border: 2px solid #ffffff0d;
+    padding: 25px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.regla-card:hover {
+    background-color: #131e35;
+    border-color: var(--amarillo-limon);
+}
+
+.card-icon {
+    font-size: 1.6rem;
+    color: var(--amarillo-limon);
+    margin-bottom: 12px;
+}
+
+.regla-card h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: var(--texto-blanco);
+}
+
+.regla-card p {
+    font-size: 0.85rem;
+    color: var(--texto-gris);
+    font-weight: 600;
+}
+
+.warning-text {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #ff5252;
+}
+
+
+/* ============================================================================
+   11. GALERÍA (Carrusel compacto con filtros)
+   ============================================================================ */
+
+.galeria-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.galeria-filtros {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    color: var(--texto-gris);
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filtro-btn i { font-size: 0.85rem; }
+
+.filtro-btn:hover {
+    border-color: var(--amarillo-limon);
+    color: var(--amarillo-limon);
+    transform: translateY(-2px);
+}
+
+.filtro-btn.active {
+    background: var(--amarillo-limon);
+    border-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slider-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+}
+
+.slider-track::-webkit-scrollbar { display: none; }
+
+.gallery-card {
+    flex: 0 0 calc(33.333% - 14px);
+    scroll-snap-align: start;
+    position: relative;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff001a;
+}
+
+.gallery-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--amarillo-limon);
+    box-shadow: 0 15px 40px #00000080, 0 0 30px #e1ff0033;
+}
+
+.card-frame {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.corner {
+    position: absolute;
+    width: 20px; height: 20px;
+    border: 2px solid var(--amarillo-limon);
+    transition: all 0.3s ease;
+}
+
+.corner.top-left     { top: 8px;    left: 8px;   border-right: none; border-bottom: none; }
+.corner.top-right    { top: 8px;    right: 8px;  border-left: none;  border-bottom: none; }
+.corner.bottom-left  { bottom: 8px; left: 8px;   border-right: none; border-top: none; }
+.corner.bottom-right { bottom: 8px; right: 8px;  border-left: none;  border-top: none; }
+
+.gallery-card:hover .corner {
+    width: 25px; height: 25px;
+    box-shadow: 0 0 10px #e1ff0080;
+}
+
+.gallery-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.3s ease;
+    filter: brightness(0.85) contrast(1.1);
+}
+
+.gallery-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.15);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg,
+        #060b1300 0%,
+        #060b1300 50%,
+        #060b13d9 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.leader-badge,
+.wallpaper-badge {
+    position: absolute;
+    top: 15px; left: 15px;
+    background: #e1ff00e6;
+    color: var(--oscuro-principal);
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    border-radius: 4px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px #00000066;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.official-badge {
+    background: #fffffff2;
+    color: #111111;
+}
+
+.gallery-card:hover .leader-badge,
+.gallery-card:hover .wallpaper-badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.leader-info,
+.gallery-info {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 4;
+    color: #ffffff;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.leader-info h3,
+.ship-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    color: var(--amarillo-limon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px #000000cc;
+}
+
+.leader-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: #ffffff;
+    opacity: 0.95;
+}
+
+.leader-stats,
+.wallpaper-res {
+    font-size: 0.75rem;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.5;
+    text-shadow: 0 1px 3px #000000cc;
+}
+
+.leader-stats i,
+.wallpaper-res i {
+    color: var(--amarillo-limon);
+    margin-right: 6px;
+    width: 14px;
+    text-align: center;
+}
+
+.gallery-card:hover .leader-info,
+.gallery-card:hover .gallery-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.download-btn {
+    position: absolute;
+    top: 15px; right: 15px;
+    width: 36px; height: 36px;
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    text-decoration: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.gallery-card:hover .download-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.download-btn:hover {
+    background: #ffffff;
+    transform: scale(1.15);
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #060b13e6;
+    color: var(--amarillo-limon);
+    border: 2px solid var(--amarillo-limon);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    z-index: 100;
+    box-shadow: 0 0 20px #e1ff0033;
+    transition: all 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    transform: translateY(-50%) scale(1.15);
+}
+
+.left-arrow  { left: -25px; }
+.right-arrow { right: -25px; }
+
+.gallery-load-more {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.load-more-btn {
+    background: transparent;
+    border: 2px solid var(--amarillo-limon);
+    color: var(--amarillo-limon);
+    padding: 12px 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.load-more-btn:hover {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #e1ff004d;
+}
+
+.gallery-card.hide { display: none; }
+
+.gallery-card.show {
+    display: block;
+    animation: cardFadeIn 0.4s ease;
+}
+
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================================
+   12. FAQ (Acordeón de preguntas frecuentes)
+   ============================================================================ */
+
+.faq-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.faq-container { max-width: 800px; margin: 0 auto; }
+
+.faq-item {
+    background-color: var(--oscuro-tarjeta);
+    border: 2px solid #ffffff0d;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.faq-item:hover { border-color: #e1ff004d; }
+
+/* Botón de pregunta (dispara el toggle del acordeón) */
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--texto-blanco);
+    padding: 18px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.faq-question:hover { color: var(--amarillo-limon); }
+
+.faq-question i {
+    color: var(--amarillo-limon);
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+
+/* Al abrir: el icono + rota 45° para convertirse en X */
+.faq-item.active .faq-question i { transform: rotate(45deg); }
+
+/* Panel de respuesta: colapsado por defecto */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 20px; /* Sin espacio vertical cuando está cerrado */
+    color: var(--texto-gris);
+    font-size: 0.9rem;
+    line-height: 1.8; /* CONTROLA EL ESPACIO ENTRE LAS LÍNEAS DE TEXTO */
+}
+
+/* Al abrir: expande y añade espaciado */
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Aumentado para evitar cortes en respuestas largas */
+    padding: 15px 20px 25px 20px; /* 15px arriba (separación de la pregunta), 25px abajo */
+}
+
+.faq-answer strong { color: var(--amarillo-limon); }
+
+/* ============================================================================
+   13. MODAL DE GALERÍA (Imagen ampliada con navegación)
+   ============================================================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: #060b13fa;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+    touch-action: pan-y;
+}
+
+.modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 85%;
+    margin: auto;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 2px solid var(--amarillo-limon);
+    box-shadow: 0 0 30px #e1ff0033;
+    animation: zoomIn 0.3s ease;
+    transition: opacity 0.15s ease-in-out;
+    will-change: opacity;
+}
+
+#modal-caption {
+    margin-top: 15px;
+    color: var(--texto-blanco);
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: var(--texto-blanco);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-close:hover { color: var(--amarillo-limon); }
+
+.modal-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0f172acc;
+    color: var(--amarillo-limon);
+    border: 2px solid var(--amarillo-limon);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+    z-index: 2100;
+}
+
+.modal-arrow:hover {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+}
+
+.modal-left-arrow  { left: 30px; }
+.modal-right-arrow { right: 30px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+
+/* ============================================================================
+   14. FOOTER (Pie de página)
+   ============================================================================ */
+
+footer {
+    background-color: #03060a;
+    color: var(--texto-gris);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-top: 1px solid #ffffff05;
+}
+
+
+/* ============================================================================
+   15. MODAL DE TÉRMINOS Y PRIVACIDAD
+   ============================================================================ */
+
+.terms-modal-overlay-footer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #060b13f2;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.terms-modal-overlay-footer.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.terms-modal-card-footer {
+    background-color: var(--oscuro-tarjeta);
+    border: 2px solid var(--amarillo-limon);
+    box-shadow: 0 0 30px #e1ff0026;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.terms-modal-header-footer {
+    background: #e1ff0005;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #ffffff0d;
+    flex-shrink: 0;
+}
+
+.terms-modal-header-footer i {
+    font-size: 1.4rem;
+    color: var(--amarillo-limon);
+}
+
+.terms-modal-header-footer h2 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--texto-blanco);
+}
+
+.terms-modal-body-footer {
+    padding: 20px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--texto-blanco);
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.terms-modal-body-footer::-webkit-scrollbar       { width: 6px; }
+.terms-modal-body-footer::-webkit-scrollbar-track { background: transparent; }
+.terms-modal-body-footer::-webkit-scrollbar-thumb {
+    background: var(--amarillo-limon);
+    border-radius: 3px;
+}
+
+.terms-modal-footer-footer {
+    padding: 15px 20px 20px 20px;
+    border-top: 1px solid #ffffff0d;
+    flex-shrink: 0;
+}
+
+.terms-btn-accept-footer {
+    display: block;
+    background-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    text-align: center;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border-radius: 6px;
+    transition: 0.2s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.terms-btn-accept-footer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px #e1ff0040;
+}
+
+
+/* ============================================================================
+   16. ICONOS SOCIALES DEL FOOTER
+   ============================================================================ */
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.footer-icon {
+    font-size: 1.6rem;
+    color: var(--texto-gris);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+}
+
+.footer-icon.discord-icon:hover {
+    color: #ffffff;
+    background-color: var(--discord-color);
+    border-color: var(--discord-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px #5865f266;
+}
+
+.footer-icon.whatsapp-icon:hover {
+    color: #ffffff;
+    background-color: var(--whatsapp-color);
+    border-color: var(--whatsapp-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px #25d36666;
+}
+
+
+/* ============================================================================
+   17. RESPONSIVE — Tablet (≤ 992px)
+   ============================================================================ */
+
+@media (max-width: 992px) {
+    .gallery-card { flex: 0 0 calc(50% - 10px); }
+    .hero-left  { flex: 1 1 100%; padding: 40px 6%; }
+    .hero-right { display: none; }
+}
+
+
+/* ============================================================================
+   18. RESPONSIVE — Móvil (≤ 768px)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .menu-btn { display: block; }
+
+    .nav-links {
+        position: fixed;
+        top: 72px;
+        left: -100%;
+        background: #0f172afc;
+        height: calc(100vh - 72px);
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 0.4s ease;
+        border-top: 1px solid #ffffff0d;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    #click:checked ~ .nav-links { left: 0; }
+
+    .nav-links li { margin: 20px 0; }
+    .nav-links a  { font-size: 1.1rem; }
+
+    .hero-left    { text-align: center; justify-content: center; }
+    .hero-content { display: flex; flex-direction: column; align-items: center; }
+    .hero-content h1 { font-size: 2.2rem; }
+    .cta-container   { width: 100%; }
+    .social-buttons  { flex-direction: column; }
+
+    .gallery-card   { flex: 0 0 100%; }
+    .slider-arrow   { display: none !important; }
+
+    .galeria-filtros { gap: 8px; }
+    .filtro-btn      { padding: 8px 16px; font-size: 0.75rem; }
+    .filtro-btn i    { display: none; }
+
+    .modal-wrapper   { max-width: 100%; }
+    .modal-arrow     { display: none; }
+    .modal-close     { top: 15px; right: 20px; font-size: 35px; }
+    .modal-content   { max-width: 100%; max-height: 65vh; }
+
+    .terms-modal-card-footer { max-width: 95%; }
+    .stats-grid   { justify-content: center; }
+    .news-content { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================================
+   19. BASE DE DATOS — Sección Builds y Armamento
+   ============================================================================ */
+
+.database-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.db-description {
+    text-align: center;
+    color: var(--texto-gris);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.db-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.db-tab {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    color: var(--texto-gris);
+    padding: 12px 25px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.db-tab:hover { border-color: var(--amarillo-limon); color: var(--amarillo-limon); }
+
+.db-tab.active {
+    background: var(--amarillo-limon);
+    border-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+}
+
+.hidden-panel { display: none; }
+
+.db-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--texto-gris);
+    padding: 40px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.db-loading i {
+    color: var(--amarillo-limon);
+    margin-right: 8px;
+}
+
+
+/* ============================================================================
+   20. RECOMENDACIONES DEL CLAN (Grid de buques)
+   ============================================================================ */
+
+.db-controls {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center; /* Centra los filtros horizontalmente */
+    align-items: center;     /* Alinea los filtros al centro */
+}
+
+.db-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ships-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.ship-card {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff001a;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s;
+}
+
+.ship-card:hover {
+    border-color: var(--amarillo-limon);
+    transform: translateY(-5px);
+}
+
+.ship-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: brightness(0.9);
+    background: var(--oscuro-tarjeta);
+}
+
+.ship-class-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ship-card h3 {
+    color: var(--amarillo-limon);
+    font-size: 1rem;
+    padding: 12px 15px 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.build-list {
+    list-style: none;
+    padding: 0 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.build-list li {
+    font-size: 0.75rem;
+    color: var(--texto-gris);
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.build-list li i {
+    color: var(--amarillo-limon);
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.build-list li strong { color: var(--texto-blanco); }
+
+.db-empty {
+    text-align: center;
+    color: var(--texto-gris);
+    padding: 30px;
+    font-size: 0.85rem;
+}
+
+/* Leyenda "Recomendado por" en tarjetas de buques — solo se muestra si el buque tiene el campo recomendadoPor */
+.ship-recommended-by {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #e1ff000a;
+    border-top: 1px solid #e1ff001a;
+    font-size: 0.7rem;
+    color: var(--texto-gris);
+    font-weight: 600;
+}
+
+.ship-recommended-by i {
+    color: var(--amarillo-limon);
+    font-size: 0.75rem;
+}
+
+.ship-recommended-by strong {
+    color: var(--amarillo-limon);
+    font-weight: 700;
+}
+
+/* ============================================================================
+   21. TIER LIST (Tablero SS/S/A/B/C/D con drag & drop)
+   ============================================================================ */
+
+.tier-pool-wrap {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+}
+
+.tier-pool-wrap h4 {
+    color: var(--amarillo-limon);
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.tier-pool-items {
+    flex: 1;
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;           /* Apila los elementos en múltiples líneas */
+    min-height: 50px;
+    align-content: flex-start; /* Alinea el contenido al inicio vertical */
+}
+
+.tier-hint {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--texto-gris);
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.tier-board {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tier-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.tier-label {
+    width: 60px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--oscuro-principal);
+}
+
+/* Colores de cada tier */
+.tier-SS { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%); box-shadow: 0 0 12px #ffd70066; }
+.tier-S  { background: var(--amarillo-limon); }
+.tier-A  { background: #25d366; }
+.tier-B  { background: #00d4ff; }
+.tier-C  { background: #ffa500; }
+.tier-D  { background: #ff5252; }
+.tier-NA { background: #6c757d; } /* Gris para N/A (Sin clasificar) */
+
+/* Contenedor de items dentro de cada fila de tier */
+.tier-items {
+    flex: 1;
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-height: 50px;
+    align-content: flex-start;
+}
+
+.tier-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--oscuro-tarjeta);
+    border: 1px solid #e1ff0033;
+    color: var(--texto-blanco);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: grab;
+    transition: 0.2s;
+}
+
+.tier-chip:active {
+    cursor: grabbing;
+}
+
+.tier-chip:hover {
+    border-color: var(--amarillo-limon);
+    transform: translateY(-2px);
+}
+
+.tier-chip img {
+    width: 28px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.tier-chip i {
+    color: var(--amarillo-limon);
+    font-size: 0.7rem;
+}
+
+.tier-actions {
+    max-width: 1200px;
+    margin: 15px auto 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tier-actions input {
+    flex: 1;
+    min-width: 220px;
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--texto-blanco);
+    font-size: 0.85rem;
+}
+
+/* ============================================================================
+   21.5 TIER LIST — Leyenda de Categorías (SS, S, A, B, C, D con descripciones)
+   ============================================================================ */
+
+/* Leyenda global de categorías */
+.tier-legend {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 15px;
+    background: var(--oscuro-tarjeta);
+    border: 1px solid #ffffff0d;
+    border-radius: 8px;
+}
+
+.tier-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tier-legend-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: var(--oscuro-principal);
+    flex-shrink: 0;
+}
+
+.tier-legend-text {
+    font-size: 0.75rem;
+    color: var(--texto-gris);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Ajuste responsive para la leyenda en móviles */
+@media (max-width: 768px) {
+    .tier-legend {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .tier-legend-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    
+    .tier-legend-text {
+        font-size: 0.7rem;
+    }
+}
+
+/* ============================================================================
+   22. RESPONSIVE — Ajustes de Tier List en Móvil (≤ 768px)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .tier-label { width: 40px; font-size: 1rem; }
+}
+
+/* ============================================================================
+   23. TIER LIST — NUEVO DISEÑO (Pestañas + Acordeón)
+   ============================================================================ */
+
+/* --- Barra principal de 3 vistas --- */
+.tier-main-tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    background: var(--oscuro-tarjeta);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #e1ff0033;
+}
+
+.tier-main-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--texto-gris);
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-right: 1px solid #ffffff0d;
+}
+
+.tier-main-tab:last-child { border-right: none; }
+
+.tier-main-tab:hover {
+    background: #e1ff000a;
+    color: var(--amarillo-limon);
+}
+
+.tier-main-tab.active {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+}
+
+.tier-main-tab i { font-size: 0.9rem; }
+
+/* --- Vistas (ocultas por defecto) --- */
+.tier-view { display: none; }
+.tier-view.active-view { display: block; }
+.hidden-view { display: none; }
+
+/* --- Sub-pestañas de categorías --- */
+.tier-sub-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    justify-content: center;
+}
+
+.tier-sub-tab {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    color: var(--texto-gris);
+    padding: 8px 18px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tier-sub-tab:hover {
+    border-color: var(--amarillo-limon);
+    color: var(--amarillo-limon);
+}
+
+.tier-sub-tab.active {
+    background: var(--amarillo-limon);
+    border-color: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+}
+
+/* --- Contenedor de listas fijadas --- */
+.fijadas-container,
+.mislistas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- Tarjeta de lista fijada (acordeón) --- */
+.tier-list-card {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.tier-list-card:hover {
+    border-color: var(--amarillo-limon);
+}
+
+.tier-list-card.official {
+    border-color: var(--amarillo-limon);
+    box-shadow: 0 0 20px #e1ff0020;
+}
+
+/* Cabecera del acordeón */
+.tier-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.tier-list-header:hover {
+    background: #e1ff000a;
+}
+
+.tier-list-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.tier-list-title i.fa-thumbtack {
+    color: var(--amarillo-limon);
+    font-size: 1rem;
+}
+
+.tier-list-title h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--texto-blanco);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.tier-list-title .official-badge-small {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tier-list-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tier-list-actions button {
+    background: none;
+    border: none;
+    color: var(--texto-gris);
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.tier-list-actions button:hover {
+    color: var(--amarillo-limon);
+    background: #e1ff0015;
+}
+
+.tier-list-actions button.danger:hover {
+    color: #ff5252;
+    background: #ff525215;
+}
+
+.tier-list-actions button.pinned-on {
+    color: var(--amarillo-limon);
+}
+
+/* Flecha de expansión */
+.tier-list-toggle {
+    font-size: 1rem;
+    color: var(--amarillo-limon);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.tier-list-card.expanded .tier-list-toggle {
+    transform: rotate(180deg);
+}
+
+/* Contenido del acordeón (tiers) */
+.tier-list-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: #060b1380;
+}
+
+.tier-list-card.expanded .tier-list-body {
+    max-height: 3000px; /* Suficiente para todos los tiers */
+}
+
+/* Fila de tier dentro del acordeón */
+.tier-accordion-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid #ffffff08;
+}
+
+.tier-accordion-row:last-child {
+    border-bottom: none;
+}
+
+.tier-accordion-label {
+    width: 70px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--oscuro-principal);
+}
+
+.tier-accordion-label.tier-SS {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+    box-shadow: 0 0 12px #ffd70066;
+}
+
+.tier-accordion-label.tier-S { background: var(--amarillo-limon); }
+.tier-accordion-label.tier-A { background: #25d366; }
+.tier-accordion-label.tier-B { background: #00d4ff; }
+.tier-accordion-label.tier-C { background: #ffa500; }
+.tier-accordion-label.tier-D { background: #ff5252; }
+.tier-accordion-label.tier-NA { background: #6c757d; } /* Gris para N/A */
+
+.tier-accordion-items {
+    flex: 1;
+    padding: 10px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: flex-start;
+    min-height: 50px;
+}
+
+/* Chip de buque dentro del acordeón (interactivo visualmente) */
+.tier-accordion-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--oscuro-tarjeta);
+    border: 1px solid #e1ff0033;
+    color: var(--texto-blanco);
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: default;
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.tier-accordion-chip:hover {
+    border-color: var(--amarillo-limon);
+    background: #1e293b; /* Un tono ligeramente más claro que el fondo base */
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 12px #00000060;
+    z-index: 10;
+}
+
+.tier-accordion-chip img {
+    width: 28px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 2px;
+    transition: transform 0.2s ease;
+}
+
+.tier-accordion-chip:hover img {
+    transform: scale(1.1);
+}
+
+.tier-accordion-chip i {
+    color: var(--amarillo-limon);
+    font-size: 0.7rem;
+}
+
+.tier-accordion-chip img {
+    width: 28px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.tier-accordion-chip i {
+    color: var(--amarillo-limon);
+    font-size: 0.7rem;
+}
+
+/* --- Header de Mis Listas --- */
+.mislistas-header {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.mislistas-header h4 {
+    color: var(--amarillo-limon);
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+/* --- Tarjeta de lista guardada (en Mis Listas) --- */
+.mislistas-card {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid #e1ff0033;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.mislistas-card:hover {
+    border-color: var(--amarillo-limon);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .tier-main-tabs {
+        flex-direction: column;
+    }
+    
+    .tier-main-tab {
+        border-right: none;
+        border-bottom: 1px solid #ffffff0d;
+        padding: 12px 15px;
+        font-size: 0.75rem;
+    }
+    
+    .tier-main-tab:last-child { border-bottom: none; }
+    
+    .tier-sub-tabs {
+        gap: 6px;
+    }
+    
+    .tier-sub-tab {
+        padding: 6px 12px;
+        font-size: 0.65rem;
+    }
+    
+    .tier-accordion-label {
+        width: 50px;
+        font-size: 0.9rem;
+    }
+    
+    .tier-list-title h4 {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================================================
+   23.5 TIER LIST — Ajustes Responsive del Acordeón (Móvil ≤ 768px)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    /* ... (tus otras reglas de móvil ya existentes) ... */
+
+    /* 1. Mejorar el contenedor del encabezado */
+    .tier-list-header {
+        padding: 12px 15px;
+        gap: 10px;
+        align-items: flex-start; /* Evita estiramientos verticales raros */
+    }
+
+    /* 2. Permitir que el título y sus badges fluyan a la siguiente línea si no caben */
+    .tier-list-title {
+        flex-wrap: wrap;
+        gap: 6px;
+        flex: 1;
+        min-width: 0; /* Necesario para que el text-overflow funcione en flex */
+    }
+
+    /* 3. Ajustar el texto principal para que no desborde */
+    .tier-list-title h4 {
+        font-size: 0.8rem;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%; /* Fuerza a que ocupe su propia línea si es necesario */
+    }
+
+    /* 4. Hacer el badge "OFICIAL" más compacto */
+    .tier-list-title .official-badge-small {
+        font-size: 0.55rem;
+        padding: 2px 6px;
+    }
+
+    /* 5. Ajustar la categoría entre corchetes */
+    .tier-list-category {
+        color: var(--texto-gris);
+        font-size: 0.75rem;
+        margin-left: 8px;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+        .tier-list-category {
+            font-size: 0.65rem;
+            margin-left: 0; /* Usamos el 'gap' del padre en su lugar */
+        }
+    }
+
+    /* 6. Proteger los botones de acción para que NO se aplasten */
+    .tier-list-actions {
+        flex-shrink: 0; /* Impide que el contenedor de botones se encoja */
+        gap: 8px;
+    }
+
+    /* 7. Área táctil más grande para los dedos en los botones */
+    .tier-list-actions button {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    /* 8. Ajustar el ancho de la etiqueta del tier (SS, S, A, etc.) */
+    .tier-accordion-label {
+        width: 45px;
+        font-size: 0.85rem;
+    }
+}
