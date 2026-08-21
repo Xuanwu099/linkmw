@@ -69,7 +69,7 @@
         { "id": "ashigara", "name": "JS Ashigara", "clase": "destructor", "img": "db/destroyer/Ashigara.jpg" },
 
         { "id": "f110", "name": "SPS F-110", "clase": "fragata", "img": "db/frigate/F110.jpg", "build": { "misiles": "MICA-M, HQ-26, Mako", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B, WS-3, MAR-290, Deterrence 300" } },
-        { "id": "smart4000", "name": "SPS Smart 4000", "clase": "fragata", "img": "db/frigate/smart4000.jpg", "build": { "misiles": "MICA-M, HQ-26, Shtil-1" } },
+        { "id": "smart4000", "name": "SPS Smart 4000", "clase": "fragata", "img": "db/frigate/SMART4000.jpg", "build": { "misiles": "MICA-M, HQ-26, Shtil-1" } },
         { "id": "blueshark", "name": "FS Blue Shark", "clase": "fragata", "img": "db/frigate/BlueShark.jpg" },
         { "id": "normadie", "name": "FS Normandie", "clase": "fragata", "img": "db/frigate/Normandie.jpg" },
         { "id": "cstp", "name": "CN CSTP", "clase": "fragata", "img": "db/frigate/CSTP.jpg", "build": { "misiles": "MICA-M, HQ-26, Shtil-1" , "torpedos": "YU-12, DTCN L5, Type 12" } },
