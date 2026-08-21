@@ -998,8 +998,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- ACORAZADOS ---
         const bb_SS = ['tirpitz', 'hood', 'rodney', 'alsace'];
         const bb_S = ['kronshtadt', 'moscow', 'richelieu', 'sawtooth'];
-        const bb_A = ['hampshire'];
-        const bb_B = ['huaqing', 'iowa', 'montana', 'mushashi', 'bismarck', 'yamatoaegis'];
+        const bb_A = ['hampshire','montana'];
+        const bb_B = ['huaqing', 'iowa', 'mushashi', 'bismarck', 'yamatoaegis'];
         const bb_C = ['massa', 'nusantara'];
         const bb_D = ['missouri', 'teton', 'tamato'];
         const bb_rest = battleships.filter(id => !bb_SS.includes(id) && !bb_S.includes(id) && !bb_A.includes(id) && !bb_B.includes(id) && !bb_C.includes(id) && !bb_D.includes(id));
