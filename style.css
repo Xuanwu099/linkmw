@@ -152,7 +152,7 @@ body {
 .progress-fill {
     height: 100%;
     width: 30%;
-    background: linear-gradient(90deg, #34cc16, #e1ff00, #34cc16);
+    background: linear-gradient(90deg, #e1ff00, #8bff1a, #e1ff00);
     background-size: 200% 100%;         /* Gradiente 2x más ancho para el efecto shimmer */
     border-radius: 2px;
     animation: load 2s ease-in-out infinite, shimmer 1.5s linear infinite;
