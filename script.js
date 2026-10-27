@@ -875,9 +875,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
 
-    // ⚠️ IMPORTANTE: Reemplaza esta URL con tu NUEVO Webhook de Discord.
-    // ¡NUNCA compartas esta URL públicamente!
-    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1562298270452285663/0CGP0g2AqrSkVAnnzwb7dRNApqUc7C_J_Wlh5SP08xnon9n25sZO5MmxlX_x-A9rFsJV";
+    //  Reemplaza esta URL con tu NUEVO Webhook de Discord.
+
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1564727521164132364/tzLXxCka3tkKZ5DW0GuDVLZkHDwu7S87BToCRlDyhDHUXcTQMN0nDfmmUMNxoIgvvjWu";
 
     if (challengeForm) {
         challengeForm.addEventListener('submit', async function(e) {
