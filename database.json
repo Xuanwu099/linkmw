@@ -303,7 +303,7 @@
         "name": "Pukgukson-4",
         "category": "misiles",
         "stars": 4.5,
-        "image": "db/misiles/Pukgukson.jpg",
+        "image": "db/misiles/Pukguksong.jpg",
         "stats": [
             { "label": "DPM", "value": "253,714", "percentage": 88, "colorClass": "damage" },
             { "label": "Recarga", "value": "10.5 s", "percentage": 50, "colorClass": "speed" },
