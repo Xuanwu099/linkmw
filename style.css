@@ -2199,3 +2199,571 @@ footer {
         font-size: 0.85rem;
     }
 }
+
+/* Variables de colores para fácil edición */
+:root {
+  --bg-dark: #0b1120;
+  --card-bg: #151e32;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --color-damage: #ef4444; /* Rojo */
+  --color-range: #22c55e;  /* Verde */
+  --color-speed: #3b82f6;  /* Azul */
+  --glow-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Contenedor Grid (Responsivo) */
+.weapon-tier-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 40px 20px;
+  background-color: var(--bg-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Diseño de la Tarjeta */
+.weapon-card {
+  background: var(--card-bg);
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 25px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Hover (Brillo al pasar el mouse) */
+.weapon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--glow-color);
+  border-color: #3b82f6;
+}
+
+/* Cabecera (Ranking e Icono) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rank {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  font-style: italic;
+}
+
+.weapon-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+}
+
+.weapon-name {
+  color: var(--text-main);
+  font-size: 1.4rem;
+  margin: 0 0 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Barras de Estadísticas */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+/* Ajuste de filas de estadísticas - SIN TEXTO ROTO */
+.weapon-card .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;  /* Evita que el texto se rompa */
+}
+
+.weapon-card .stat-label {
+    color: var(--texto-gris);
+    font-size: 0.8rem;  /* Ligeramente más pequeño */
+    width: 90px;        /* Ancho fijo para las etiquetas */
+    font-weight: 600;
+    flex-shrink: 0;     /* Evita que se encoja */
+}
+
+.weapon-card .stat-bar-bg {
+    flex-grow: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-width: 100px;   /* Ancho mínimo para la barra */
+}
+
+.weapon-card .stat-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+.weapon-card .stat-value {
+    color: var(--texto-blanco);
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: auto;        /* Ancho automático */
+    min-width: 70px;    /* Ancho mínimo para que quepa "36,400" */
+    text-align: right;
+    white-space: nowrap; /* Evita que se rompa */
+    flex-shrink: 0;      /* Evita que se encoja */
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  width: 70px;
+  font-weight: 600;
+}
+
+.stat-bar-bg {
+  flex-grow: 1;
+  height: 8px;
+  background: #0f172a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-in-out;
+}
+
+/* Colores de las barras (semánticos pero vibrantes) */
+.weapon-card .stat-bar-fill.damage { background: #ff4757; box-shadow: 0 0 8px #ff4757; }
+.weapon-card .stat-bar-fill.range { background: #2ed573; box-shadow: 0 0 8px #2ed573; }
+.weapon-card .stat-bar-fill.speed { background: #1e90ff; box-shadow: 0 0 8px #1e90ff; }
+
+/* Color por defecto para stats nuevos (ej: "Precisión", "Sigilo") */
+.weapon-card .stat-bar-fill.default { background: #a855f7; box-shadow: 0 0 8px #a855f7; } 
+
+/* Sección de Consejos */
+.usage-tip {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #fbbf24; /* Borde amarillo tipo advertencia */
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.tip-icon {
+  font-size: 1.2rem;
+}
+
+.usage-tip p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.usage-tip strong {
+  color: #fbbf24;
+  display: block;
+  margin-bottom: 4px;
+}
+/* ============================================================================
+   TOP ARMAMENTO - ESTILO NIEVE DE LIMÓN (CONSOLIDADO Y CORREGIDO)
+   ============================================================================ */
+
+.weapon-tier-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- LÓGICA DE FILTRADO (CRUCIAL PARA QUE FUNCIONE EL JS) --- */
+.weapon-card.hide { 
+    display: none !important; 
+}
+
+.weapon-card.show {
+    display: block;
+    animation: cardFadeIn 0.4s ease;
+}
+
+/* --- DISEÑO DE LA TARJETA --- */
+.weapon-card {
+    background: rgba(15, 23, 42, 0.95); /* var(--oscuro-tarjeta) */
+    border: 1px solid rgba(225, 255, 0, 0.2);
+    border-radius: 12px;
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.weapon-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--amarillo-limon);
+    box-shadow: 0 8px 25px rgba(225, 255, 0, 0.15);
+}
+
+.weapon-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.weapon-card .rank {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--amarillo-limon);
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(225, 255, 0, 0.3);
+}
+
+.weapon-card .weapon-icon {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.weapon-card .weapon-name {
+    color: var(--texto-blanco);
+    font-size: 1.3rem;
+    margin: 0 0 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.weapon-card .stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.weapon-card .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weapon-card .stat-label {
+    color: var(--texto-gris);
+    font-size: 0.85rem;
+    width: 70px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.weapon-card .stat-bar-bg {
+    flex-grow: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.weapon-card .stat-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+/* Colores de las barras */
+.weapon-card .stat-bar-fill.damage { background: #ff4757; box-shadow: 0 0 8px #ff4757; }
+.weapon-card .stat-bar-fill.range { background: #2ed573; box-shadow: 0 0 8px #2ed573; }
+.weapon-card .stat-bar-fill.speed { background: #1e90ff; box-shadow: 0 0 8px #1e90ff; }
+
+
+.weapon-card .stat-value {
+    color: var(--texto-blanco);
+    font-size: 0.9rem;
+    font-weight: bold;
+    width: 40px;
+    text-align: right;
+}
+
+.weapon-card .usage-tip {
+    background: rgba(225, 255, 0, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid var(--amarillo-limon);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.weapon-card .tip-icon { font-size: 1.2rem; }
+
+.weapon-card .usage-tip p {
+    margin: 0;
+    color: var(--texto-gris);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.weapon-card .usage-tip strong {
+    color: var(--amarillo-limon);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.weapon-card .weapon-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.weapon-card .w-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--amarillo-limon);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid rgba(225, 255, 0, 0.3);
+}
+/* ============================================================================
+   FORZAR VISIBILIDAD DEL PANEL DE ARMAMENTO (SOLUCIÓN DEFINITIVA)
+   ============================================================================ */
+
+/* Cuando el panel de armamento NO tiene la clase hidden-panel, debe ser visible */
+#panel-armamento:not(.hidden-panel) {
+    display: block !important;
+}
+
+/* Asegurar que el contenedor de armas sea visible */
+#panel-armamento:not(.hidden-panel) #weaponGrid {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Forzar que las tarjetas de armas sean visibles */
+#panel-armamento:not(.hidden-panel) .weapon-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* ============================================================================
+   ESTRELLAS DE VALORACIÓN EN TARJETAS DE ARMAMENTO (Con medias estrellas)
+   ============================================================================ */
+.weapon-stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 15px;
+    color: #f1c606; /* Amarillo limón hexadecimal e1ff00, f1c606*/
+    font-size: 1rem;
+}
+
+/* Efecto de brillo sutil en estrellas llenas Y medias estrellas */
+.weapon-stars .fas.fa-star,
+.weapon-stars .fas.fa-star-half-stroke {
+    filter: drop-shadow(0 0 3px #2a2b2899); /* Hexadecimal con 60% de opacidad */
+}
+
+/* Las estrellas vacías serán de un gris tenue para no distraer */
+.weapon-stars .far.fa-star {
+    color: #475569; /* Gris oscuro (slate-600) */
+    filter: none;
+}
+/* ============================================================================
+   25. SECCIÓN DE DESAFÍOS (Formulario)
+   ============================================================================ */
+.desafios-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.desafios-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--oscuro-tarjeta);
+    border: 1px solid rgba(225, 255, 0, 0.15);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.desafios-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.desafios-form label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--texto-blanco);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.desafios-form label i {
+    color: var(--amarillo-limon);
+    width: 16px;
+    text-align: center;
+}
+
+.desafios-form input,
+.desafios-form select,
+.desafios-form textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 12px 15px;
+    color: var(--texto-blanco);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.desafios-form input:focus,
+.desafios-form select:focus,
+.desafios-form textarea:focus {
+    outline: none;
+    border-color: var(--amarillo-limon);
+    box-shadow: 0 0 0 2px rgba(225, 255, 0, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.desafios-form select {
+    cursor: pointer;
+    appearance: none; /* Elimina la flecha por defecto del navegador */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e1ff00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 12px auto;
+}
+
+.desafios-form select option {
+    background: var(--oscuro-tarjeta);
+    color: var(--texto-blanco);
+}
+
+.desafios-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-desafio {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    border: none;
+    padding: 14px 40px;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+}
+
+.btn-desafio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 255, 0, 0.3);
+}
+
+.btn-desafio:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-hint {
+    font-size: 0.75rem;
+    color: var(--texto-gris);
+    text-align: center;
+    max-width: 500px;
+}
+
+.form-status {
+    text-align: center;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 6px;
+    display: none; /* Oculto por defecto */
+}
+
+.form-status.success {
+    display: block;
+    background: rgba(46, 213, 115, 0.1);
+    color: #2ed573;
+    border: 1px solid #2ed573;
+}
+
+.form-status.error {
+    display: block;
+    background: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+    border: 1px solid #ff4757;
+}
+
+/* Responsive para el formulario */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+    }
+    
+    .desafios-container {
+        padding: 25px 20px;
+    }
+}
