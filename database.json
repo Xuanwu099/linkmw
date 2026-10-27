@@ -20,6 +20,7 @@
         { "id": "teton", "name": "Pan Spatial Teton", "clase": "acorazado", "img": "db/bb/Teton.jpg" },
         { "id": "tamato", "name": "IJN Yamato", "clase": "acorazado", "img": "db/bb/Yamato.jpg" },
         { "id": "yamatoaegis", "name": "JS Yamato Aegis", "clase": "acorazado", "img": "db/bb/YamatoAegis.jpg" },
+        { "id": "newjersey", "name": "USS New Jersey", "clase": "acorazado", "img": "db/bb/NewJersey.jpg" },
 
         { "id": "zumwalt", "name": "USS Zumwalt", "clase": "destructor", "img": "db/destroyer/Zumwalt.jpg", "build": { "misiles": "YJ-19 (3X) + MICA-M, HQ-26, Shtil-1 (2X)", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "automaticos": "Seahawk Sigma, AFGS", "aa": "KSAM Block 2, ALKA, HPLS" } },
         { "id": "spruance", "name": "USS Spruance", "clase": "destructor", "img": "db/destroyer/Spruance.jpg", "build": { "misiles": "YJ-19 (3X) + MICA-M, HQ-26 (2X)", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "torpedos": "YU-12, Tiger Shark, DM2A5, Spearfish Mod1", "aa": "KSAM Block 2, ALKA, HPLS" } },
@@ -67,6 +68,9 @@
         { "id": "jeongjo", "name": "ROKS Jeongjo the Great", "clase": "destructor", "img": "db/destroyer/Batch2.jpg" },
         { "id": "lider", "name": "RF Lider", "clase": "destructor", "img": "db/destroyer/Lider.jpg" },
         { "id": "ashigara", "name": "JS Ashigara", "clase": "destructor", "img": "db/destroyer/Ashigara.jpg" },
+        { "id": "kharlamov", "name": "RF Admiral Kharlamov", "clase": "destructor", "img": "db/destroyer/Harlamov.jpg" },
+        { "id": "andrea", "name": "IT Andrea Doria", "clase": "destructor", "img": "db/destroyer/AndreaDoria.jpg" },
+
 
         { "id": "f110", "name": "SPS F-110", "clase": "fragata", "img": "db/frigate/F110.jpg", "build": { "misiles": "MICA-M, HQ-26, Mako", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B, WS-3, MAR-290, Deterrence 300" } },
         { "id": "smart4000", "name": "SPS Smart 4000", "clase": "fragata", "img": "db/frigate/SMART4000.jpg", "build": { "misiles": "MICA-M, HQ-26, Shtil-1" } },
@@ -93,7 +97,7 @@
         { "id": "gorshkov", "name": "RF Admiral Gorshkov", "clase": "fragata", "img": "db/frigate/Gorshkov.jpg" },
 
         { "id": "arkansas", "name": "USS Arkansas", "clase": "crucero", "img": "db/cruiser/Arkansas.jpg", "build": { "misiles": "MICA-M, HQ-26, S-500 Prometheus", "canones": "A-200 Navigator, XM2001 Crusader, Primetron, Archer", "torpedos": "DM2A5, TAL Shyena, YU-12, Spearfish Mod1", "aa": "KSAM Block 2, ALKA, HPLS" } },
-        { "id": "shiloh", "name": "USS Shiloh", "clase": "crucero", "img": "db/cruiser/Shiloh.jpg", "build": { "misiles": "MICA-M, Mako, YJ-19", "canones": "A-200 Navigator, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B, WS-3, Deterrence 300", "aa": "KSAM Block 2, RIM-8 Talos, ALKA, HPLS" } },
+        { "id": "shiloh", "name": "USS Shiloh", "clase": "crucero", "img": "db/cruiser/Shiloh.jpg", "build": { "misiles": "YJ-17, YJ-19 + MICA-M", "canones": "A-200 Navigator, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B, WS-3, Deterrence 300", "aa": "KSAM Block 2, RIM-8 Talos, ALKA, HPLS" } },
         { "id": "graf", "name": "FGS Admiral Graf Spee", "clase": "crucero", "img": "db/cruiser/AdmiralGrafSpee.jpg" },
         { "id": "isakov", "name": "RF Admiral Isakov", "clase": "crucero", "img": "db/cruiser/AdmiralIsakov.jpg" },
         { "id": "nahimov", "name": "RF Admiral Nahimov", "clase": "crucero", "img": "db/cruiser/AdmiralNahimov.jpg" },
@@ -122,6 +126,9 @@
         { "id": "vella", "name": "USS Vella Gulf", "clase": "crucero", "img": "db/cruiser/VellaGulf.jpg" },
         { "id": "vittorio", "name": "IT Vittorio Veneto", "clase": "crucero", "img": "db/cruiser/VittorioVeneto.jpg" },
         { "id": "vladivostok", "name": "RF Vladivostok", "clase": "crucero", "img": "db/cruiser/Vladivostok.jpg" },
+        { "id": "azov", "name": "RF Azov (1134-BF)", "clase": "crucero", "img": "db/cruiser/Azov.jpg" },
+        { "id": "ccg90", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/CCG90.jpg" },
+
 
         { "id": "enterprise", "name": "USS Enterprise", "clase": "portaaviones", "img": "db/acv/Enterprise.jpg", "build": { "lanzagrandas": " WS-3,RBU-2500", "aviones":"F-19 Hellcat + J-36,Tornado F.Mk + Jscknife + Thanatos,Qaher" ,"helicopteros":"Z-18, RAH-66B Sea Comanche, Mi-171" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,HPLS,ALKA" } },
         { "id": "america", "name": "USS America LHA6", "clase": "portaaviones", "img": "db/acv/AmericaLHA6.jpg" },
@@ -196,5 +203,604 @@
         { "id": "submarino", "grupo": "Buques", "label": "Submarino", "tipo": "ship" },
         { "id": "otros", "grupo": "Buques", "label": "Otros", "tipo": "ship" }
       
+    ],
+
+    "weapons": [
+    {
+        "id": "yj17",
+        "name": "YJ-17",
+        "category": "misiles",
+        "stars": 5,
+        "image": "db/misiles/YJ17.jpg",
+        "stats": [
+            { "label": "DPM", "value": "208,000", "percentage": 75, "colorClass": "damage" },
+            { "label": "Recarga", "value": "10 s", "percentage": 99, "colorClass": "speed" },
+            { "label": "Alcance", "value": "15 km", "percentage": 99, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Antiseñuelo","Mercado"]
+    },
+    {
+        "id": "asn4g",
+        "name": "ASN4G",
+        "category": "misiles",
+         "stars": 4.5,
+        "image": "db/misiles/ASN4G.jpg",
+        "stats": [
+            { "label": "DPM", "value": "254,805", "percentage": 80, "colorClass": "damage" },
+            { "label": "Recarga", "value": "7.7 s", "percentage": 77, "colorClass": "speed" },
+            { "label": "Alcance", "value": "12.13 km", "percentage": 80, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Nuclear", "Ranked","Gacha"]
+    },
+    {
+        "id": "akash",
+        "name": "Akash NG",
+        "category": "misiles",
+        "stars": 5,
+        "image": "db/misiles/Akash.jpg",
+        "stats": [
+            { "label": "DPM", "value": "213,905", "percentage": 78, "colorClass": "damage" },
+            { "label": "Recarga", "value": "3.15 s", "percentage": 35, "colorClass": "speed" },
+            { "label": "Alcance", "value": "13 km", "percentage": 82, "colorClass": "range" }
+        ],
+        "tip": "Ideal a larga distancia.",
+        "tags": ["ASM","Antiaéreo","Gacha"]
+    },
+    {
+        "id": "mica",
+        "name": "MICA-M",
+        "category": "misiles",
+        "stars": 4.5,
+        "image": "db/misiles/Mica.jpg",
+        "stats": [
+            { "label": "DPM", "value": "173,846", "percentage": 70, "colorClass": "damage" },
+            { "label": "Recarga", "value": "5.25 s", "percentage": 52, "colorClass": "speed" },
+            { "label": "Alcance", "value": "12.57 km", "percentage": 80, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Antiaéreo","Mercado"]
+    },
+    {
+        "id": "m001",
+        "name": "Pan Spatial M-001",
+        "category": "misiles",
+        "stars": 5,
+        "image": "db/misiles/M001.jpg",
+        "stats": [
+            { "label": "DPM", "value": "185,025", "percentage": 70, "colorClass": "damage" },
+            { "label": "Recarga", "value": "10.5 s", "percentage": 100, "colorClass": "speed" },
+            { "label": "Alcance", "value": "11.27 km", "percentage": 75, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Racimo","Gacha"]
+    },
+    {
+        "id": "yj19",
+        "name": "YJ-19",
+        "category": "misiles",
+        "stars": 4.5,
+        "image": "db/misiles/YJ19.jpg",
+        "stats": [
+            { "label": "DPM", "value": "130,440", "percentage": 60, "colorClass": "damage" },
+            { "label": "Recarga", "value": "10 s", "percentage": 100, "colorClass": "speed" },
+            { "label": "Alcance", "value": "15.6 km", "percentage": 100, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Guiado","Mercado"]
+    },
+    {
+        "id": "hycore",
+        "name": "Hycore",
+        "category": "misiles",
+        "stars": 4,
+        "image": "db/misiles/Hycore.jpg",
+        "stats": [
+            { "label": "DPM", "value": "278,571", "percentage": 88, "colorClass": "damage" },
+            { "label": "Recarga", "value": "7 s", "percentage": 70, "colorClass": "speed" },
+            { "label": "Alcance", "value": "12.13 km", "percentage": 85, "colorClass": "range" }
+        ],
+        "tags": ["ASM","Tienda"]
+    },
+    {
+        "id": "pukgksong",
+        "name": "Pukgukson-4",
+        "category": "misiles",
+        "stars": 4.5,
+        "image": "db/misiles/Pukgukson.jpg",
+        "stats": [
+            { "label": "DPM", "value": "253,714", "percentage": 88, "colorClass": "damage" },
+            { "label": "Recarga", "value": "10.5 s", "percentage": 50, "colorClass": "speed" },
+            { "label": "Alcance", "value": "8.67 km", "percentage": 70, "colorClass": "range" }
+        ],
+        "tags": ["SLBM","Gacha"]
+    },
+    {
+        "id": "lajner",
+        "name": "R-29RMU2.1 Lajner",
+        "category": "misiles",
+        "stars": 4.5,
+        "image": "db/misiles/Lajner.jpg",
+        "stats": [
+            { "label": "DPM", "value": "241,714", "percentage": 86, "colorClass": "damage" },
+            { "label": "Recarga", "value": "17.5 s", "percentage": 90, "colorClass": "speed" },
+            { "label": "Alcance", "value": "13 km", "percentage": 90, "colorClass": "range" }
+        ],
+        "tags": ["SLBM","Mercado"]
+    },
+
+
+    {
+        "id": "a200",
+        "name": "A-200 Navigator",
+        "category": "canones",
+        "stars": 4,
+        "image": "db/cannon/A200.jpg",
+        "stats": [
+            { "label": "Recarga", "value": "8.61 s", "percentage": 86, "colorClass": "speed" },
+            { "label": "Alcance", "value": "15.6 Km", "percentage": 100, "colorClass": "damage" }
+        ],
+        "tags": ["Ranked"]
+    },
+    {
+        "id": "archer",
+        "name": "Archer (155mm)",
+        "category": "canones",
+        "stars": 5,
+        "image": "db/cannon/Archer.jpg",
+        "stats": [
+            { "label": "Recarga", "value": "7.7 s", "percentage": 77, "colorClass": "speed" },
+            { "label": "Alcance", "value": "15.6 Km", "percentage": 100, "colorClass": "damage" }
+        ],
+        "tags": ["Gacha"]
+    },
+    {
+        "id": "crusader",
+        "name": "XM2001 Crusader",
+        "category": "canones",
+        "stars": 4.5,
+        "image": "db/cannon/Crusader.jpg",
+        "stats": [
+            { "label": "Recarga", "value": "6.44 s", "percentage": 64, "colorClass": "speed" },
+            { "label": "Alcance", "value": "13 Km", "percentage": 83, "colorClass": "damage" }
+        ],
+        "tags": ["Mercado"]
+    },
+    {
+        "id": "447",
+        "name": "Project 447",
+        "category": "canones",
+        "stars": 4.5,
+        "image": "db/cannon/Project447.jpg",
+        "stats": [
+            { "label": "Recarga", "value": "7.14 s", "percentage": 71, "colorClass": "speed" },
+            { "label": "Alcance", "value": "13.87 Km", "percentage": 85, "colorClass": "damage" }
+        ],
+        "tip": "El mejor gacha",
+        "tags": ["Mercado"]
+    },
+
+
+    {
+        "id": "afgs",
+        "name": "AFGS",
+        "category": "automaticos",
+        "stars": 5,
+        "image": "db/autocannon/AFGS.jpg",
+        "stats": [
+            
+        ],
+        "tip": "El mejor gacha",
+        "tags": ["Mercado","Antitorpedo"]
+    },
+    {
+        "id": "gibka",
+        "name": "Gibka",
+        "category": "automaticos",
+        "stars": 3.5,
+        "image": "db/autocannon/Gibka.jpg",
+        "stats": [
+            
+        ],
+        "tip": "El mejor gacha",
+        "tags": ["Tienda","Antibuque"]
+    },
+    {
+        "id": "paket",
+        "name": "Paket-NK",
+        "category": "automaticos",
+        "stars": 4,
+        "image": "db/autocannon/PaketNK.jpg",
+        "stats": [
+     
+        ],
+        "tags": ["Gacha","Antitorpedo","Antisubmarino"]
+    },
+    {
+        "id": "sigma",
+        "name": "Seahawk Sigma",
+        "category": "automaticos",
+        "stars": 4,
+        "image": "db/autocannon/Sigma.jpg",
+        "stats": [
+        ],
+        "tags": ["Mercado","Antibuque","Antiaéreo"]
+    },
+
+    {
+        "id": "mar290",
+        "name": "MAR 290",
+        "category": "lanzagrandas",
+        "stars": 5,
+        "image": "db/gl/MAR290.jpg",
+        "stats": [
+            { "label": "DPM", "value": "253,232", "percentage": 88, "colorClass": "damage" },
+            { "label": "Recarga", "value": "7.35 s", "percentage": 73, "colorClass": "speed" },
+            { "label": "Alcance", "value": "11.27 km", "percentage": 92, "colorClass": "range" }
+        ],
+        "tags": ["Manual","Gacha","Antisubmarino","Antitorpedo"]
+    },
+    {
+        "id": "rbu2500",
+        "name": "RBU 2500",
+        "category": "lanzagrandas",
+        "stars": 5,
+        "image": "db/gl/RBU2500.jpg",
+        "stats": [
+            { "label": "DPM", "value": "273,943", "percentage": 88, "colorClass": "damage" },
+            { "label": "Recarga", "value": "4.55 s", "percentage": 45, "colorClass": "speed" },
+            { "label": "Alcance", "value": "8.67 km", "percentage": 85, "colorClass": "range" }
+        ],
+        "tags": ["Manual","Mercado","Antisubmarino","Antitorpedo"]
+    },
+    {
+        "id": "rhan",
+        "name": "RHAN",
+        "category": "lanzagrandas",
+        "stars": 5,
+        "image": "db/gl/RHan.jpg",
+        "stats": [
+            { "label": "DPM", "value": "237,231", "percentage": 80, "colorClass": "damage" },
+            { "label": "Recarga", "value": "6.3 s", "percentage": 63, "colorClass": "speed" },
+            { "label": "Alcance", "value": "10.4 km", "percentage": 90, "colorClass": "range" }
+        ],
+        "tags": ["Manual","Gacha","Ranked","Antisubmarino"]
+    },
+    {
+        "id": "ws",
+        "name": "WS 3",
+        "category": "lanzagrandas",
+        "stars": 5,
+        "image": "db/gl/WS3.jpg",
+        "stats": [
+            { "label": "DPM", "value": "237,231", "percentage": 84, "colorClass": "damage" },
+            { "label": "Recarga", "value": "6.3 s", "percentage": 63, "colorClass": "speed" },
+            { "label": "Alcance", "value": "10.4 km", "percentage": 88, "colorClass": "range" }
+        ],
+        "tags": ["Fijación","Ranked","Antisubmarino","Antiseñuelo"]
+    },
+
+
+    {
+        "id": "dtcn",
+        "name": "DTCNL5",
+        "category": "torpedos",
+        "stars": 4.5,
+        "image": "db/torpedos/DTCNL5.jpg",
+        "stats": [
+        ],
+        "tags": ["Mercado"]
+    },
+    {
+        "id": "piranha",
+        "name": "Piranha",
+        "category": "torpedos",
+        "stars": 5,
+        "image": "db/torpedos/Piranha.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Evento"]
+    },
+    {
+        "id": "shyena",
+        "name": "TAL Shyena",
+        "category": "torpedos",
+        "stars": 4.5,
+        "image": "db/torpedos/TALShyena.jpg",
+        "stats": [
+           
+        ],
+
+        "tags": ["Gacha","Antiseñuelo"]
+    },
+    {
+        "id": "type89",
+        "name": "Type 89",
+        "category": "torpedos",
+        "stars": 4,
+        "image": "db/torpedos/Type89.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Tienda"]
+    },
+    {
+        "id": "whiteshark",
+        "name": "White Shark",
+        "category": "torpedos",
+        "stars": 5,
+        "image": "db/torpedos/WhiteShark.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Gacha","Antiseñuelo"]
+    },
+    {
+        "id": "yu12",
+        "name": "YU-12",
+        "category": "torpedos",
+        "stars": 4,
+        "image": "db/torpedos/YU12.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Mercado","Antiseñuelo"]
+    },
+
+
+    {
+        "id": "alka",
+        "name": "ALKA",
+        "category": "aa",
+        "stars": 4.5,
+        "image": "db/aa/ALKA.jpg",
+        "stats": [
+            
+        ],
+    
+        "tags": ["Mercado","Lasér"]
+    }, 
+    {
+        "id": "hpls",
+        "name": "HPLS",
+        "category": "aa",
+        "stars": 4.5,
+        "image": "db/aa/HPLS.jpg",
+        "stats": [
+          
+        ],
+        "tags": ["Mercado","Lasér"]
+    }, 
+    {
+        "id": "KSAM",
+        "name": "KSAM",
+        "category": "aa",
+        "stars": 4.5,
+        "image": "db/aa/KSAM.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Tienda"]
+    }, 
+    {
+        "id": "ly1",
+        "name": "LY-1",
+        "category": "aa",
+        "stars": 5,
+        "image": "db/aa/LY1.jpg",
+        "stats": [
+         
+        ],
+        
+        "tags": ["Gacha","Lasér"]
+    }, 
+    {
+        "id": "seawolf",
+        "name": "Sea Wolf",
+        "category": "aa",
+        "stars": 4,
+        "image": "db/aa/SeaWolf.jpg",
+        "stats": [
+           
+        ],
+        "tags": ["Gacha"]
+    }, 
+    {
+        "id": "talos",
+        "name": "Rim8 Talos",
+        "category": "aa",
+        "stars": 4,
+        "image": "db/aa/Talos.jpg",
+        "stats": [
+        ],
+        "tags": ["Ranked"]
+    },
+
+    
+    {
+        "id": "f19",
+        "name": "F19 Hellcat",
+        "category": "strike",
+        "stars": 4.5,
+        "image": "db/strike/F19.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Mercado"]
+    }, 
+    {
+        "id": "shenyang",
+        "name": "Shenyang",
+        "category": "strike",
+        "stars": 5,
+        "image": "db/strike/Shenyang.jpg",
+        "stats": [
+            
+        ],
+        "tags": ["Bundle"]
+    }, 
+    {
+        "id": "su24",
+        "name": "SU-24M",
+        "category": "strike",
+        "stars": 4,
+        "image": "db/strike/SU24M.jpg",
+        "stats": [
+        ],
+
+        "tags": ["Ranked"]
+    },
+
+
+    {
+        "id": "harrier",
+        "name": "AV8BNA Harrier",
+        "category": "strike",
+        "stars": 4,
+        "image": "db/strike/AV8BNA.jpg",
+        "stats": [
+
+        ],
+        "tags": ["Mercado","Misiles Guiados"]
+    }, 
+
+    {
+        "id": "jack",
+        "name": "Pan Spatial Jacknife",
+        "category": "bomber",
+        "stars": 4,
+        "image": "db/bomber/Jacknife.jpg",
+        "stats": [
+            
+        ],
+
+        "tags": ["Mercado"]
+    }, 
+     {
+        "id": "kbx",
+        "name": "KBX",
+        "category": "bomber",
+        "stars": 4,
+        "image": "db/bomber/KBX.jpg",
+        "stats": [
+            
+        ],
+
+        "tags": ["Mercado"]
+    }, 
+
+     {
+        "id": "st4",
+        "name": "Sukhoi T4",
+        "category": "bomber",
+        "stars": 4.5,
+        "image": "db/bomber/SukhoiT4.jpg",
+        "stats": [
+            
+        ],
+
+        "tags": ["Bundle"]
+    },
+
+
+    {
+        "id": "j36a",
+        "name": "J36ASF",
+        "category": "caza",
+        "stars": 5,
+        "image": "db/fighter/J36ASF.jpg",
+        "stats": [
+
+        ],
+  
+        "tags": ["Evento"]
+    }, 
+    {
+        "id": "p125",
+        "name": "P 125",
+        "category": "caza",
+        "stars": 4.5,
+        "image": "db/fighter/P125.jpg",
+        "stats": [
+
+        ],
+
+        "tags": ["Mercado"]
+    }, 
+    {
+        "id": "su57",
+        "name": "SU-57A",
+        "category": "caza",
+        "stars": 4,
+        "image": "db/fighter/SU57A.jpg",
+        "stats": [
+
+        ],
+        "tip": "El mejor gacha",
+        "tags": ["Tienda"]
+    }, 
+
+
+    {
+        "id": "qaher",
+        "name": "Qaher 313",
+        "category": "drone",
+        "stars":4.5,
+        "image": "db/drone/Qaher313.jpg",
+        "stats": [
+
+            { "label": "Reserva", "value": "6", "percentage": 100, "colorClass": "speed" }
+        ],
+  
+        "tags": ["Mercado","Misiles Guiados"]
+    }, 
+    {
+        "id": "sp12",
+        "name": "Sapsan 12",
+        "category": "drone",
+        "stars": 5,
+        "image": "db/drone/SP12.jpg",
+        "stats": [
+            { "label": "Reserva", "value": "3", "percentage": 66, "colorClass": "speed" }
+        ],
+
+        "tags": ["Mercado","Misiles Guiados"]
+    }, 
+    {
+        "id": "thanatos",
+        "name": "Thanatos",
+        "category": "drone",
+        "stars": 5,
+        "image": "db/drone/Thanatos.jpg",
+        "stats": [
+            { "label": "Reserva", "value": "6", "percentage": 100, "colorClass": "speed" }
+        ],
+
+        "tags": ["Mercado"]
+    },
+
+
+    {
+        "id": "cht1",
+        "name": "CHT1",
+        "category": "usv",
+        "stars": 4,
+        "image": "db/usv/CHT1.jpg",
+        "stats": [
+        ],
+
+        "tags": ["Mercado"]
+    }, 
+    {
+        "id": "ramstrom",
+        "name": "Pan Spatial Ramstorm 1",
+        "category": "usv",
+        "stars": 4,
+        "image": "db/usv/RAMSTORM1.jpg",
+        "stats": [
+        ],
+
+        "tags": ["Gacha"]
+    }
+
+
     ]
+
 }
