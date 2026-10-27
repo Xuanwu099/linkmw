@@ -251,7 +251,7 @@
         "name": "MICA-M",
         "category": "misiles",
         "stars": 4.5,
-        "image": "db/misiles/Mica.jpg",
+        "image": "db/misiles/MICA.jpg",
         "stats": [
             { "label": "DPM", "value": "173,846", "percentage": 70, "colorClass": "damage" },
             { "label": "Recarga", "value": "5.25 s", "percentage": 52, "colorClass": "speed" },
