@@ -647,8 +647,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const submarines = db.filter(s => s.clase === 'submarino').map(s => s.id);
         const others = db.filter(s => s.clase === 'otros').map(s => s.id);
 
-        const des_SS = ['055G', 'shkval', 'johnson', 'choe', 'ningbo', 'fletcher'];
-        const des_S = ['spruance', 'ushakov','kharlamov', 'basisty', 'sriwijaya','ddgx','dazhou', 'chabanenko', 'shenzhen', 'anchar', 'type83', 'dongguan'];
+        const des_SS = ['055G', 'shkval', 'johnson','kharlamov', 'choe', 'ningbo', 'fletcher'];
+        const des_S = ['spruance', 'ushakov', 'basisty', 'sriwijaya','ddgx','dazhou', 'chabanenko', 'shenzhen', 'anchar', 'type83', 'dongguan'];
         const des_A = ['zumwalt', 'hangzhou', 'kylin', 'ddx','ashigara'];
         const des_B = [ 'chengying', 'smart8000', 'defender', 'akizuki', 'jss','type058', 'visakhapatnam', 'maya', 'project2145', 'lider','jacklucas','monsoor','constitution','hobart'];
         const des_C = ['oceanavenger', 'combatant', 'tf2000', 'swordship','paladin'];
