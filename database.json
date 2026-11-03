@@ -39,6 +39,7 @@
         { "id": "redrum", "name": "Pan Spatial REDRUM", "clase": "destructor", "img": "db/destroyer/REDRUM.jpg" },
         { "id": "defender", "name": "HMS Defender", "clase": "destructor", "img": "db/destroyer/DefenderD36.jpg" },
         { "id": "chabanenko", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chabanenko.jpg" },
+        { "id": "chaba", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chaba.jpg", "recomendadoPor": "El Cacahuates " ,"build": { "misiles":"Kh-90","canones":"MKE 76","lanzagrandas": "SY-400", "helicoptero":"Z-10" ,"helicopteros":"X-49 SpeedHawk, RAH-66B Sea Comanche", "aa":"LY-1(X3), Sea Wolf (X2)" } },
         { "id": "ningbo", "name": "RF Type 956EM Ningbo", "clase": "destructor", "img": "db/destroyer/Ningbo.jpg" },
         { "id": "hobart", "name": "HMAS Hobart", "clase": "destructor", "img": "db/destroyer/Hobart.jpg" },
         { "id": "shenzhen", "name": "CN Type 051B Shenzhen", "clase": "destructor", "img": "db/destroyer/Type051B.jpg" },
