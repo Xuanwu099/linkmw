@@ -327,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ALLOWED_RECOMMENDATIONS = [
         'f110', 'smart4000', 'cstp', 'rusich', '126', 'ushakov', 'spruance', 'zumwalt', 'basisty','chaba','kharlamov',
         'arkansas', 'shiloh','cg90kiosko','cg90mendez', 'hood', 'rodney', 'enterprise', 'type076', 'type004', 'type071',
-        'arkansas', 'shiloh','project_055g', 'hood', 'rodney', 'enterprise', 'type076', 'type004', 'type071',
         'S5', 'type039', 'blackghost', 'fenice', 'comanche', 'mi171', 'z20'
     ];
 
