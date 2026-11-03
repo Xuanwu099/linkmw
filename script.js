@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentShipClass = 'fragata';
 
     const ALLOWED_RECOMMENDATIONS = [
-        'f110', 'smart4000', 'cstp', 'rusich', '126', 'ushakov', 'spruance', 'zumwalt', 'basisty','chaba','kharlamov',
+        'f110', 'smart4000', 'cstp', 'rusich', '126', 'ushakov', 'spruance', 'zumwalt', 'basisty','chaba','055grolitas','kharlamov',
         'arkansas', 'shiloh','cg90kiosko','cg90mendez', 'hood', 'rodney', 'enterprise', 'type076', 'type004', 'type071',
         'S5', 'type039', 'blackghost', 'fenice', 'comanche', 'mi171','cobra', 'z20'
     ];
