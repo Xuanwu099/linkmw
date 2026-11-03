@@ -129,10 +129,10 @@
         { "id": "vladivostok", "name": "RF Vladivostok", "clase": "crucero", "img": "db/cruiser/Vladivostok.jpg" },
         { "id": "azov", "name": "RF Azov (1134-BF)", "clase": "crucero", "img": "db/cruiser/Azov.jpg" },
         { "id": "ccg90", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/CCG90.jpg" },
-        { "id": "cg90kiosko", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpeg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS","aa":LY-1} },
-        { "id": "cg90mendez", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpeg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM","aa":LY-1} },
+        { "id": "cg90kiosko", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS","aa":"LY-1"} },
+        { "id": "cg90mendez", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM","aa":"LY-1"} },
 
-
+        
         { "id": "enterprise", "name": "USS Enterprise", "clase": "portaaviones", "img": "db/acv/Enterprise.jpg", "build": { "lanzagrandas": " WS-3,RBU-2500", "aviones":"F-19 Hellcat + J-36,Tornado F.Mk + Jscknife + Thanatos,Qaher" ,"helicopteros":"Z-18, RAH-66B Sea Comanche, Mi-171" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,HPLS,ALKA" } },
         { "id": "america", "name": "USS America LHA6", "clase": "portaaviones", "img": "db/acv/AmericaLHA6.jpg" },
         { "id": "chixiao", "name": "ChiXiao", "clase": "portaaviones", "img": "db/acv/ChiXiao.jpg" },
