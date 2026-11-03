@@ -39,7 +39,7 @@
         { "id": "redrum", "name": "Pan Spatial REDRUM", "clase": "destructor", "img": "db/destroyer/REDRUM.jpg" },
         { "id": "defender", "name": "HMS Defender", "clase": "destructor", "img": "db/destroyer/DefenderD36.jpg" },
         { "id": "chabanenko", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chabanenko.jpg" },
-        { "id": "chaba", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chaba.jpg", "recomendadoPor": "El Cacahuates " ,"build": { "misiles":"Kh-90","canones":"MKE 76","lanzagrandas": "SY-400", "helicopteros":"Z-10" , "aa":"LY-1(X3), Sea Wolf (X2)" } },
+        { "id": "chaba", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chaba.jpeg", "recomendadoPor": "El Cacahuates " ,"build": { "misiles":"Kh-90","canones":"MKE 76","lanzagrandas": "SY-400", "helicopteros":"Z-10" , "aa":"LY-1(X3), Sea Wolf (X2)" } },
         { "id": "ningbo", "name": "RF Type 956EM Ningbo", "clase": "destructor", "img": "db/destroyer/Ningbo.jpg" },
         { "id": "hobart", "name": "HMAS Hobart", "clase": "destructor", "img": "db/destroyer/Hobart.jpg" },
         { "id": "shenzhen", "name": "CN Type 051B Shenzhen", "clase": "destructor", "img": "db/destroyer/Type051B.jpg" },
@@ -129,6 +129,8 @@
         { "id": "vladivostok", "name": "RF Vladivostok", "clase": "crucero", "img": "db/cruiser/Vladivostok.jpg" },
         { "id": "azov", "name": "RF Azov (1134-BF)", "clase": "crucero", "img": "db/cruiser/Azov.jpg" },
         { "id": "ccg90", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/CCG90.jpg" },
+        { "id": "cg90kiosko", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS"} },
+        { "id": "cg90mendez", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM"} },
 
 
         { "id": "enterprise", "name": "USS Enterprise", "clase": "portaaviones", "img": "db/acv/Enterprise.jpg", "build": { "lanzagrandas": " WS-3,RBU-2500", "aviones":"F-19 Hellcat + J-36,Tornado F.Mk + Jscknife + Thanatos,Qaher" ,"helicopteros":"Z-18, RAH-66B Sea Comanche, Mi-171" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,HPLS,ALKA" } },
