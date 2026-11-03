@@ -195,6 +195,7 @@
         { "id": "fenice", "name": "AW249 Fenice", "clase": "helicoptero", "uso": "PVP", "img": "db/helicopter/Fenice.jpg" },
         { "id": "comanche", "name": "RAH-66B Sea Comanche", "clase": "helicoptero", "uso": "PVP, Abrir mapa, Antisubmarino", "img": "db/helicopter/RAH66B.jpg" },
         { "id": "mi171", "name": "Mi-171SH", "clase": "helicoptero", "uso": "Antisubmarino", "img": "db/helicopter/MI171SH.jpg" },
+        { "id": "cobra", "name": "AH-1W SuperCobra", "clase": "helicoptero", "uso": "Abrir Mapa, daño 100% seguro ", "img": "db/helicopter/SuperCobra.jpg" },
         { "id": "z20", "name": "Z-20", "clase": "helicoptero", "uso": "Antisubmarino", "img": "db/helicopter/Z20H.jpg" }
     ],
     "categories": [
