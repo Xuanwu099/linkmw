@@ -69,7 +69,7 @@
         { "id": "jeongjo", "name": "ROKS Jeongjo the Great", "clase": "destructor", "img": "db/destroyer/Batch2.jpg" },
         { "id": "lider", "name": "RF Lider", "clase": "destructor", "img": "db/destroyer/Lider.jpg" },
         { "id": "ashigara", "name": "JS Ashigara", "clase": "destructor", "img": "db/destroyer/Ashigara.jpg" },
-        { "id": "kharlamov", "name": "RF Admiral Kharlamov", "clase": "destructor", "img": "db/destroyer/Harlamov.jpg" },
+        { "id": "kharlamov", "name": "RF Admiral Kharlamov", "clase": "destructor", "img": "db/destroyer/Harlamov.jpg","build":{"misiles":"ASN4G,YJ-17","canones":"A-200 Navigator, XM2001 Crusader, Primetron, Archer","lanzagrandas":"RBU-2500, R-HAN 122B, WS-3, Deterrence 300","helicopteros":"X-49 SpeedHawk, RAH-66B Sea Comanche,AH-1W SuperCobra","automaticos":"Paket-NK, AFGS, Seahawk Sigma"} },
         { "id": "andrea", "name": "IT Andrea Doria", "clase": "destructor", "img": "db/destroyer/AndreaDoria.jpg" },
 
 
@@ -129,8 +129,8 @@
         { "id": "vladivostok", "name": "RF Vladivostok", "clase": "crucero", "img": "db/cruiser/Vladivostok.jpg" },
         { "id": "azov", "name": "RF Azov (1134-BF)", "clase": "crucero", "img": "db/cruiser/Azov.jpg" },
         { "id": "ccg90", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/CCG90.jpg" },
-        { "id": "cg90kiosko", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS"} },
-        { "id": "cg90mendez", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM"} },
+        { "id": "cg90kiosko", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpeg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS"} },
+        { "id": "cg90mendez", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpeg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM"} },
 
 
         { "id": "enterprise", "name": "USS Enterprise", "clase": "portaaviones", "img": "db/acv/Enterprise.jpg", "build": { "lanzagrandas": " WS-3,RBU-2500", "aviones":"F-19 Hellcat + J-36,Tornado F.Mk + Jscknife + Thanatos,Qaher" ,"helicopteros":"Z-18, RAH-66B Sea Comanche, Mi-171" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,HPLS,ALKA" } },
