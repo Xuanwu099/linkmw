@@ -16,13 +16,6 @@
  * - Sistema de Tier List con drag & drop y localStorage
  * ============================================================================
  */
-/**
- * ============================================================================
- * NIEVE DE LIMÓN — SCRIPT PRINCIPAL
- * ============================================================================
- * Archivo que contiene toda la lógica de interacción del sitio.
- * ============================================================================
- */
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -86,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('galleryTrack');
     const leftArrow = document.querySelector('.left-arrow');
     const rightArrow = document.querySelector('.right-arrow');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
     const captionText = document.getElementById('modal-caption');
@@ -116,14 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.add('hide');
             }
         });
-        updateLoadMoreButton();
         if (track) track.scrollTo({ left: 0, behavior: 'smooth' });
-    }
-
-    function updateLoadMoreButton() {
-        if (!loadMoreBtn) return;
-        const totalMatching = Array.from(galleryCards).filter(c => currentFilter === 'todos' || c.getAttribute('data-category') === currentFilter).length;
-        loadMoreBtn.style.display = visibleCardsLimit >= totalMatching ? 'none' : 'inline-flex';
     }
 
     filterButtons.forEach(button => {
@@ -134,13 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
             filterGallery(button.getAttribute('data-filter'));
         });
     });
-
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            visibleCardsLimit += 3;
-            filterGallery(currentFilter);
-        });
-    }
 
     if (track && leftArrow && rightArrow) {
         rightArrow.addEventListener('click', () => {
@@ -153,7 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function openModal(imgElement) {
+        function openModal(imgElement) {
+        // Asegurar que las flechas estén visibles al abrir desde la Galería
+        if (modalLeftArrow) modalLeftArrow.style.display = "flex";
+        if (modalRightArrow) modalRightArrow.style.display = "flex";
+
         const visibleImages = getVisibleImages();
         currentImgIndex = visibleImages.indexOf(imgElement);
         if (currentImgIndex === -1) currentImgIndex = 0;
@@ -162,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = "hidden";
     }
 
+    //Agregamos dos líneas al inicio para asegurar que las flechas siempre estén visibles al abrir la galería
     function updateModalContent(visibleImages) {
         if (!visibleImages || !visibleImages.length) return;
         const targetImg = visibleImages[currentImgIndex];
@@ -185,6 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
         modal.style.display = "none";
         document.body.style.overflow = "";
+        // Restaurar las flechas del carrusel para la Galería
+        if (modalLeftArrow) modalLeftArrow.style.display = "flex";
+        if (modalRightArrow) modalRightArrow.style.display = "flex";
     }
 
     if (track) {
@@ -272,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================================
-    // 8. MODAL DE TÉRMINOS Y PRIVACIDAD
+    // 8. MODAL DE TÉRMINOS Y PRIVACIDAD / LEGAL
     // =========================================================================
     const termsModal = document.getElementById('terms-modal');
     const openTermsBtn = document.getElementById('open-terms');
@@ -293,8 +279,33 @@ document.addEventListener('DOMContentLoaded', () => {
         closeTermsBtn.addEventListener('click', closeTermsModal);
         termsModal.addEventListener('click', (e) => { if (e.target === termsModal) closeTermsModal(); });
     }
+
+    const legalModal = document.getElementById('legal-modal');
+    const openLegalBtn = document.getElementById('open-legal');
+    const closeLegalBtn = document.getElementById('close-legal-btn');
+
+    function openLegalModal(e) {
+        if (e) e.preventDefault();
+        legalModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (menuCheckbox) menuCheckbox.checked = false;
+    }
+    function closeLegalModal() {
+        legalModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    if (openLegalBtn && legalModal) openLegalBtn.addEventListener('click', openLegalModal);
+    if (closeLegalBtn && legalModal) {
+        closeLegalBtn.addEventListener('click', closeLegalModal);
+        legalModal.addEventListener('click', (e) => { if (e.target === legalModal) closeLegalModal(); });
+    }
+
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && termsModal.classList.contains('active')) closeTermsModal();
+        if (e.key === 'Escape') {
+            if (termsModal.classList.contains('active')) closeTermsModal();
+            if (legalModal.classList.contains('active')) closeLegalModal();
+            if (modal.style.display === "flex") closeModal();
+        }
     });
 
     // =========================================================================
@@ -306,52 +317,51 @@ document.addEventListener('DOMContentLoaded', () => {
     let WEAPONS_DB = []; 
 
     const BUILD_META = {
-        misiles: { label:"Misiles", icon:"fa-rocket" },
-        canones: { label:"Cañones", icon:"fa-crosshairs" },
-        lanzagrandas: { label:"Lanzagranadas", icon:"fa-bomb" },
-        automaticos: { label:"Cañones automáticos", icon:"fa-bullseye" },
-        aa: { label:"Defensa AA", icon:"fa-shield-halved" },
-        torpedos: { label:"Torpedos", icon:"fa-fish" },
-        strike: { label:"Avion de asalto", icon:"fa-plane" },
-        caza: { label:"Caza", icon:"fa-plane" },
-        bomber: { label:"Bombaderos", icon:"fa-plane" },
-        drone: { label:"Drones", icon:"fa-plane" },
-        helicopteros: { label:"Helicópteros", icon:"fa-helicopter" },
-        usv: { label:"USV", icon:"fa-ship" }
+        misiles: { label: "Misiles", icon: "fa-rocket" },
+        canones: { label: "Cañones", icon: "fa-crosshairs" },
+        lanzagrandas: { label: "Lanzagranadas", icon: "fa-bomb" },
+        automaticos: { label: "Cañones automáticos", icon: "fa-bullseye" },
+        aa: { label: "Defensa AA", icon: "fa-shield-halved" },
+        torpedos: { label: "Torpedos", icon: "fa-fish" },
+        strike: { label: "Avión de asalto", icon: "fa-plane" },
+        caza: { label: "Caza", icon: "fa-plane" },
+        bomber: { label: "Bombardero", icon: "fa-plane" },
+        drone: { label: "Drones", icon: "fa-plane" },
+        helicopteros: { label: "Helicópteros", icon: "fa-helicopter" },
+        usv: { label: "USV", icon: "fa-ship" }
     };
 
     const shipsGrid = document.getElementById('shipsGrid');
-    const helicoptersSection = document.getElementById('helicoptersSection');
     let currentShipClass = 'fragata';
 
+    //  lista "Buques"
     const ALLOWED_RECOMMENDATIONS = [
-        'f110', 'smart4000', 'cstp', 'rusich', '126', 'ushakov', 'spruance', 'zumwalt', 'basisty','chaba','055grolitas','kharlamov',
-        'arkansas', 'shiloh','cg90kiosko','cg90mendez','bostoncheetos', 'hood', 'rodney', 'enterprise', 'type076', 'type004', 'type071',
-        'S5', 'type039', 'blackghost', 'fenice', 'comanche', 'mi171','cobra', 'z20'
+        'f110', 'smart4000', 'cstp', 'rusich', '126', 'ushakov', 'spruance', 'zumwalt', 'basisty', 'chaba', '055grolitas', 'kharlamov',
+        'arkansas', 'shiloh', 'cg90kiosko', 'cg90mendez', 'bostoncheetos', 'hood', 'rodney', 'enterprise', 'type076', 'type004', 'type071',
+        'S5', 'type039', 'blackghost', 'fenice', 'comanche', 'mi171', 'cobra', 'z20'
     ];
 
     function renderShips() {
         if (!shipsGrid) return;
-        if (currentShipClass === 'helicoptero') {
-            shipsGrid.innerHTML = '';
-            if (helicoptersSection) helicoptersSection.classList.remove('hidden-panel');
-        } else {
-            if (helicoptersSection) helicoptersSection.classList.add('hidden-panel');
-        }
 
-        const lista = SHIPS_DB.filter(s => ALLOWED_RECOMMENDATIONS.includes(s.id) && (currentShipClass === '' || s.clase === currentShipClass));
+        // Filtramos usando ALLOWED_RECOMMENDATIONS para mostrar solo los seleccionados
+        const lista = SHIPS_DB.filter(s => 
+            ALLOWED_RECOMMENDATIONS.includes(s.id) && 
+            (currentShipClass === 'todos' || s.clase === currentShipClass)
+        );
 
         shipsGrid.innerHTML = lista.length ? lista.map(s => {
             let buildHtml = '';
             if (s.clase === 'helicoptero') {
                 buildHtml = `<li><i class="fas fa-info-circle"></i><span><strong>Destaca en:</strong> ${s.uso || 'No especificado'}</span></li>`;
             } else {
-                buildHtml = Object.entries(s.build || {}).map(([k,v]) => `
+                buildHtml = Object.entries(s.build || {}).map(([k, v]) => `
                     <li><i class="fas ${(BUILD_META[k] || {icon:'fa-cube'}).icon}"></i>
                         <span><strong>${(BUILD_META[k] || {label:k}).label}:</strong> ${v}</span>
                     </li>`).join("");
             }
-            const recommendedByHtml = s.recomendadoPor ? `<div class="ship-recommended-by"><i class="fas fa-user-shield"></i><span>Recomendado por: <strong>${s.recomendadoPor}</strong></span></div>` : '';
+            
+            const recommendedByHtml = s.recomendadoPor ? `<div class="ship-recommended-by"><i class="fas fa-user-shield"></i><span>Recomendado por: <strong>${s.recomendadoPor.trim()}</strong></span></div>` : '';
 
             return `<article class="ship-card">
                 <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x225/0f172a/e1ff00?text=Sin+Imagen';">
@@ -363,6 +373,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join("") : `<p class="db-empty">Sin resultados para esa búsqueda.</p>`;
     }
 
+    // Event listener: Event delegation para abrir el modal de imagen al hacer clic en un buque
+    if (shipsGrid) {
+        shipsGrid.addEventListener('click', (e) => {
+            const img = e.target.closest('.ship-card img');
+            if (img) {
+                // Deshabilitar flechas del carrusel para el apartado de Buques
+                if (modalLeftArrow) modalLeftArrow.style.display = "none";
+                if (modalRightArrow) modalRightArrow.style.display = "none";
+
+                const shipName = img.closest('.ship-card').querySelector('h3')?.innerText || 'Buque';
+                modalImg.style.opacity = "0";
+                setTimeout(() => {
+                    modalImg.src = img.src;
+                    modalImg.alt = img.alt;
+                    captionText.innerHTML = `<strong>${shipName}</strong>`;
+                    modalImg.style.opacity = "1";
+                }, 150);
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+            }
+        });
+    }
     document.querySelectorAll('[data-shipclass]').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('[data-shipclass]').forEach(b => b.classList.remove('active'));
@@ -545,10 +577,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('✅ Lista copiada a "Mis Listas"');
     };
 
+    // Excluir buques con 'recomendadoPor' del pool de la Tier List
     function itemsForCategory(catId) {
         const cat = TIER_CATEGORIES.find(c => c.id === catId);
         if (!cat) return [];
-        return SHIPS_DB.filter(s => s.clase === catId).map(s => ({ id:s.id, name:s.name, img:s.img }));
+        return SHIPS_DB.filter(s => s.clase === catId && !s.recomendadoPor).map(s => ({ id: s.id, name: s.name, img: s.img }));
     }
 
     function tierChip(it) {
@@ -639,16 +672,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function generateInitialTierlists(db) {
-        const destroyers = db.filter(s => s.clase === 'destructor').map(s => s.id);
-        const carriers = db.filter(s => s.clase === 'portaaviones').map(s => s.id);
-        const frigates = db.filter(s => s.clase === 'fragata').map(s => s.id);
-        const cruisers = db.filter(s => s.clase === 'crucero').map(s => s.id);
-        const battleships = db.filter(s => s.clase === 'acorazado').map(s => s.id);
-        const submarines = db.filter(s => s.clase === 'submarino').map(s => s.id);
-        const others = db.filter(s => s.clase === 'otros').map(s => s.id);
+        //  Creamos una base de datos "limpia" excluyendo los buques con 'recomendadoPor'
+        // para que no aparezcan en las listas oficiales ni en el grupo "NA" (rest) del pool.
+        const cleanDb = db.filter(s => !s.recomendadoPor);
 
-        const des_SS = ['055G', 'shkval', 'johnson','kharlamov', 'choe', 'ningbo', 'fletcher'];
-        const des_S = ['spruance', 'ushakov', 'basisty', 'sriwijaya','ddgx','dazhou', 'chabanenko', 'shenzhen', 'anchar', 'type83', 'dongguan'];
+        const destroyers = cleanDb.filter(s => s.clase === 'destructor').map(s => s.id);
+        const carriers = cleanDb.filter(s => s.clase === 'portaaviones').map(s => s.id);
+        const frigates = cleanDb.filter(s => s.clase === 'fragata').map(s => s.id);
+        const cruisers = cleanDb.filter(s => s.clase === 'crucero').map(s => s.id);
+        const battleships = cleanDb.filter(s => s.clase === 'acorazado').map(s => s.id);
+        const submarines = cleanDb.filter(s => s.clase === 'submarino').map(s => s.id);
+        const others = cleanDb.filter(s => s.clase === 'otros').map(s => s.id);
+
+        const des_SS = ['055G', 'shkval', 'johnson', 'choe', 'ningbo', 'fletcher'];
+        const des_S = ['spruance', 'ushakov','kharlamov', 'basisty', 'sriwijaya','ddgx','dazhou', 'chabanenko', 'shenzhen', 'anchar', 'type83', 'dongguan'];
         const des_A = ['zumwalt', 'hangzhou', 'kylin', 'ddx','ashigara'];
         const des_B = [ 'chengying', 'smart8000', 'defender', 'akizuki', 'jss','type058', 'visakhapatnam', 'maya', 'project2145', 'lider','jacklucas','monsoor','constitution','hobart'];
         const des_C = ['oceanavenger', 'combatant', 'tf2000', 'swordship','paladin'];
@@ -703,75 +740,91 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 9.5. SISTEMA DINÁMICO DE TOP ARMAMENTO
+    // 9.5. SISTEMA DINÁMICO DE TOP ARMAMENTO (Incluye Helicópteros)
     // =========================================================================
     const weaponGrid = document.getElementById('weaponGrid');
     const weaponFilters = document.querySelectorAll('[data-weaponcat]');
 
-    function renderWeapons(categoryFilter = 'todos') {
-    if (!weaponGrid) return;
+    function renderWeapons(categoryFilter = 'misiles') {
+        if (!weaponGrid) return;
 
-    const filteredWeapons = categoryFilter === 'todos' 
-        ? WEAPONS_DB 
-        : WEAPONS_DB.filter(w => w.category === categoryFilter);
+        let filteredItems = [];
+        let isHelicopterView = false;
 
-    if (filteredWeapons.length === 0) {
-        weaponGrid.innerHTML = '<p class="db-empty">No hay datos de armamento para esta categoría aún.</p>';
-        return;
-    }
-
-    // 1. FUNCIÓN AUXILIAR PARA GENERAR ESTRELLAS
-    function generateStars(rating) {
-        let starsHtml = '';
-        const maxStars = 5;
-        
-        for (let i = 1; i <= maxStars; i++) {
-            if (rating >= i) {
-                // Estrella llena (ej: rating 4.5, cuando i=1,2,3,4)
-                starsHtml += '<i class="fas fa-star"></i>'; 
-            } else if (rating >= i - 0.5) {
-                // Media estrella (ej: rating 4.5, cuando i=5)
-                starsHtml += '<i class="fas fa-star-half-stroke"></i>'; 
-            } else {
-                // Estrella vacía (ej: rating 4.5, no aplica, pero si rating es 4, cuando i=5)
-                starsHtml += '<i class="far fa-star"></i>'; 
-            }
+        if (categoryFilter === 'helicopteros') {
+            isHelicopterView = true;
+            filteredItems = SHIPS_DB.filter(s => s.clase === 'helicoptero');
+        } else {
+            filteredItems = categoryFilter === 'todos' 
+                ? WEAPONS_DB 
+                : WEAPONS_DB.filter(w => w.category === categoryFilter);
         }
-        return `<div class="weapon-stars">${starsHtml}</div>`;
-    }
 
-    const html = filteredWeapons.map(weapon => {
-        const statsHtml = weapon.stats.map(stat => `
-            <div class="stat-row">
-                <span class="stat-label">${stat.label}</span>
-                <div class="stat-bar-bg">
-                    <div class="stat-bar-fill ${stat.colorClass || 'default'}" style="width: ${stat.percentage}%;"></div>
-                </div>
-                <span class="stat-value">${stat.value}</span>
-            </div>
-        `).join('');
-        
-        const tagsHtml = weapon.tags ? weapon.tags.map(tag => `<span class="w-tag">${tag}</span>`).join('') : '';
-        
-        // 2. GENERAR LAS ESTRELLAS (Si no existe en JSON, pone 0)
-        const starsHtml = generateStars(weapon.stars || 0);
+        if (filteredItems.length === 0) {
+            weaponGrid.innerHTML = '<p class="db-empty">No hay datos de armamento para esta categoría aún.</p>';
+            return;
+        }
 
-        return `
-        <div class="weapon-card show" data-category="${weapon.category}">
-            <div class="card-header">
-                <img src="${weapon.image}" alt="${weapon.name}" class="weapon-icon" onerror="this.src='https://via.placeholder.com/60/e1ff00/000000?text=W'">
-            </div>
-            <h3 class="weapon-name">${weapon.name}</h3>
-            
-            <!-- 3. INSERTAR LAS ESTRELLAS AQUÍ -->
-            ${starsHtml}
-            
-            <div class="stats-container">${statsHtml}</div>
-            <div class="weapon-tags">${tagsHtml}</div>
-        </div>`;
-    }).join('');
-    
-    weaponGrid.innerHTML = html;
+        function generateStars(rating) {
+            let starsHtml = '';
+            const maxStars = 5;
+            for (let i = 1; i <= maxStars; i++) {
+                if (rating >= i) {
+                    starsHtml += '<i class="fas fa-star"></i>'; 
+                } else if (rating >= i - 0.5) {
+                    starsHtml += '<i class="fas fa-star-half-stroke"></i>'; 
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>'; 
+                }
+            }
+            return `<div class="weapon-stars">${starsHtml}</div>`;
+        }
+
+        const html = filteredItems.map(item => {
+            if (isHelicopterView) {
+                const usoText = item.uso || 'Uso general';
+                return `
+                <div class="weapon-card show" data-category="helicopteros">
+                    <div class="card-header">
+                        <img src="${item.img}" alt="${item.name}" class="weapon-icon" onerror="this.src='https://via.placeholder.com/60/e1ff00/000000?text=Heli'">
+                    </div>
+                    <h3 class="weapon-name">${item.name}</h3>
+                    <div class="usage-tip" style="margin-top: 15px;">
+                        <i class="fas fa-helicopter tip-icon" style="color: var(--amarillo-limon);"></i>
+                        <p><strong>Uso recomendado:</strong><br>${usoText}</p>
+                    </div>
+                    <div class="weapon-tags">
+                        <span class="w-tag"> </span>
+                    </div>
+                </div>`;
+            } else {
+                const statsHtml = (item.stats || []).map(stat => `
+                    <div class="stat-row">
+                        <span class="stat-label">${stat.label}</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar-fill ${stat.colorClass || 'default'}" style="width: ${stat.percentage}%;"></div>
+                        </div>
+                        <span class="stat-value">${stat.value}</span>
+                    </div>
+                `).join('');
+                
+                const tagsHtml = (item.tags || []).map(tag => `<span class="w-tag">${tag}</span>`).join('');
+                const starsHtml = generateStars(item.stars || 0);
+
+                return `
+                <div class="weapon-card show" data-category="${item.category}">
+                    <div class="card-header">
+                        <img src="${item.image}" alt="${item.name}" class="weapon-icon" onerror="this.src='https://via.placeholder.com/60/e1ff00/000000?text=W'">
+                    </div>
+                    <h3 class="weapon-name">${item.name}</h3>
+                    ${starsHtml}
+                    <div class="stats-container">${statsHtml}</div>
+                    <div class="weapon-tags">${tagsHtml}</div>
+                </div>`;
+            }
+        }).join('');
+        
+        weaponGrid.innerHTML = html;
     }
 
     weaponFilters.forEach(btn => {
@@ -843,41 +896,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================================
-    // 12. MODAL DE LEGAL Y FUENTES
-    // =========================================================================
-    const legalModal = document.getElementById('legal-modal');
-    const openLegalBtn = document.getElementById('open-legal');
-    const closeLegalBtn = document.getElementById('close-legal-btn');
-
-    function openLegalModal(e) {
-        if (e) e.preventDefault();
-        legalModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        if (menuCheckbox) menuCheckbox.checked = false;
-    }
-    function closeLegalModal() {
-        legalModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    if (openLegalBtn && legalModal) openLegalBtn.addEventListener('click', openLegalModal);
-    if (closeLegalBtn && legalModal) {
-        closeLegalBtn.addEventListener('click', closeLegalModal);
-        legalModal.addEventListener('click', (e) => { if (e.target === legalModal) closeLegalModal(); });
-    }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && legalModal.classList.contains('active')) closeLegalModal();
-    });
-
-    // =========================================================================
-    // 13. FORMULARIO DE DESAFÍOS (Conexión a Discord)
+    // 12. FORMULARIO DE DESAFÍOS (Conexión a Discord)
     // =========================================================================
     const challengeForm = document.getElementById('challengeForm');
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
-
-    //  Reemplaza esta URL con tu NUEVO Webhook de Discord.
-
-    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1564727521164132364/tzLXxCka3tkKZ5DW0GuDVLZkHDwu7S87BToCRlDyhDHUXcTQMN0nDfmmUMNxoIgvvjWu";
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1562298270452285663/0CGP0g2AqrSkVAnnzwb7dRNApqUc7C_J_Wlh5SP08xnon9n25sZO5MmxlX_x-A9rFsJV";
 
     if (challengeForm) {
         challengeForm.addEventListener('submit', async function(e) {
@@ -889,7 +913,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formStatus.className = 'form-status';
             formStatus.style.display = 'none';
 
-            // 1. Recopilar los datos del formulario
             const clanName = document.getElementById('clanName').value;
             const clanId = document.getElementById('clanId').value;
             const discordContact = document.getElementById('discordContact').value;
@@ -900,13 +923,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchFormat = document.getElementById('matchFormat').value;
             const matchRules = document.getElementById('matchRules').value;
 
-            // 2. Crear el mensaje bonito para Discord (Embed)
             const payload = {
                 username: "Sistema de Desafíos NDL",
                 avatar_url: "https://limonmw.online/images/favicon_01.png", 
                 embeds: [{
                     title: "⚔️ ¡NUEVO DESAFÍO RECIBIDO! ⚔️",
-                    color: 14811904, // Color amarillo limón en decimal (0xE1FF00)
+                    color: 14811904,
                     fields: [
                         { name: "🛡️ Clan", value: `**${clanName}** (ID: ${clanId})`, inline: true },
                         { name: "👤 Contacto", value: `${discordContact} (ID: ${discordId})`, inline: true },
@@ -920,7 +942,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // 3. Enviar a Discord
                 const response = await fetch(DISCORD_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -947,4 +968,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // <-- Cierre único y correcto del DOMContentLoaded
+    // =========================================================================
+    // 13. SIMULADOR GACHA ROTATIVO
+    // =========================================================================
+    const gachaFrame = document.getElementById('gachaFrame');
+    const gachaTitle = document.getElementById('gachaTitle');
+    const daysLeftSpan = document.getElementById('daysLeft');
+    const gachaSelector = document.getElementById('gachaSelector');
+
+    if (gachaFrame) {
+        const gachaEvents = [
+            { id: 'gacha_aniversario', name: 'El Estafador', file: 'estafador.html', startDate: '2026-11-02', endDate: '2026-11-20', priority: 1 },
+            { id: 'gacha_noviembre', name: 'Gacha Mensual: Flota Fantasma', file: 'cofres_barquitos.html', startDate: '2026-11-12', endDate: '2026-11-28', priority: 2 },
+            { id: 'gacha_diciembre', name: 'Cofres: Año Nuevo', file: 'gacha2.html', startDate: '2026-12-26', endDate: '2026-12-31', priority: 2 }
+        ];
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const activeEvents = gachaEvents.filter(event => {
+            const start = new Date(event.startDate); start.setHours(0,0,0,0);
+            const end = new Date(event.endDate); end.setHours(23,59,59,999);
+            return today >= start && today <= end;
+        }).sort((a, b) => a.priority - b.priority);
+
+        function loadGacha(event) {
+            gachaFrame.src = event.file;
+            gachaTitle.textContent = event.name;
+            const endDate = new Date(event.endDate);
+            const diffTime = endDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (daysLeftSpan) daysLeftSpan.textContent = diffDays > 0 ? diffDays : 0;
+        }
+
+        if (activeEvents.length > 1) {
+            gachaSelector.style.display = 'flex';
+            gachaSelector.innerHTML = '';
+            activeEvents.forEach((event, index) => {
+                const btn = document.createElement('button');
+                btn.className = `gacha-select-btn ${index === 0 ? 'active' : ''}`;
+                let btnText = event.name;
+                if (event.priority === 1) btnText += '<span class="priority-badge">DESTACADO</span>';
+                btn.innerHTML = btnText;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.gacha-select-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    loadGacha(event);
+                });
+                gachaSelector.appendChild(btn);
+            });
+            loadGacha(activeEvents[0]);
+        } else if (activeEvents.length === 1) {
+            gachaSelector.style.display = 'none';
+            loadGacha(activeEvents[0]);
+        } else {
+            gachaSelector.style.display = 'none';
+            gachaTitle.textContent = "No hay eventos activos en este momento.";
+            gachaFrame.style.display = 'none';
+        }
+    }
+
+});

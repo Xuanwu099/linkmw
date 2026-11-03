@@ -2767,3 +2767,135 @@ footer {
         padding: 25px 20px;
     }
 }
+
+/*========Ruleta===========*/
+/* ============================================================================
+   SECCIÓN GACHA ROTATIVO (IFRAME)
+   ============================================================================ */
+.gacha-section {
+    background-color: var(--oscuro-principal);
+    padding: 60px 6%;
+}
+
+.gacha-season-banner {
+    background: linear-gradient(90deg, rgba(225, 255, 0, 0.1) 0%, rgba(15, 23, 42, 0) 100%);
+    border-left: 4px solid var(--amarillo-limon);
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-radius: 0 8px 8px 0;
+}
+
+.gacha-season-banner .season-tag {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.gacha-season-banner h3 {
+    color: var(--texto-blanco);
+    font-size: 1.2rem;
+    margin: 8px 0 4px;
+}
+
+.gacha-season-banner p {
+    color: var(--texto-gris);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Contenedor responsivo para el Iframe */
+.gacha-iframe-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--oscuro-tarjeta);
+    border: 1px solid rgba(225, 255, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gacha-iframe-container iframe {
+    width: 100%;
+    height: 800px; /* Ajusta según la altura de tus ruletas */
+    display: block;
+    border: none;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .gacha-iframe-container iframe {
+        height: 1000px; /* Más alto en móvil por el scroll vertical */
+    }
+}
+
+/* ============================================================================
+   SELECTOR INTELIGENTE DE GACHAS (Pestañas)
+   ============================================================================ */
+.gacha-selector {
+    display: flex;
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    padding: 0 6%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gacha-select-btn {
+    background: var(--oscuro-tarjeta);
+    border: 2px solid rgba(225, 255, 0, 0.2);
+    color: var(--texto-gris);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gacha-select-btn:hover {
+    border-color: var(--amarillo-limon);
+    color: var(--texto-blanco);
+    transform: translateY(-2px);
+}
+
+/* Estado Activo */
+.gacha-select-btn.active {
+    background: rgba(225, 255, 0, 0.1);
+    border-color: var(--amarillo-limon);
+    color: var(--amarillo-limon);
+    box-shadow: 0 0 15px rgba(225, 255, 0, 0.15);
+}
+
+/* Badge de "Recomendado" para el de mayor prioridad */
+.priority-badge {
+    background: var(--amarillo-limon);
+    color: var(--oscuro-principal);
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 900;
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .gacha-selector {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    .gacha-select-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

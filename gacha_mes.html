@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Ruleta Mensual</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Monte Carlo Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#e1ff00',       /* --amarillo-limon */
+                            bg: '#060b13',           /* --oscuro-principal */
+                            card: '#0f172a',         /* --oscuro-tarjeta */
+                            textMuted: '#94a3b8',    /* --texto-gris */
+                            textLight: '#f8fafc',    /* --texto-blanco */
+                        },
+                        /* Se mantienen los colores originales EXCLUSIVAMENTE para premios principales y secundarios */
+                        gacha: { gold: '#ffd700', purple: '#a855f7', blue: '#3b82f6', cyan: '#06b6d4' }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(255, 215, 0, 0.4)' },
+                            '50%': { boxShadow: '0 0 30px rgba(255, 215, 0, 0.9)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --amarillo-limon:    #e1ff00;   /* Color de acento principal (marca) */
+            --oscuro-principal:  #060b13;   /* Fondo base del sitio */
+            --oscuro-tarjeta:    #0f172a;   /* Fondo de tarjetas y paneles */
+            --texto-gris:        #94a3b8;   /* Texto secundario / descripciones */
+            --texto-blanco:      #f8fafc;   /* Texto principal */
+        }
+
+        body {
+            background-color: var(--oscuro-principal);
+            color: var(--texto-blanco);
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--oscuro-principal); }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        
+        /* Se conservan los colores y estilos originales EXCLUSIVAMENTE para las tarjetas de premios principales y secundarios */
+        .rarity-principal { border: 2px solid #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.25); }
+        .rarity-secundario { border: 2px solid #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.2); }
+        .rarity-terciario { border: 1px solid #3b82f6; }
+        
+        .gacha-item-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .gacha-item-card:hover { transform: translateY(-4px); }
+        .modal-blur { backdrop-filter: blur(8px); }
+
+        .text-brand-accent { color: var(--amarillo-limon); }
+        .bg-brand-accent { background-color: var(--amarillo-limon); }
+        .border-brand-accent { border-color: var(--amarillo-limon); }
+        
+        .bg-oscuro-principal { background-color: var(--oscuro-principal); }
+        .bg-oscuro-tarjeta { background-color: var(--oscuro-tarjeta); }
+        .text-gris { color: var(--texto-gris); }
+        .text-blanco { color: var(--texto-blanco); }
+    </style>
+</head>
+<body class="bg-[var(--oscuro-principal)] text-[var(--texto-blanco)] font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- HEADER -->
+    <header class="bg-[var(--oscuro-tarjeta)] border-b border-slate-800 sticky top-0 z-30 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-[var(--amarillo-limon)] rounded-lg text-[var(--oscuro-principal)] font-extrabold text-xl shadow-md">
+                    <i class="fa-solid fa-anchor"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--amarillo-limon)] via-[var(--texto-blanco)] to-cyan-400">Ruleta Mensual</h1>
+                    <p class="text-xs text-[var(--texto-gris)]">Simulador gacha</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 text-sm">
+                <div class="bg-[var(--oscuro-principal)]/80 px-3 py-1.5 rounded-lg border border-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-ticket text-cyan-400"></i>
+                    <span class="text-xs text-[var(--texto-gris)]">Fichas Regalo:</span>
+                    <span class="font-mono font-bold text-cyan-400" id="freeChipsBadge">30</span>
+                </div>
+                <div class="bg-[var(--oscuro-principal)]/80 px-3 py-1.5 rounded-lg border border-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-coins text-[var(--amarillo-limon)]"></i>
+                    <span class="text-xs text-[var(--texto-gris)]">Tiros Totales:</span>
+                    <span class="font-mono font-bold text-[var(--amarillo-limon)]" id="totalPullsBadge">0</span>
+                </div>
+                <button onclick="confirmFullReset()" class="bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 flex items-center space-x-1.5">
+                    <i class="fa-solid fa-rotate-right"></i><span class="hidden sm:inline">Reiniciar</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- TOP BAR: PROFILE, DESIRED PRIZE & DYNAMICS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- 1. PLAYER PROFILE CARD -->
+            <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl p-5 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-[var(--amarillo-limon)]/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-user-gear text-[var(--amarillo-limon)]"></i>
+                            <h2 class="font-bold text-[var(--texto-blanco)]">Perfil de jugador</h2>
+                        </div>
+                        <button onclick="openProfileModal()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-[var(--amarillo-limon)] px-2.5 py-1 rounded-md transition">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Tiros previos realizados</span>
+                            <span class="font-semibold text-[var(--texto-blanco)]" id="profileTirosPrevios">0</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Tiros para garantía (Principal)</span>
+                            <span class="font-semibold text-[var(--amarillo-limon)]" id="pullsToGuarantee">1150</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Meses sin premio principal</span>
+                            <span class="font-semibold text-[var(--texto-blanco)]" id="profileMonthsP">0 Meses</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Meses sin premio secundario</span>
+                            <span class="font-semibold text-[var(--texto-blanco)]" id="profileMonthsS">0 Meses</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Inversión mensual aprox.</span>
+                            <span class="font-semibold text-[var(--amarillo-limon)]" id="profileInvestment">$50 USD</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Patrón de juego</span>
+                            <span class="font-semibold text-[var(--texto-blanco)]" id="profilePattern">Constante</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800 col-span-2">
+                            <span class="text-[var(--texto-gris)] block mb-0.5">Semanas sin gastar dinero en el juego</span>
+                            <span class="font-semibold text-cyan-400" id="profileWeeksNoSpend">0 Semanas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-[var(--oscuro-principal)] via-slate-900 to-[var(--oscuro-principal)] p-3 rounded-lg border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-[var(--texto-gris)]">Multiplicador de Recompensa </div>
+                        <div class="text-xs text-cyan-400 font-medium" id="engagementStatusText">Estado: Neutral</div>
+                    </div>
+                    <div class="text-2xl font-black font-mono text-[var(--amarillo-limon)] bg-slate-950/80 px-3 py-1 rounded border border-slate-800" id="engagementFactorDisplay">1.00x</div>
+                </div>
+            </div>
+
+            <!-- 2. DESIRED PRIZE ANALYZER -->
+            <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <i class="fa-solid fa-crosshairs text-[var(--amarillo-limon)]"></i>
+                        <h2 class="font-bold text-[var(--texto-blanco)]">Analizador de premio objetivo</h2>
+                    </div>
+                    <p class="text-xs text-[var(--texto-gris)] mb-3">Selecciona un premio <b>Principal o Secundario</b> para calcular su Probabilidad.</p>
+                    <select id="desiredPrizeSelect" onchange="updateDesiredPrizeStats()" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-sm text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none mb-4">
+                        <option value="">-- Selecciona un premio --</option>
+                    </select>
+                    
+                    <div id="desiredPrizeStats" class="space-y-3 text-xs hidden">
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-[var(--texto-gris)]">Prob. Base (Ponderación):</span>
+                            <span class="font-mono font-bold text-[var(--texto-blanco)]" id="statBaseProb">0%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-[var(--texto-gris)]">Valor Esperado (EV):</span>
+                            <span class="font-mono font-bold text-[var(--amarillo-limon)]" id="statEV">0 tiros</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-[var(--texto-gris)]">Prob. Acumulada (n=50):</span>
+                            <span class="font-mono text-cyan-400" id="statCum50">0%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-[var(--texto-gris)]">Prob. Acumulada (n=100):</span>
+                            <span class="font-mono text-cyan-400" id="statCum100">0%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-[var(--texto-gris)]">Percentil 95 (Confianza):</span>
+                            <span class="font-mono text-purple-400" id="statP95">0 tiros</span>
+                        </div>
+                        <div class="bg-[var(--oscuro-principal)]/80 p-2 rounded border border-slate-800 mt-2">
+                            <span class="text-[var(--texto-gris)] block mb-1">Tiros Mínimos Ideales (Objetivo):</span>
+                            <span class="text-lg font-black text-[var(--amarillo-limon)]" id="statIdealPulls">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. GACHA CONTROLS -->
+            <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col justify-between border-t-4 border-t-[var(--amarillo-limon)]">
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <i class="fa-solid fa-gamepad text-[var(--amarillo-limon)]"></i>
+                        <h2 class="font-bold text-[var(--texto-blanco)]">Panel de Tiradas</h2>
+                    </div>
+                    <p class="text-xs text-[var(--texto-gris)] mb-4">Elige el número de tiros. <span id="freeChipsWarning" class="text-cyan-400 font-bold hidden"><i class="fa-solid fa-triangle-exclamation"></i> ¡Fichas de Regalo! (Drop rate reducido al 5%)</span></p>
+                </div>
+                <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="executePulls(1)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-[var(--texto-blanco)] font-bold py-3 px-4 rounded-lg shadow-md active:scale-95 transition text-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cube text-cyan-400"></i><span>Tirar x1</span>
+                        </button>
+                        <button onclick="executePulls(10)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-[var(--texto-blanco)] font-bold py-3 px-4 rounded-lg shadow-md active:scale-95 transition text-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cubes text-purple-400"></i><span>Tirar x10</span>
+                        </button>
+                    </div>
+                    <button onclick="executePullUntilGood()" class="w-full bg-[var(--amarillo-limon)] hover:brightness-110 text-[var(--oscuro-principal)] font-extrabold py-3 px-3 rounded-lg shadow-md active:scale-95 transition text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-bolt"></i><span>Hasta alcanzar premio Top</span>
+                    </button>
+                    <button onclick="openMonteCarloModal()" class="w-full bg-[var(--oscuro-principal)] hover:bg-slate-900 text-cyan-400 border border-slate-800 hover:border-slate-700 font-bold py-3 px-4 rounded-lg transition text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-chart-line text-cyan-400"></i><span>Simulación Montecarlo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIZE POOL & ITEMS GRID -->
+        <section class="space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-[var(--texto-blanco)] flex items-center space-x-2">
+                        <i class="fa-solid fa-boxes-stacked text-[var(--amarillo-limon)]"></i>
+                        <span>Premios y Probabilidades (Ponderación Dinámica)</span>
+                    </h2>
+                    <p class="text-xs text-[var(--texto-gris)]">Sistema categórico con ajuste dinámico y garantía al tiro 1150.</p>
+                </div>
+                <div class="flex items-center space-x-3 text-xs">
+                    <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ffd700] inline-block"></span><span class="text-[var(--texto-gris)]">Principal</span></span>
+                    <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#a855f7] inline-block"></span><span class="text-[var(--texto-gris)]">Secundario</span></span>
+                    <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-400 inline-block"></span><span class="text-[var(--texto-gris)]">Terciario</span></span>
+                </div>
+            </div>
+            <div id="itemsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+        </section>
+
+        <!-- INVENTORY & HISTORY -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl p-5 shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-[var(--texto-blanco)] flex items-center space-x-2"><i class="fa-solid fa-warehouse text-cyan-400"></i><span>Inventario obtenido</span></h3>
+                    <button onclick="resetInventory()" class="text-xs text-[var(--texto-gris)] hover:text-red-400 transition"><i class="fa-solid fa-rotate-right"></i> Reiniciar Estado</button>
+                </div>
+                <div id="inventoryContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-xs"></div>
+            </div>
+            <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col h-80">
+                <h3 class="font-bold text-[var(--texto-blanco)] mb-3 flex items-center justify-between">
+                    <span class="flex items-center space-x-2"><i class="fa-solid fa-clock-rotate-left text-[var(--amarillo-limon)]"></i><span>Historial Reciente</span></span>
+                    <span class="text-xs font-normal text-[var(--texto-gris)]" id="historyCountText">0 tiradas</span>
+                </h3>
+                <div id="pullsHistoryList" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+                    <div class="text-center text-[var(--texto-gris)] py-8">No has realizado tiradas todavía.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[var(--oscuro-tarjeta)] border-t border-slate-800 mt-10 py-4 text-center text-xs text-[var(--texto-gris)]">
+        Modelos: Distribución Geométrica, Binomial, Cadenas de Markov, Piedad Suave, PRNG Criptográfico, Sesgo de Reemplazo & Cashback Loops.
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- PROFILE MODAL -->
+    <div id="profileModal" class="fixed inset-0 bg-black/80 modal-blur z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-[var(--texto-gris)] hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-lg font-bold text-[var(--amarillo-limon)] flex items-center space-x-2"><i class="fa-solid fa-user-gear"></i><span>Configuración de Perfil</span></h3>
+            <p class="text-xs text-[var(--texto-gris)]">Ajusta las variables. El algoritmo usa Cadenas de Markov para transicionar entre estados de "Castigo" y "Recompensa".</p>
+
+            <form id="profileForm" onsubmit="saveProfile(event)" class="space-y-4 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-[var(--texto-blanco)] mb-1">Tiros previos realizados (sin premio principal):</label>
+                        <input type="number" id="inputTirosPrevios" min="0" value="0" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none font-mono">
+                        <p class="text-[10px] text-[var(--texto-gris)] mt-1">Este valor alimentará directamente el contador de la garantía de 1150 tiros.</p>
+                    </div>
+                    <div>
+                        <label class="block text-[var(--texto-blanco)] mb-1">Meses sin premio Principal:</label>
+                        <input type="number" id="inputMesesP" min="0" max="60" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[var(--texto-blanco)] mb-1">Meses sin premio Secundario:</label>
+                        <input type="number" id="inputMesesS" min="0" max="60" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none font-mono">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[var(--texto-blanco)] mb-1">Inversión Mensual Aproximada ($ USD):</label>
+                    <select id="selectInversion" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none">
+                        <option value="0">F2P - $0 USD/mes</option>
+                        <option value="15">Micro - $10 a $20 USD/mes</option>
+                        <option value="50" selected>Dolphin - $20 a $100 USD/mes</option>
+                        <option value="250">Whale - $100 a $500 USD/mes</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[var(--texto-blanco)] mb-1">Patrón de Juego:</label>
+                    <select id="selectTipoJugador" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none">
+                        <option value="true">Constante (Juega todos los días)</option>
+                        <option value="false">Intermitente (Vuelve tras días/semanas)</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+                    <div>
+                        <label class="block text-[var(--texto-blanco)] mb-1">Meses consecutivos gastando:</label>
+                        <input type="number" id="inputMesesConsecutivos" min="0" max="24" value="0" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none font-mono">
+                        <p class="text-[10px] text-[var(--texto-gris)] mt-1">Activa el "Sesgo de Reemplazo" (Castigo).</p>
+                    </div>
+                    <div>
+                        <label class="block text-[var(--texto-blanco)] mb-1">Semanas sin gastar en ruleta:</label>
+                        <input type="number" id="inputSemanasSinGastar" min="0" max="52" value="0" class="w-full bg-[var(--oscuro-principal)] border border-slate-700 rounded-lg p-2 text-[var(--texto-blanco)] focus:border-[var(--amarillo-limon)] focus:outline-none font-mono">
+                        <p class="text-[10px] text-[var(--texto-gris)] mt-1">Activa el "Cashback Loop" (Recompensa por retorno).</p>
+                    </div>
+                </div>
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeProfileModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-[var(--texto-gris)] rounded-lg">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 bg-[var(--amarillo-limon)] hover:brightness-110 text-[var(--oscuro-principal)] font-bold rounded-lg shadow-md">Guardar y Recalcular</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PULL RESULTS MODAL -->
+    <div id="pullResultsModal" class="fixed inset-0 bg-black/90 modal-blur z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl max-w-3xl w-full p-6 shadow-2xl relative space-y-6 text-center">
+            <h3 class="text-xl font-extrabold text-[var(--amarillo-limon)] flex items-center justify-center space-x-2"><i class="fa-solid fa-gift text-2xl"></i><span>¡Resultados de la Tirada!</span></h3>
+            <p class="text-xs text-[var(--texto-gris)] mt-1" id="modalPullSubtitle">Premios obtenidos</p>
+            <div id="pullsResultGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-h-96 overflow-y-auto p-2"></div>
+            <div class="pt-2 flex justify-center">
+                <button onclick="closePullResultsModal()" class="px-6 py-2.5 bg-[var(--amarillo-limon)] text-[var(--oscuro-principal)] font-extrabold rounded-lg shadow-lg hover:brightness-110 active:scale-95 transition">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MONTE CARLO MODAL -->
+    <div id="monteCarloModal" class="fixed inset-0 bg-black/90 modal-blur z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[var(--oscuro-tarjeta)] border border-slate-800 rounded-xl max-w-4xl w-full p-6 shadow-2xl relative space-y-4 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeMonteCarloModal()" class="absolute top-4 right-4 text-[var(--texto-gris)] hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="border-b border-slate-800 pb-3">
+                <h3 class="text-xl font-bold text-[var(--amarillo-limon)] flex items-center space-x-2"><i class="fa-solid fa-chart-line text-cyan-400"></i><span>Simulación Montecarlo (Análisis Empírico)</span></h3>
+                <p class="text-xs text-[var(--texto-gris)]">Evalúa la Distribución Geométrica y los Intervalos de Confianza comparando tu perfil vs. neutral.</p>
+            </div>
+            <div class="flex items-center space-x-4 bg-[var(--oscuro-principal)]/80 p-3 rounded-lg border border-slate-800">
+                <div class="flex-1">
+                    <label class="block text-xs text-[var(--texto-blanco)] mb-1">Iteraciones:</label>
+                    <select id="monteCarloIterSelect" class="w-full bg-[var(--oscuro-tarjeta)] border border-slate-700 rounded-lg p-2 text-xs text-[var(--texto-blanco)] focus:outline-none font-mono">
+                        <option value="1000" selected>1,000 Iteraciones</option>
+                        <option value="5000">5,000 Iteraciones</option>
+                        <option value="10000">10,000 Iteraciones</option>
+                    </select>
+                </div>
+                <button onclick="runMonteCarloSimulation()" class="mt-5 px-5 py-2.5 bg-[var(--amarillo-limon)] text-[var(--oscuro-principal)] font-extrabold rounded-lg text-xs hover:brightness-110 shadow-md"><i class="fa-solid fa-play mr-1"></i> Correr</button>
+            </div>
+            <div id="mcResultsSection" class="hidden space-y-6">
+                <div id="mcConclusionBanner" class="p-3.5 rounded-lg text-xs font-semibold border flex items-center space-x-3"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-[var(--oscuro-principal)]/80 border border-amber-500/30 rounded-xl p-4 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2"><span class="font-bold text-[var(--amarillo-limon)]">Escenario A: Tu Perfil</span><span class="bg-amber-500/20 text-[var(--amarillo-limon)] px-2 py-0.5 rounded font-mono" id="mcFactorA">1.00x</span></div>
+                        <div class="grid grid-cols-2 gap-2 font-mono text-[var(--texto-blanco)]">
+                            <div>Media (EV): <span class="text-[var(--amarillo-limon)] font-bold" id="mcA_mean">-</span></div>
+                            <div>Mediana: <span class="text-[var(--amarillo-limon)] font-bold" id="mcA_median">-</span></div>
+                            <div>Varianza: <span class="text-[var(--texto-gris)]" id="mcA_var">-</span></div>
+                            <div>Percentil 95: <span class="text-[var(--texto-blanco)]" id="mcA_p95">-</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-[var(--oscuro-principal)]/80 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2"><span class="font-bold text-cyan-400">Escenario B: Neutral (RTP Base)</span><span class="bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded font-mono">1.00x</span></div>
+                        <div class="grid grid-cols-2 gap-2 font-mono text-[var(--texto-blanco)]">
+                            <div>Media (EV): <span class="text-cyan-400 font-bold" id="mcB_mean">-</span></div>
+                            <div>Mediana: <span class="text-cyan-400 font-bold" id="mcB_median">-</span></div>
+                            <div>Varianza: <span class="text-[var(--texto-gris)]" id="mcB_var">-</span></div>
+                            <div>Percentil 95: <span class="text-[var(--texto-blanco)]" id="mcB_p95">-</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[var(--oscuro-principal)]/80 border border-slate-800 rounded-xl p-4">
+                    <h4 class="text-xs font-bold text-[var(--texto-blanco)] mb-3">Histograma de Distribución Geométrica (Escenario A)</h4>
+                    <div class="h-64"><canvas id="mcHistogramChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // 1. DATA DEFINITIONS
+        const initialPrizePool = [
+            { id: "buque", name: "FS Charles De Gaulle", prob: 0.0008, limit: 1, category: "Principal", img: "https://mwstats.info/cdn-cgi/image/width=640%2Cformat=auto%2Cquality=85/images/ship-composite/R91CharlesDeGaulle.jpeg?v=97a6914d" },
+            { id: "riche", name: "FS Richelieu", prob: 0.0014, limit: 1, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=640%2Cformat=auto%2Cquality=85/images/ship-composite/Richelieu.jpeg?v=ac95f6a1" },
+            { id: "hyfly", name: "HyFly(nuke)", prob: 0.0028, limit: 3, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/SY400.jpeg?v=031dc2ae" },
+            { id: "subroc", name: "UUM-44 Subroc", prob: 0.0078, limit: 3, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/UUM44SUBROC.jpeg?v=5c922fc8" },
+            { id: "wh7", name: "WH-7", prob: 0.0012, limit: 2, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/WH7.jpeg?v=4c524c87" },
+            { id: "ticket_10", name: "Helix Chiper(10)", prob: 0.0745, limit: Infinity, category: "Terciario", img: "images/helix.jpeg" },
+            { id: "ticket_4", name: "Helix Chiper(4)", prob: 0.022, limit: Infinity, category: "Terciario", img: "images/helix.jpeg" },
+            { id: "fichas", name:"Fichas de cagada", prob:0.030, limit:Infinity, category:"Terciario",img:"https://img.magnific.com/vector-gratis/ilustracion-emojis-caca_23-2151317179.jpg?semt=ais_hybrid&w=740&q=80" },
+            { id: "mejoras_10", name: "Mejoras (10)", prob: 0.033, limit: Infinity, category: "Terciario", img: "images/upgrade.jpeg" },
+            { id: "consumibles", name: "Consumibles", prob: 0.012805, limit: Infinity, category: "Terciario", img: "images/consumibles.jpeg" },
+        ];
+
+        let currentPool = JSON.parse(JSON.stringify(initialPrizePool));
+        let totalPulls = 0;
+        let pullsSinceLastMain = 0; // Contador estricto para la garantía de 1150
+        let pullHistory = [];
+        let inventory = {};
+        let softPityCounter = 0;
+        let freeChips = 30; // Fichas de regalo iniciales
+
+        let playerProfile = {
+            tiros_previos: 0,
+            meses_sin_principal: 0,
+            meses_sin_secundario: 0,
+            inversion_mensual: 50.0,
+            jugador_constante: true,
+            meses_consecutivos_gastando: 0,
+            semanas_sin_gastar_ruleta: 0
+        };
+
+        let engagementFactor = 1.0;
+        let mcChartInstance = null;
+
+        // 2. PRNG DE ALTA CALIDAD
+        function getSecureRandom() {
+            if (window.crypto && window.crypto.getRandomValues) {
+                const array = new Uint32Array(1);
+                window.crypto.getRandomValues(array);
+                return array[0] / (0xFFFFFFFF + 1);
+            }
+            return Math.random();
+        }
+
+        // 3. MOTOR DE ENGAGEMENT Y MODELOS MATEMÁTICOS
+        function calculateEngagementFactor(profile) {
+            let factor = 1.0;
+            const { meses_sin_principal: mp, meses_sin_secundario: ms, inversion_mensual: inv, meses_consecutivos_gastando: mcg, semanas_sin_gastar_ruleta: wns } = profile;
+
+            if (softPityCounter > 50) {
+                factor *= 1.0 + ((softPityCounter - 50) * 0.02);
+            }
+
+            if (mcg >= 2 && inv > 0) {
+                factor *= 0.55;
+            } else if (mcg >= 3) {
+                factor *= 0.40;
+            }
+
+            if (wns >= 4 && wns <= 12) {
+                factor *= 1.65;
+            } else if (wns > 12 && wns <= 24) {
+                factor *= 1.30;
+            } else if (wns > 24) {
+                factor *= 1.10;
+            }
+
+            if (mp >= 3) factor *= 1.0 + (mp - 3) * 0.15;
+            if (ms >= 2) factor *= 1.0 + (ms - 2) * 0.08;
+
+            if (!profile.jugador_constante && wns > 2) {
+                factor *= 1.25;
+            }
+
+            if (inv === 0) factor *= 1.30;
+            else if (inv < 20) factor *= 1.10;
+            else if (inv < 100) factor *= 1.00;
+            else factor *= 0.85;
+
+            return Math.max(0.15, Math.min(factor, 5.0));
+        }
+
+        function calculateAdjustedProbabilities(poolState, engFactor, isFreeChip) {
+            let limitedSum = 0;
+            poolState.forEach(p => { if (p.limit > 0 && p.limit !== Infinity) limitedSum += p.prob; });
+
+            const factorAjusteS = Math.max(0, 1.0 - limitedSum);
+            const probBaseInfinito = poolState.filter(p => p.limit === Infinity).reduce((acc, p) => acc + p.prob, 0);
+            const ajusteInfinito = probBaseInfinito > 0 ? (factorAjusteS / probBaseInfinito) : 1.0;
+
+            let adjustedProbs = poolState.map(p => {
+                if (p.limit === 0) return 0.0;
+                let finalP = (p.limit === Infinity) ? (p.prob * ajusteInfinito) : p.prob;
+                
+                if (p.category === "Principal" || p.category === "Secundario") {
+                    finalP *= engFactor;
+                    // Penalización drástica si se usa ficha de regalo (5% de la probabilidad normal)
+                    if (isFreeChip) {
+                        finalP *= 0.05; 
+                    }
+                }
+                return finalP;
+            });
+
+            const totalSum = adjustedProbs.reduce((a, b) => a + b, 0);
+            return totalSum > 0 ? adjustedProbs.map(p => p / totalSum) : adjustedProbs;
+        }
+
+        // 4. FUNCIONES MATEMÁTICAS AUXILIARES
+        function geometricCDF(p, n) {
+            return 1 - Math.pow(1 - p, n);
+        }
+        
+        function geometricPercentile95(p) {
+            if (p >= 1) return 1;
+            if (p <= 0) return Infinity;
+            return Math.ceil(Math.log(0.05) / Math.log(1 - p));
+        }
+
+        // 5. UI RENDERING
+        function updateUI() {
+            engagementFactor = calculateEngagementFactor(playerProfile);
+            
+            document.getElementById('profileTirosPrevios').innerText = playerProfile.tiros_previos;
+            
+            // Actualizar indicador de garantía
+            const remainingToGuarantee = Math.max(0, 1150 - pullsSinceLastMain);
+            const guaranteeEl = document.getElementById('pullsToGuarantee');
+            if (guaranteeEl) {
+                guaranteeEl.innerText = remainingToGuarantee === 0 ? "¡GARANTIZADO!" : `${remainingToGuarantee} tiros`;
+                guaranteeEl.className = remainingToGuarantee <= 50 && remainingToGuarantee > 0
+                    ? "font-semibold text-red-400 animate-pulse" 
+                    : "font-semibold text-[var(--amarillo-limon)]";
+            }
+
+            document.getElementById('profileMonthsP').innerText = `${playerProfile.meses_sin_principal} Meses`;
+            document.getElementById('profileMonthsS').innerText = `${playerProfile.meses_sin_secundario} Meses`;
+            document.getElementById('profileInvestment').innerText = `$${playerProfile.inversion_mensual} USD`;
+            document.getElementById('profilePattern').innerText = playerProfile.jugador_constante ? "Constante" : "Intermitente";
+            document.getElementById('profileWeeksNoSpend').innerText = `${playerProfile.semanas_sin_gastar_ruleta} Semanas`;
+
+            const factorDisp = document.getElementById('engagementFactorDisplay');
+            const factorStatus = document.getElementById('engagementStatusText');
+            factorDisp.innerText = `${engagementFactor.toFixed(2)}x`;
+
+            if (engagementFactor > 1.15) {
+                factorStatus.innerText = "Estado: RECOMPENSA (Retorno/Sequía)";
+                factorStatus.className = "text-xs text-[var(--amarillo-limon)] font-medium";
+                factorDisp.className = "text-2xl font-black font-mono text-[var(--amarillo-limon)] bg-slate-950/80 px-3 py-1 rounded border border-[var(--amarillo-limon)]/40";
+            } else if (engagementFactor < 0.85) {
+                factorStatus.innerText = "Estado: CASTIGO (Gasto Consecutivo)";
+                factorStatus.className = "text-xs text-red-400 font-medium";
+                factorDisp.className = "text-2xl font-black font-mono text-red-400 bg-slate-950/80 px-3 py-1 rounded border border-red-500/40";
+            } else {
+                factorStatus.innerText = "Estado: Neutral / Transición";
+                factorStatus.className = "text-xs text-cyan-400 font-medium";
+                factorDisp.className = "text-2xl font-black font-mono text-cyan-400 bg-slate-950/80 px-3 py-1 rounded border border-cyan-500/40";
+            }
+
+            document.getElementById('totalPullsBadge').innerText = totalPulls;
+            document.getElementById('freeChipsBadge').innerText = freeChips;
+            
+            const warning = document.getElementById('freeChipsWarning');
+            if (freeChips > 0) {
+                warning.classList.remove('hidden');
+            } else {
+                warning.classList.add('hidden');
+            }
+
+            const select = document.getElementById('desiredPrizeSelect');
+            if (select.options.length <= 1) {
+                currentPool.forEach(item => {
+                    if (item.category === "Principal" || item.category === "Secundario") {
+                        const opt = document.createElement('option');
+                        opt.value = item.id;
+                        opt.innerText = `${item.name} (${item.category})`;
+                        select.appendChild(opt);
+                    }
+                });
+            }
+
+            updateDesiredPrizeStats();
+            renderItemsGrid();
+            renderInventory();
+            renderHistory();
+        }
+
+        function updateDesiredPrizeStats() {
+            const targetId = document.getElementById('desiredPrizeSelect').value;
+            const statsDiv = document.getElementById('desiredPrizeStats');
+            
+            if (!targetId) {
+                statsDiv.classList.add('hidden');
+                return;
+            }
+            statsDiv.classList.remove('hidden');
+
+            const item = currentPool.find(p => p.id === targetId);
+            const probs = calculateAdjustedProbabilities(currentPool, engagementFactor, false);
+            const itemIndex = currentPool.findIndex(p => p.id === targetId);
+            const p = probs[itemIndex];
+
+            const ev = p > 0 ? (1 / p).toFixed(1) : "∞";
+            const cum50 = (geometricCDF(p, 50) * 100).toFixed(2);
+            const cum100 = (geometricCDF(p, 100) * 100).toFixed(2);
+            const p95 = geometricPercentile95(p);
+            const idealPulls = p > 0 ? Math.ceil(1 / p) : "N/A";
+
+            document.getElementById('statBaseProb').innerText = `${(item.prob * 100).toFixed(4)}%`;
+            document.getElementById('statEV').innerText = `${ev} tiros`;
+            document.getElementById('statCum50').innerText = `${cum50}%`;
+            document.getElementById('statCum100').innerText = `${cum100}%`;
+            document.getElementById('statP95').innerText = `${p95} tiros (95% Confianza)`;
+            document.getElementById('statIdealPulls').innerText = idealPulls;
+        }
+
+        function renderItemsGrid() {
+            const grid = document.getElementById('itemsGrid');
+            grid.innerHTML = '';
+            const probs = calculateAdjustedProbabilities(currentPool, engagementFactor, false);
+
+            currentPool.forEach((item, idx) => {
+                const currentProbPercent = (probs[idx] * 100).toFixed(4);
+                let borderClass = "rarity-terciario";
+                let badgeBg = "bg-blue-500/20 text-blue-300 border-blue-500/40";
+
+                if (item.category === "Principal") {
+                    borderClass = "rarity-principal animate-pulse-glow";
+                    badgeBg = "bg-[#ffd700]/30 text-[#ffd700] border-[#ffd700]/50";
+                } else if (item.category === "Secundario") {
+                    borderClass = "rarity-secundario";
+                    badgeBg = "bg-[#a855f7]/30 text-[#a855f7] border-[#a855f7]/50";
+                }
+
+                const remainingStockText = item.limit === Infinity ? "Sin límite" : `${item.limit} rest.`;
+
+                grid.innerHTML += `
+                    <div class="gacha-item-card bg-[var(--oscuro-tarjeta)] rounded-xl overflow-hidden ${borderClass} flex flex-col justify-between p-3 relative">
+                        <div>
+                            <div class="w-full h-28 rounded-lg overflow-hidden relative mb-2 bg-[var(--oscuro-principal)]">
+                                <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=${encodeURIComponent(item.name)}'">
+                                <span class="absolute top-1.5 right-1.5 text-[10px] px-2 py-0.5 rounded-full font-bold border ${badgeBg}">${item.category}</span>
+                            </div>
+                            <h4 class="font-bold text-xs text-[var(--texto-blanco)] truncate" title="${item.name}">${item.name}</h4>
+                            <span class="text-[11px] text-[var(--texto-gris)] block">${remainingStockText}</span>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                            <span class="text-[var(--texto-gris)] text-[10px]">Prob. Ajustada:</span>
+                            <span class="font-bold text-cyan-400">${currentProbPercent}%</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderInventory() {
+            const container = document.getElementById('inventoryContainer');
+            container.innerHTML = '';
+            const keys = Object.keys(inventory);
+            if (keys.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-[var(--texto-gris)] text-center py-4">Inventario vacío.</div>`;
+                return;
+            }
+            initialPrizePool.forEach(item => {
+                const count = inventory[item.id] || 0;
+                if (count > 0) {
+                    let badgeColor = "text-blue-400";
+                    if (item.category === "Principal") badgeColor = "text-[#ffd700] font-bold";
+                    else if (item.category === "Secundario") badgeColor = "text-[#a855f7]";
+                    container.innerHTML += `
+                        <div class="bg-[var(--oscuro-principal)]/60 p-2.5 rounded-lg border border-slate-800 flex justify-between items-center">
+                            <span class="truncate text-[var(--texto-blanco)] mr-1">${item.name}</span>
+                            <span class="font-mono text-sm ${badgeColor}">x${count}</span>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('pullsHistoryList');
+            document.getElementById('historyCountText').innerText = `${pullHistory.length} tiradas`;
+            if (pullHistory.length === 0) {
+                list.innerHTML = `<div class="text-center text-[var(--texto-gris)] py-8">No has realizado tiradas todavía.</div>`;
+                return;
+            }
+            list.innerHTML = '';
+            const recent = pullHistory.slice(-25).reverse();
+            recent.forEach(entry => {
+                let colorClass = "text-[var(--texto-blanco)] border-slate-800";
+                let icon = "fa-cube text-blue-400";
+                if (entry.category === "Principal") {
+                    colorClass = "text-[#ffd700] font-bold border-[#ffd700]/40 bg-[#ffd700]/10";
+                    icon = "fa-crown text-[#ffd700]";
+                } else if (entry.category === "Secundario") {
+                    colorClass = "text-[#a855f7] border-[#a855f7]/40 bg-[#a855f7]/10";
+                    icon = "fa-jet-fighter text-[#a855f7]";
+                }
+                list.innerHTML += `
+                    <div class="p-2 rounded-lg border ${colorClass} flex justify-between items-center bg-[var(--oscuro-principal)]/40">
+                        <span class="flex items-center space-x-2 truncate">
+                            <i class="fa-solid ${icon}"></i>
+                            <span class="truncate">${entry.name}</span>
+                        </span>
+                        <span class="font-mono text-[10px] text-[var(--texto-gris)]">#${entry.pullNumber}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // 6. GACHA SIMULATION ENGINE (CORREGIDO)
+        function singlePull() {
+            totalPulls++;
+            pullsSinceLastMain++;
+
+            let isFreeChip = false;
+            if (freeChips > 0) {
+                freeChips--;
+                isFreeChip = true;
+            }
+
+            let selectedIdx = 0;
+
+            // 1. VERIFICAR GARANTÍA ESTRICTA (Tiro 1150 para Premio Principal)
+            if (pullsSinceLastMain >= 1150) {
+                let mainPrizes = currentPool.filter(p => p.category === "Principal" && p.limit > 0);
+                
+                // Si no hay stock, la garantía ignora el límite para cumplir la promesa del sistema
+                if (mainPrizes.length === 0) {
+                    mainPrizes = currentPool.filter(p => p.category === "Principal");
+                }
+
+                if (mainPrizes.length > 0) {
+                    const totalProb = mainPrizes.reduce((sum, p) => sum + p.prob, 0);
+                    const rand = getSecureRandom() * totalProb;
+                    let cumulative = 0;
+                    for (const p of mainPrizes) {
+                        cumulative += p.prob;
+                        if (rand <= cumulative) {
+                            selectedIdx = currentPool.findIndex(item => item.id === p.id);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                // 2. COMPORTAMIENTO PROBABILÍSTICO NORMAL
+                const probs = calculateAdjustedProbabilities(currentPool, engagementFactor, isFreeChip);
+                const rand = getSecureRandom();
+                let cumulative = 0;
+                for (let i = 0; i < probs.length; i++) {
+                    cumulative += probs[i];
+                    if (rand <= cumulative) {
+                        selectedIdx = i;
+                        break;
+                    }
+                }
+            }
+
+            const item = currentPool[selectedIdx];
+            
+            if (item.limit !== Infinity) {
+                item.limit--;
+            }
+
+            // 3. ACTUALIZACIÓN DE CONTADORES
+            if (item.category === "Principal") {
+                pullsSinceLastMain = 0; // ¡GARANTÍA RESETEADA EXCLUSIVAMENTE AQUÍ!
+                softPityCounter = 0;
+            } else if (item.category === "Secundario") {
+                softPityCounter = 0; // Resetear soft pity, pero NO la garantía de 1150
+            } else {
+                softPityCounter++;
+            }
+
+            inventory[item.id] = (inventory[item.id] || 0) + 1;
+            pullHistory.push({ name: item.name, category: item.category, pullNumber: totalPulls, item: item });
+            return item;
+        }
+
+        function executePulls(count) {
+            const results = [];
+            for (let i = 0; i < count; i++) results.push(singlePull());
+            updateUI();
+            showPullResultsModal(results);
+        }
+
+        function executePullUntilGood() {
+            const results = [];
+            let maxSafetyLimit = 5000;
+            let found = false;
+            while (maxSafetyLimit > 0 && !found) {
+                maxSafetyLimit--;
+                const pull = singlePull();
+                results.push(pull);
+                if (pull.category === "Principal" || pull.category === "Secundario") found = true;
+            }
+            updateUI();
+            showPullResultsModal(results);
+        }
+
+        function confirmFullReset() {
+            if (confirm("¿Reiniciar completamente el simulador y el perfil?")) fullResetSimulator();
+        }
+
+        function fullResetSimulator() {
+            currentPool = JSON.parse(JSON.stringify(initialPrizePool));
+            totalPulls = 0; 
+            pullsSinceLastMain = 0;
+            pullHistory = []; 
+            inventory = {}; 
+            softPityCounter = 0;
+            freeChips = 30;
+            playerProfile = { 
+                tiros_previos: 0,
+                meses_sin_principal: 0, 
+                meses_sin_secundario: 0, 
+                inversion_mensual: 50.0, 
+                jugador_constante: true, 
+                meses_consecutivos_gastando: 0, 
+                semanas_sin_gastar_ruleta: 0 
+            };
+            document.getElementById('mcResultsSection').classList.add('hidden');
+            if (mcChartInstance) { mcChartInstance.destroy(); mcChartInstance = null; }
+            updateUI();
+        }
+
+        function resetInventory() {
+            currentPool = JSON.parse(JSON.stringify(initialPrizePool));
+            totalPulls = 0; 
+            pullsSinceLastMain = 0;
+            pullHistory = []; 
+            inventory = {}; 
+            softPityCounter = 0;
+            freeChips = 30;
+            playerProfile.tiros_previos = 0;
+            updateUI();
+        }
+
+        // 7. MONTE CARLO SIMULATION
+        function runMonteCarloSimulation() {
+            const simCount = parseInt(document.getElementById('monteCarloIterSelect').value);
+            const resultsA = [], resultsB = [];
+            const poolCopyA = JSON.parse(JSON.stringify(currentPool));
+            const poolCopyB = JSON.parse(JSON.stringify(currentPool));
+
+            for (let i = 0; i < simCount; i++) resultsA.push(simSingleRun(poolCopyA, engagementFactor));
+            for (let i = 0; i < simCount; i++) resultsB.push(simSingleRun(poolCopyB, 1.0));
+
+            const statsA = calculateStats(resultsA);
+            const statsB = calculateStats(resultsB);
+            displayMonteCarloResults(statsA, statsB, simCount, resultsA);
+        }
+
+        function simSingleRun(initialPool, factor) {
+            let localPool = JSON.parse(JSON.stringify(initialPool));
+            let pulls = 0, limit = 10000, localPity = 0;
+            while (pulls < limit) {
+                pulls++; 
+                localPity++;
+                
+                // Garantía simulada en Montecarlo al tiro 1150
+                if (localPity >= 1150) {
+                    return pulls; // Fuerza el éxito (obtuvo el principal por garantía)
+                }
+
+                let currentFactor = factor;
+                if (localPity > 50) currentFactor *= 1.0 + ((localPity - 50) * 0.02);
+
+                const probs = calculateAdjustedProbabilities(localPool, currentFactor, false);
+                const rand = getSecureRandom();
+                let cumulative = 0, selectedIdx = 0;
+                for (let i = 0; i < probs.length; i++) {
+                    cumulative += probs[i];
+                    if (rand <= cumulative) { selectedIdx = i; break; }
+                }
+                const item = localPool[selectedIdx];
+                if (item.limit !== Infinity) item.limit--;
+                
+                if (item.category === "Principal" || item.category === "Secundario") {
+                    return pulls;
+                }
+            }
+            return limit;
+        }
+
+        function calculateStats(data) {
+            const sorted = [...data].sort((a, b) => a - b);
+            const n = sorted.length;
+            const mean = sorted.reduce((a, b) => a + b, 0) / n;
+            const median = n % 2 === 0 ? (sorted[n/2 - 1] + sorted[n/2]) / 2 : sorted[Math.floor(n/2)];
+            const variance = sorted.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / n;
+            return {
+                mean: mean.toFixed(2),
+                median: Math.round(median),
+                variance: variance.toFixed(2),
+                p95: sorted[Math.floor(n * 0.95)]
+            };
+        }
+
+        function displayMonteCarloResults(statsA, statsB, simCount, rawDataA) {
+            document.getElementById('mcFactorA').innerText = `${engagementFactor.toFixed(2)}x`;
+            document.getElementById('mcA_mean').innerText = `${statsA.mean}`;
+            document.getElementById('mcA_median').innerText = `${statsA.median}`;
+            document.getElementById('mcA_var').innerText = `${statsA.variance}`;
+            document.getElementById('mcA_p95').innerText = `${statsA.p95}`;
+
+            document.getElementById('mcB_mean').innerText = `${statsB.mean}`;
+            document.getElementById('mcB_median').innerText = `${statsB.median}`;
+            document.getElementById('mcB_var').innerText = `${statsB.variance}`;
+            document.getElementById('mcB_p95').innerText = `${statsB.p95}`;
+
+            const diff = parseFloat(statsA.mean) - parseFloat(statsB.mean);
+            const banner = document.getElementById('mcConclusionBanner');
+            if (diff < -1) {
+                banner.className = "p-3.5 rounded-lg text-xs font-semibold border flex items-center space-x-3 bg-amber-500/10 border-amber-500/40 text-[var(--amarillo-limon)]";
+                banner.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i><span><b>Conclusión:</b> Tu perfil te BENEFICIA (Cashback/Retorno). Ahorras ~${Math.abs(diff).toFixed(1)} tiros vs. el promedio neutral.</span>`;
+            } else if (diff > 1) {
+                banner.className = "p-3.5 rounded-lg text-xs font-semibold border flex items-center space-x-3 bg-red-500/10 border-red-500/40 text-red-400";
+                banner.innerHTML = `<i class="fa-solid fa-circle-xmark text-base"></i><span><b>Conclusión:</b> Tu perfil te PERJUDICA (Sesgo de Reemplazo). Gastas ~${diff.toFixed(1)} tiros extra por gasto consecutivo.</span>`;
+            } else {
+                banner.className = "p-3.5 rounded-lg text-xs font-semibold border flex items-center space-x-3 bg-cyan-500/10 border-cyan-500/40 text-cyan-400";
+                banner.innerHTML = `<i class="fa-solid fa-circle-info text-base"></i><span><b>Conclusión:</b> Tu perfil opera cerca del RTP base neutral.</span>`;
+            }
+
+            document.getElementById('mcResultsSection').classList.remove('hidden');
+            renderHistogram(rawDataA);
+        }
+
+        function renderHistogram(data) {
+            const ctx = document.getElementById('mcHistogramChart').getContext('2d');
+            const binCount = 15;
+            const min = Math.min(...data), max = Math.max(...data);
+            const binWidth = Math.max(1, Math.ceil((max - min) / binCount));
+            const bins = new Array(binCount).fill(0), labels = [];
+
+            for (let i = 0; i < binCount; i++) {
+                const start = min + i * binWidth;
+                labels.push(`${start}-${start + binWidth - 1}`);
+            }
+            data.forEach(val => {
+                let binIdx = Math.floor((val - min) / binWidth);
+                if (binIdx >= binCount) binIdx = binCount - 1;
+                bins[binIdx]++;
+            });
+
+            if (mcChartInstance) mcChartInstance.destroy();
+            mcChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'Frecuencia', data: bins, backgroundColor: 'rgba(225, 255, 0, 0.6)', borderColor: 'rgba(225, 255, 0, 1)', borderWidth: 1, borderRadius: 4 }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, title: { display: true, text: 'Tiros para Premio Top', color: '#f8fafc' } },
+                    scales: { x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } } }
+                }
+            });
+        }
+
+        // 8. MODAL HANDLERS
+        function showPullResultsModal(results) {
+            const grid = document.getElementById('pullsResultGrid');
+            grid.innerHTML = '';
+            document.getElementById('modalPullSubtitle').innerText = `Obtuviste ${results.length} premio(s)`;
+            results.forEach(res => {
+                let glowClass = "border-slate-700 bg-[var(--oscuro-principal)]";
+                if (res.category === "Principal") glowClass = "border-[#ffd700] bg-[#ffd700]/20 text-[#ffd700] rarity-principal";
+                else if (res.category === "Secundario") glowClass = "border-[#a855f7] bg-[#a855f7]/20 text-[#a855f7] rarity-secundario";
+                grid.innerHTML += `
+                    <div class="p-3 rounded-lg border ${glowClass} flex flex-col items-center justify-between text-center space-y-2">
+                        <img src="${res.img}" class="w-12 h-12 rounded object-cover">
+                        <span class="text-xs font-bold leading-tight line-clamp-2">${res.name}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('pullResultsModal').classList.remove('hidden');
+        }
+        function closePullResultsModal() { document.getElementById('pullResultsModal').classList.add('hidden'); }
+        
+        function openProfileModal() {
+            document.getElementById('inputTirosPrevios').value = playerProfile.tiros_previos;
+            document.getElementById('inputMesesP').value = playerProfile.meses_sin_principal;
+            document.getElementById('inputMesesS').value = playerProfile.meses_sin_secundario;
+            document.getElementById('selectInversion').value = playerProfile.inversion_mensual;
+            document.getElementById('selectTipoJugador').value = playerProfile.jugador_constante.toString();
+            document.getElementById('inputMesesConsecutivos').value = playerProfile.meses_consecutivos_gastando;
+            document.getElementById('inputSemanasSinGastar').value = playerProfile.semanas_sin_gastar_ruleta;
+            document.getElementById('profileModal').classList.remove('hidden');
+        }
+        function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
+        
+        function saveProfile(e) {
+            e.preventDefault();
+            const tirosPrevios = parseInt(document.getElementById('inputTirosPrevios').value) || 0;
+            playerProfile.tiros_previos = tirosPrevios;
+            
+            // CORRECCIÓN CLAVE: Asumimos que los tiros previos son tiros consecutivos SIN premio principal
+            // para que el contador de garantía sea preciso y funcione desde el primer tiro.
+            totalPulls = tirosPrevios;
+            pullsSinceLastMain = tirosPrevios; 
+            
+            playerProfile.meses_sin_principal = parseInt(document.getElementById('inputMesesP').value) || 0;
+            playerProfile.meses_sin_secundario = parseInt(document.getElementById('inputMesesS').value) || 0;
+            playerProfile.inversion_mensual = parseFloat(document.getElementById('selectInversion').value);
+            playerProfile.jugador_constante = document.getElementById('selectTipoJugador').value === "true";
+            playerProfile.meses_consecutivos_gastando = parseInt(document.getElementById('inputMesesConsecutivos').value) || 0;
+            playerProfile.semanas_sin_gastar_ruleta = parseInt(document.getElementById('inputSemanasSinGastar').value) || 0;
+            closeProfileModal();
+            updateUI();
+        }
+
+        function openMonteCarloModal() { document.getElementById('monteCarloModal').classList.remove('hidden'); }
+        function closeMonteCarloModal() { document.getElementById('monteCarloModal').classList.add('hidden'); }
+
+        window.onload = function() { updateUI(); };
+    </script>
+</body>
+</html>
