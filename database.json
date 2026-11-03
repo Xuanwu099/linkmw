@@ -107,6 +107,7 @@
         { "id": "amagi", "name": "JS Amagi", "clase": "crucero", "img": "db/cruiser/Amagi.jpg" },
         { "id": "battlecruiser", "name": "USS Battlecruiser 2000", "clase": "crucero", "img": "db/cruiser/Battlecruiser2000.jpg" },
         { "id": "boston", "name": "USS Boston", "clase": "crucero", "img": "db/cruiser/Boston.jpg" },
+        { "id": "bostoncheetos","name":"USS Boston", "clase":"crucero","img":"db/cruiser/bostonCheetos.jpeg","recomendadoPor":"Cheetos","build":{"misiles":"Hyfly-2 (Nuke)","lanzagrandas":"PHL-191","helicopteros":"AR-2000"}},
         { "id": "california", "name": "USS California", "clase": "crucero", "img": "db/cruiser/CaliforniaCGN36.jpg" },
         { "id": "CGX21", "name": "USS CGX21", "clase": "crucero", "img": "db/cruiser/CGX21.jpg" },
         { "id": "defiant", "name": "USS Defiant", "clase": "crucero", "img": "db/cruiser/Defiant.jpg" },
