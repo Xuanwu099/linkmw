@@ -27,6 +27,7 @@
         { "id": "ushakov", "name": "RF Admiral Ushakov", "clase": "destructor", "img": "db/destroyer/Ushakov.jpg", "build": { "misiles": "Mako, MICA-M, HQ-26 Shtil-1", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B", "aa": "KSAM Block 2, RIM-8 Talos, ALKA, HPLS", "torpedos": "Type 89, DTCN L5, DM2A5, White Shark" } },
         { "id": "basisty", "name": "RF Admiral Basisty", "clase": "destructor", "img": "db/destroyer/Basisty.jpg", "build": { "misiles": "Mako, MICA-M, HQ-26, Shtil-1", "canones": "A-200 Navigator, MONARC, L/52A1, XM2001 Crusader, Archer", "lanzagrandas": "RBU-2500, R-HAN 122B", "aa": "KSAM Block 2, RIM-8 Talos, ALKA, HPLS", "torpedos": "Type 89, DTCN L5, DM2A5, White Shark" } },
         { "id": "055G", "name": "CN Project055G", "clase": "destructor", "img": "db/destroyer/Project055G.jpg" },
+        { "id":"055grolitas","name":"CN Project 055G", "clase":"destructor","img":"db/destroyer/055gRolitas.jpeg","recomendadoPor":"Rolitas","build":{"misiles":"Pan Spatial  M-001","lanzagrandas":"FQF-2500","helicopteros":"AR-2000"}},
         { "id": "shkval", "name": "RF Shkval", "clase": "destructor", "img": "db/destroyer/Project23560E.jpg" },
         { "id": "fd8000", "name": "ROKS FD 8000", "clase": "destructor", "img": "db/destroyer/FD8000.jpg" },
         { "id": "johnson", "name": "USS Johnson", "clase": "destructor", "img": "db/destroyer/Johnson.jpg" },
