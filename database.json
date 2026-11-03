@@ -39,7 +39,7 @@
         { "id": "redrum", "name": "Pan Spatial REDRUM", "clase": "destructor", "img": "db/destroyer/REDRUM.jpg" },
         { "id": "defender", "name": "HMS Defender", "clase": "destructor", "img": "db/destroyer/DefenderD36.jpg" },
         { "id": "chabanenko", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chabanenko.jpg" },
-        { "id": "chaba", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chaba.jpeg", "recomendadoPor": "El Cacahuates " ,"build": { "misiles":"Kh-90","canones":"MKE 76","lanzagrandas": "SY-400", "helicopteros":"Z-10" , "aa":"LY-1(X3), Sea Wolf (X2)" } },
+        { "id": "chaba", "name": "RF Admiral Chabanenko", "clase": "destructor", "img": "db/destroyer/Chaba.jpeg", "recomendadoPor": "Cacahuatoso " ,"build": { "misiles":"Kh-90","canones":"MKE 76","lanzagrandas": "SY-400", "helicopteros":"Z-10" , "aa":"LY-1(X3), Sea Wolf (X2)" } },
         { "id": "ningbo", "name": "RF Type 956EM Ningbo", "clase": "destructor", "img": "db/destroyer/Ningbo.jpg" },
         { "id": "hobart", "name": "HMAS Hobart", "clase": "destructor", "img": "db/destroyer/Hobart.jpg" },
         { "id": "shenzhen", "name": "CN Type 051B Shenzhen", "clase": "destructor", "img": "db/destroyer/Type051B.jpg" },
@@ -130,7 +130,7 @@
         { "id": "azov", "name": "RF Azov (1134-BF)", "clase": "crucero", "img": "db/cruiser/Azov.jpg" },
         { "id": "ccg90", "name": "CN Projecto CG90", "clase": "crucero", "img": "db/cruiser/CCG90.jpg" },
         { "id": "cg90kiosko", "name": "CN Project CG90", "clase": "crucero", "img": "db/cruiser/cg90kiosko.jpeg","recomendadoPor": "Kiosko ","build":{"misiles":"Pan Spatial  M-001","canones":"Pan Spatial C-005","helicopteros":"AH-1W SuperCobra","automaticos":"AFGS","aa":"LY-1"} },
-        { "id": "cg90mendez", "name": "CN Project CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpeg","recomendadoPor": "Mendoza ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM","aa":"LY-1"} },
+        { "id": "cg90mendez", "name": "CN Project CG90", "clase": "crucero", "img": "db/cruiser/cg90mendez.jpeg","recomendadoPor": "Méndez ","build":{"misiles":"ASN4G","canones":"Project 447","helicopteros":"AH-1W SuperCobra","automaticos":"Paket-NKM","aa":"LY-1"} },
 
         
         { "id": "enterprise", "name": "USS Enterprise", "clase": "portaaviones", "img": "db/acv/Enterprise.jpg", "build": { "lanzagrandas": " WS-3,RBU-2500", "aviones":"F-19 Hellcat + J-36,Tornado F.Mk + Jscknife + Thanatos,Qaher" ,"helicopteros":"Z-18, RAH-66B Sea Comanche, Mi-171" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,HPLS,ALKA" } },
@@ -148,7 +148,7 @@
         { "id": "charles", "name": "FS R91 Charles De Gaulle", "clase": "portaaviones", "img": "db/acv/R91CharlesDeGaulle.jpg" },
         { "id": "tianjin", "name": "CN Tianjin", "clase": "portaaviones", "img": "db/acv/Tianjin.jpg" },
         { "id": "trieste", "name": "IT Trieste", "clase": "portaaviones", "img": "db/acv/Trieste.jpg" },
-        { "id": "type004", "name": "CN Type 004", "clase": "portaaviones", "img": "db/acv/Type004.jpg", "recomendadoPor": "Mendez y Cheetos " ,"build": { "lanzagrandas": "Mar-260, WS-3", "aviones":"F-19 Hellcat + F-22 Raptor + S-T4 + Thanatos" ,"helicopteros":"X-49 SpeedHawk, RAH-66B Sea Comanche" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,LY-1, ALKA" } },
+        { "id": "type004", "name": "CN Type 004", "clase": "portaaviones", "img": "db/acv/Type004.jpg", "recomendadoPor": "Méndez y Cheetos " ,"build": { "lanzagrandas": "Mar-260, WS-3", "aviones":"F-19 Hellcat + F-22 Raptor + S-T4 + Thanatos" ,"helicopteros":"X-49 SpeedHawk, RAH-66B Sea Comanche" , "automaticos":"Paket-NK, AFGS, Seahawk Sigma", "aa":"RIM-8 Talos,LY-1, ALKA" } },
         { "id": "type076", "name": "CN Type 076 Sichuan", "clase": "portaaviones", "img": "db/acv/Type076.jpg","build": { "lanzagrandas": "RBU-2500, WS-3", "aviones":"F-19 Hellcat +  Thanatos, Qaher" ,"helicopteros":" RAH-66B Sea Comanche, Mi-171,Z-18,Z-20" , "automaticos":"Paket-NK, AFGS", "aa":"KSAM Block 2, ALKA, HPLS" } },
         { "id": "typhoon", "name": "RF Typhoon", "clase": "portaaviones", "img": "db/acv/Typhoon.jpg" },
         { "id": "ulyanovsk", "name": "RF ATARKR Ulyanovsk", "clase": "portaaviones", "img": "db/acv/Ulyanovsk.jpg" },
