@@ -406,16 +406,16 @@
     <script>
         // 1. DATA DEFINITIONS
         const initialPrizePool = [
-            { id: "buque", name: "FS Charles De Gaulle", prob: 0.0008, limit: 1, category: "Principal", img: "https://mwstats.info/cdn-cgi/image/width=640%2Cformat=auto%2Cquality=85/images/ship-composite/R91CharlesDeGaulle.jpeg?v=97a6914d" },
-            { id: "riche", name: "FS Richelieu", prob: 0.0014, limit: 1, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=640%2Cformat=auto%2Cquality=85/images/ship-composite/Richelieu.jpeg?v=ac95f6a1" },
-            { id: "hyfly", name: "HyFly(nuke)", prob: 0.0028, limit: 3, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/SY400.jpeg?v=031dc2ae" },
-            { id: "subroc", name: "UUM-44 Subroc", prob: 0.0078, limit: 3, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/UUM44SUBROC.jpeg?v=5c922fc8" },
-            { id: "wh7", name: "WH-7", prob: 0.0012, limit: 2, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/WH7.jpeg?v=4c524c87" },
-            { id: "ticket_10", name: "Helix Chiper(10)", prob: 0.0745, limit: Infinity, category: "Terciario", img: "images/helix.jpeg" },
-            { id: "ticket_4", name: "Helix Chiper(4)", prob: 0.022, limit: Infinity, category: "Terciario", img: "images/helix.jpeg" },
-            { id: "fichas", name:"Fichas de cagada", prob:0.030, limit:Infinity, category:"Terciario",img:"https://img.magnific.com/vector-gratis/ilustracion-emojis-caca_23-2151317179.jpg?semt=ais_hybrid&w=740&q=80" },
-            { id: "mejoras_10", name: "Mejoras (10)", prob: 0.033, limit: Infinity, category: "Terciario", img: "images/upgrade.jpeg" },
-            { id: "consumibles", name: "Consumibles", prob: 0.012805, limit: Infinity, category: "Terciario", img: "images/consumibles.jpeg" },
+            { id: "buque", name: "ROKS HDF-6000", prob: 0.0007, limit: 1, category: "Principal", img: "https://mwstats.info/cdn-cgi/image/width=300%2Cformat=auto%2Cquality=85/images/ship-composite/HDF6000.jpeg?v=6f14d0e5" },
+            { id: "30DX", name: "JS 30DX", prob: 0.0013, limit: 1, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=640%2Cformat=auto%2Cquality=85/images/ship-composite/30DX.jpeg?v=4fd7d897" },
+            { id: "K136", name: "K136 KOORYONG", prob: 0.0030, limit: 3, category: "Secundario", img: "K136" },
+            { id: "asng", name: "ASN4G", prob: 0.00035, limit: 3, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/ASN4G.jpeg?v=b8b05157" },
+            { id: "buck", name: "RG-30 BUCKSHOT", prob: 0.10, limit: 2, category: "Secundario", img: "https://mwstats.info/cdn-cgi/image/width=720%2Cformat=auto%2Cquality=85/images/subsystem-composite/RG30Buckshot.jpeg?v=91b807a4" },
+            { id: "ticket", name: "BLACK MARK", prob: 0.13, limit: Infinity, category: "Terciario", img: "BLACK MARK" },
+            { id: "mejoras", name: "UPGRADE", prob: 0.2, limit: Infinity, category: "Terciario", img: "images/upgrade.jpeg" },
+            { id: "fichas", name:"Fichas de cagada", prob:0.22, limit:Infinity, category:"Terciario",img:"https://img.magnific.com/vector-gratis/ilustracion-emojis-caca_23-2151317179.jpg?semt=ais_hybrid&w=740&q=80" },
+            { id: "batery", name: "BATERIAS", prob: 0.0263, limit: Infinity, category: "Terciario", img: "BATERY" },
+            { id: "consumibles", name: "CONSUMIBLES", prob: 0.01665, limit: Infinity, category: "Terciario", img: "images/consumibles.jpeg" },
         ];
 
         let currentPool = JSON.parse(JSON.stringify(initialPrizePool));
